@@ -66,7 +66,6 @@ const INITIAL_MESSAGES: Message[] = [
     text: "Hey! How are you?",
     variant: "incoming",
     timestamp: "10:20 AM",
-    showTail: true,
   },
   {
     id: 2,
@@ -74,14 +73,12 @@ const INITIAL_MESSAGES: Message[] = [
     variant: "outgoing",
     timestamp: "10:22 AM",
     status: "read",
-    showTail: true,
   },
   {
     id: 3,
     text: "That looks amazing! Can I try it?",
     variant: "incoming",
     timestamp: "10:25 AM",
-    showTail: true,
   },
   {
     id: 4,
@@ -89,7 +86,6 @@ const INITIAL_MESSAGES: Message[] = [
     variant: "outgoing",
     timestamp: "10:28 AM",
     status: "read",
-    showTail: true,
   },
   {
     id: 5,
@@ -97,16 +93,21 @@ const INITIAL_MESSAGES: Message[] = [
     variant: "outgoing",
     timestamp: "10:28 AM",
     status: "delivered",
-    showTail: false,
   },
   {
     id: 6,
     text: "See you tomorrow! 😊",
     variant: "incoming",
     timestamp: "10:30 AM",
-    showTail: true,
   },
 ];
+
+/** Show tail on the last message of each consecutive group from the same sender */
+function shouldShowTail(messages: Message[], index: number): boolean {
+  const current = messages[index];
+  const next = messages[index + 1];
+  return !next || next.variant !== current.variant;
+}
 
 export function ChatDemo() {
   const [selectedChat, setSelectedChat] = useState(1);
@@ -132,7 +133,6 @@ export function ChatDemo() {
         variant: "outgoing",
         timestamp,
         status: "sent" as const,
-        showTail: true,
       },
     ]);
   };
@@ -200,18 +200,20 @@ export function ChatDemo() {
         />
 
         {/* Messages */}
-        <div className="flex flex-1 flex-col gap-1 overflow-y-auto px-[var(--wa-chat-spacing)] py-2">
-          {messages.map((msg) => (
-            <ChatBubble
-              key={msg.id}
-              variant={msg.variant}
-              timestamp={msg.timestamp}
-              status={msg.status}
-              showTail={msg.showTail}
-            >
-              {msg.text}
-            </ChatBubble>
-          ))}
+        <div className="flex-1 overflow-y-auto">
+          <div className="flex flex-col gap-1 py-2 pl-[55px] pr-[12px]">
+            {messages.map((msg, idx) => (
+              <ChatBubble
+                key={msg.id}
+                variant={msg.variant}
+                timestamp={msg.timestamp}
+                status={msg.status}
+                showTail={shouldShowTail(messages, idx)}
+              >
+                {msg.text}
+              </ChatBubble>
+            ))}
+          </div>
         </div>
 
         {/* Input */}
