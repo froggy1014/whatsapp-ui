@@ -1,0 +1,83 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "whatsapp-ui",
+  "homepage": "https://whatsapp-ui.vercel.app",
+  "items": [
+    {
+      "name": "chat-bubble",
+      "type": "registry:component",
+      "title": "Chat Bubble",
+      "description": "WhatsApp-style message bubble with incoming/outgoing variants, timestamps, read receipts (single check, double check, blue ticks), and tail styling.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/chat-bubble.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/chat-bubble.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "chat-list-item",
+      "type": "registry:component",
+      "title": "Chat List Item",
+      "description": "WhatsApp-style conversation list row with avatar, name, last message preview, timestamp, unread badge, and online status indicator.",
+      "registryDependencies": ["avatar"],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/chat-list-item.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/chat-list-item.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "message-input",
+      "type": "registry:component",
+      "title": "Message Input",
+      "description": "WhatsApp-style message composer with emoji button, attachment button, text input with auto-resize, and send/voice record toggle.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/message-input.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/message-input.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "chat-header",
+      "type": "registry:component",
+      "title": "Chat Header",
+      "description": "WhatsApp-style conversation header with avatar, contact name, online status, and action buttons (video call, voice call, search, menu).",
+      "registryDependencies": ["avatar"],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/chat-header.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/chat-header.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    }
+  ]
+}
