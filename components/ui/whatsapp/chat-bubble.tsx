@@ -71,43 +71,6 @@ function StatusIndicator({ status }: { status: MessageStatus }) {
   }
 }
 
-/**
- * WhatsApp-style bubble tail.
- * Sits at the bottom of the bubble, curves outward then down.
- * Based on actual WhatsApp Web screenshot reference.
- */
-function IncomingTail() {
-  return (
-    <svg
-      viewBox="0 0 11 20"
-      width="11"
-      height="20"
-      className="shrink-0 self-end"
-    >
-      <path
-        d="M11 0v20C11 11 0 7 0 0h11z"
-        fill="var(--wa-bubble-incoming)"
-      />
-    </svg>
-  );
-}
-
-function OutgoingTail() {
-  return (
-    <svg
-      viewBox="0 0 11 20"
-      width="11"
-      height="20"
-      className="shrink-0 self-end"
-    >
-      <path
-        d="M0 0v20C0 11 11 7 11 0H0z"
-        fill="var(--wa-bubble-outgoing)"
-      />
-    </svg>
-  );
-}
-
 const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
   (
     {
@@ -131,70 +94,72 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
         className={cn(
           "flex w-full",
           isOutgoing ? "justify-end" : "justify-start",
+          // Extra bottom margin when tail is shown to make room for protruding tail
+          showTail ? "mb-[6px]" : "",
           className
         )}
         {...props}
         ref={ref}
       >
-        {/* Wrapper: bubble + tail in a row, tail aligned to bottom */}
         <div
           className={cn(
-            "flex max-w-[var(--wa-msg-max-width)] items-end",
-            isOutgoing ? "flex-row" : "flex-row"
+            "wa-font relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[6px]",
+            isOutgoing
+              ? "bg-[var(--wa-bubble-outgoing)]"
+              : "bg-[var(--wa-bubble-incoming)]",
+            showTail &&
+              (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
           )}
         >
-          {/* Incoming tail (left side) */}
-          {!isOutgoing &&
-            (showTail ? (
-              <IncomingTail />
-            ) : (
-              <span className="w-[11px] shrink-0" />
-            ))}
-
-          {/* Bubble body */}
-          <div
-            className={cn(
-              "wa-font rounded-lg px-[9px] pb-2 pt-[6px]",
-              isOutgoing
-                ? "bg-[var(--wa-bubble-outgoing)]"
-                : "bg-[var(--wa-bubble-incoming)]",
-              showTail &&
-                (isOutgoing ? "rounded-br-none" : "rounded-bl-none")
-            )}
-          >
-            {/* Group chat sender name */}
-            {isGroupChat && !isOutgoing && sender && (
-              <p
-                className="mb-0.5 text-[12.8px] font-medium leading-[22px]"
-                style={{ color: senderColor || "var(--wa-emerald-500)" }}
-              >
-                {sender}
-              </p>
-            )}
-
-            {/* Message content */}
-            <div className="text-[14.2px] leading-[19px] text-[var(--wa-text-primary)]">
-              {children}
-            </div>
-
-            {/* Metadata: timestamp + status */}
-            <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
-              {timestamp && (
-                <span className="text-[11px] leading-[15px] text-[var(--wa-bubble-meta)]">
-                  {timestamp}
-                </span>
+          {/* Tail: based on actual WhatsApp Web SVG paths, flipped for bottom positioning */}
+          {showTail && (
+            <svg
+              viewBox="0 0 8 13"
+              width="8"
+              height="13"
+              className={cn(
+                "absolute bottom-0",
+                isOutgoing ? "-right-[8px]" : "-left-[8px]"
               )}
-              {isOutgoing && status && <StatusIndicator status={status} />}
-            </div>
+            >
+              {isOutgoing ? (
+                <path
+                  d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z"
+                  fill="var(--wa-bubble-outgoing)"
+                />
+              ) : (
+                <path
+                  d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z"
+                  fill="var(--wa-bubble-incoming)"
+                />
+              )}
+            </svg>
+          )}
+
+          {/* Group chat sender name */}
+          {isGroupChat && !isOutgoing && sender && (
+            <p
+              className="mb-0.5 text-[12.8px] font-medium leading-[22px]"
+              style={{ color: senderColor || "var(--wa-emerald-500)" }}
+            >
+              {sender}
+            </p>
+          )}
+
+          {/* Message content */}
+          <div className="text-[14.2px] leading-[19px] text-[var(--wa-text-primary)]">
+            {children}
           </div>
 
-          {/* Outgoing tail (right side) */}
-          {isOutgoing &&
-            (showTail ? (
-              <OutgoingTail />
-            ) : (
-              <span className="w-[11px] shrink-0" />
-            ))}
+          {/* Metadata: timestamp + status */}
+          <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
+            {timestamp && (
+              <span className="text-[11px] leading-[15px] text-[var(--wa-bubble-meta)]">
+                {timestamp}
+              </span>
+            )}
+            {isOutgoing && status && <StatusIndicator status={status} />}
+          </div>
         </div>
       </div>
     );

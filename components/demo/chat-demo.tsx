@@ -201,7 +201,7 @@ export function ChatDemo() {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto">
-          <div className="flex flex-col gap-1 py-2 pl-[55px] pr-[12px]">
+          <div className="flex flex-col gap-[2px] px-[63px] py-2">
             {messages.map((msg, idx) => (
               <ChatBubble
                 key={msg.id}
