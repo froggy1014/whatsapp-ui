@@ -3,12 +3,6 @@ import "../components/ui/whatsapp/styles/whatsapp.css";
 
 const preview: Preview = {
   parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
     backgrounds: {
       default: "chat",
       values: [
