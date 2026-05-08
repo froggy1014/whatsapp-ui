@@ -94,11 +94,11 @@ const FileAttachmentBubble = React.forwardRef<
     const statusIcon = () => {
       if (!isOutgoing || !status) return null;
       if (status === "sending" || status === "sent")
-        return <span className="text-[var(--wa-delivered)] opacity-75"><CheckIcon /></span>;
+        return <span className="text-wa-delivered opacity-75"><CheckIcon /></span>;
       if (status === "delivered")
-        return <span className="text-[var(--wa-delivered)]"><DoubleCheckIcon /></span>;
+        return <span className="text-wa-delivered"><DoubleCheckIcon /></span>;
       if (status === "read")
-        return <span className="text-[var(--wa-read)]"><DoubleCheckIcon /></span>;
+        return <span className="text-wa-read"><DoubleCheckIcon /></span>;
     };
 
     return (
@@ -114,10 +114,10 @@ const FileAttachmentBubble = React.forwardRef<
       >
         <div
           className={cn(
-            "wa-font relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[6px]",
+            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[6px]",
             isOutgoing
-              ? "bg-[var(--wa-bubble-outgoing)]"
-              : "bg-[var(--wa-bubble-incoming)]",
+              ? "bg-wa-bubble-outgoing"
+              : "bg-wa-bubble-incoming",
             showTail && (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
           )}
         >
@@ -134,12 +134,12 @@ const FileAttachmentBubble = React.forwardRef<
               {isOutgoing ? (
                 <path
                   d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z"
-                  fill="var(--wa-bubble-outgoing)"
+                  className="fill-wa-bubble-outgoing"
                 />
               ) : (
                 <path
                   d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z"
-                  fill="var(--wa-bubble-incoming)"
+                  className="fill-wa-bubble-incoming"
                 />
               )}
             </svg>
@@ -154,8 +154,8 @@ const FileAttachmentBubble = React.forwardRef<
               className={cn(
                 "flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full transition-colors",
                 isOutgoing
-                  ? "bg-[var(--wa-emerald-600)] text-white hover:bg-[var(--wa-emerald-500)]"
-                  : "bg-[var(--wa-gray-200)] text-[var(--wa-icon-default)] hover:bg-[var(--wa-gray-300)]"
+                  ? "bg-wa-emerald-600 text-white hover:bg-wa-emerald-500"
+                  : "bg-wa-gray-200 text-wa-icon-default hover:bg-wa-gray-300"
               )}
               aria-label="Download file"
             >
@@ -168,10 +168,10 @@ const FileAttachmentBubble = React.forwardRef<
 
             {/* File info */}
             <div className="flex min-w-0 flex-col">
-              <span className="truncate text-[14px] font-medium leading-[19px] text-[var(--wa-text-primary)]">
+              <span className="truncate text-[14px] font-medium leading-[19px] text-wa-text-primary">
                 {fileName}
               </span>
-              <span className="mt-[1px] text-[12px] leading-[16px] text-[var(--wa-text-secondary)]">
+              <span className="mt-[1px] text-[12px] leading-[16px] text-wa-text-secondary">
                 {[fileSize, fileType].filter(Boolean).join(" · ")}
               </span>
             </div>
@@ -179,9 +179,9 @@ const FileAttachmentBubble = React.forwardRef<
 
           {/* Download progress bar */}
           {downloadStatus === "downloading" && (
-            <div className="mt-2 h-[2px] w-full overflow-hidden rounded-full bg-[var(--wa-border)]">
+            <div className="mt-2 h-[2px] w-full overflow-hidden rounded-full bg-wa-border">
               <div
-                className="h-full rounded-full bg-[var(--wa-emerald-500)] transition-all duration-200"
+                className="h-full rounded-full bg-wa-emerald-500 transition-all duration-200"
                 style={{ width: `${downloadProgress ?? 0}%` }}
               />
             </div>
@@ -190,7 +190,7 @@ const FileAttachmentBubble = React.forwardRef<
           {/* Metadata */}
           <div className="float-right -mb-1 ml-2 mt-1 flex items-center gap-[3px]">
             {timestamp && (
-              <span className="text-[11px] leading-[15px] text-[var(--wa-bubble-meta)]">
+              <span className="text-[11px] leading-[15px] text-wa-bubble-meta">
                 {timestamp}
               </span>
             )}

@@ -92,7 +92,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          "wa-font flex h-[var(--wa-header-height)] items-center gap-[10px] bg-[var(--wa-panel-header-bg)] px-4",
+          "font-wa flex h-wa-header-height items-center gap-[10px] bg-wa-panel-header-bg px-4",
           className
         )}
         {...props}
@@ -102,7 +102,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
           <button
             type="button"
             onClick={onBack}
-            className="p-1 text-[var(--wa-icon-default)] transition-colors hover:text-[var(--wa-icon-lighter)]"
+            className="p-1 text-wa-icon-default transition-colors hover:text-wa-icon-lighter"
             aria-label="Back"
           >
             <BackIcon />
@@ -111,7 +111,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
 
         {/* Avatar */}
         <div className="relative shrink-0 cursor-pointer">
-          <div className="h-[var(--wa-avatar-size-sm)] w-[var(--wa-avatar-size-sm)] overflow-hidden rounded-full bg-[var(--wa-gray-300)]">
+          <div className="h-wa-avatar-sm w-wa-avatar-sm overflow-hidden rounded-full bg-wa-gray-300">
             {avatar ? (
               <img
                 src={avatar}
@@ -121,11 +121,11 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
             ) : (
               <svg
                 viewBox="0 0 212 212"
-                className="h-full w-full text-[var(--wa-gray-100)]"
+                className="h-full w-full text-wa-gray-100"
               >
                 <path
                   d="M106.251.5C164.653.5 212 47.846 212 106.25S164.653 212 106.25 212C47.846 212 .5 164.654.5 106.25S47.846.5 106.251.5z"
-                  fill="var(--wa-gray-300)"
+                  className="fill-wa-gray-300"
                 />
                 <path
                   d="M173.561 171.615a62.767 62.767 0 0 0-2.065-2.955 67.7 67.7 0 0 0-2.608-3.299 70.112 70.112 0 0 0-3.184-3.527 71.097 71.097 0 0 0-5.924-5.47 72.458 72.458 0 0 0-10.204-7.026 75.2 75.2 0 0 0-5.98-3.055c-.062-.028-.118-.059-.18-.087-9.792-4.44-22.106-7.529-37.416-7.529s-27.624 3.089-37.416 7.529c-.338.153-.653.318-.985.474a75.37 75.37 0 0 0-6.229 3.298 72.589 72.589 0 0 0-9.15 6.395 71.243 71.243 0 0 0-5.924 5.47 70.064 70.064 0 0 0-3.184 3.527 67.142 67.142 0 0 0-2.609 3.299 63.292 63.292 0 0 0-2.065 2.955 56.33 56.33 0 0 0-1.447 2.324c-.033.056-.073.119-.104.174a47.92 47.92 0 0 0-1.07 1.926c-.559 1.068-.818 1.678-.818 1.678v.398c18.285 17.927 43.322 28.985 70.945 28.985 27.623 0 52.661-11.058 70.945-28.985v-.398s-.26-.61-.818-1.678a49.69 49.69 0 0 0-1.07-1.926c-.031-.055-.071-.118-.104-.174a56.926 56.926 0 0 0-1.447-2.324zM106.002 125.5c2.645 0 5.212-.253 7.68-.737a38.272 38.272 0 0 0 3.624-.896 37.124 37.124 0 0 0 5.12-1.958 36.307 36.307 0 0 0 6.15-3.67 35.923 35.923 0 0 0 9.489-10.48 36.558 36.558 0 0 0 2.422-4.84 37.051 37.051 0 0 0 1.716-5.25c.299-1.208.542-2.443.725-3.701.275-1.887.417-3.827.417-5.811s-.142-3.925-.417-5.811a38.734 38.734 0 0 0-.725-3.701 37.058 37.058 0 0 0-1.716-5.25 36.564 36.564 0 0 0-2.422-4.84 35.917 35.917 0 0 0-9.489-10.48 36.347 36.347 0 0 0-6.15-3.67 37.124 37.124 0 0 0-5.12-1.958 37.67 37.67 0 0 0-3.624-.896 39.875 39.875 0 0 0-7.68-.737c-21.162 0-37.345 16.183-37.345 37.345 0 21.159 16.183 37.342 37.345 37.342z"
@@ -138,11 +138,11 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
 
         {/* Name & Status */}
         <div className="flex min-w-0 flex-1 cursor-pointer flex-col justify-center">
-          <span className="truncate text-[16px] leading-[21px] text-[var(--wa-text-primary)]">
+          <span className="truncate text-[16px] leading-[21px] text-wa-text-primary">
             {name}
           </span>
           {(status || isOnline) && (
-            <span className="truncate text-[13px] leading-[20px] text-[var(--wa-text-secondary)]">
+            <span className="truncate text-[13px] leading-[20px] text-wa-text-secondary">
               {isOnline ? "online" : status}
             </span>
           )}
@@ -154,7 +154,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
             <button
               type="button"
               onClick={onVideoCall}
-              className="rounded-full p-2 text-[var(--wa-icon-default)] transition-colors hover:bg-[var(--wa-hover)]"
+              className="rounded-full p-2 text-wa-icon-default transition-colors hover:bg-wa-hover"
               aria-label="Video call"
             >
               <VideoCallIcon />
@@ -164,7 +164,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
             <button
               type="button"
               onClick={onVoiceCall}
-              className="rounded-full p-2 text-[var(--wa-icon-default)] transition-colors hover:bg-[var(--wa-hover)]"
+              className="rounded-full p-2 text-wa-icon-default transition-colors hover:bg-wa-hover"
               aria-label="Voice call"
             >
               <VoiceCallIcon />
@@ -174,7 +174,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
             <button
               type="button"
               onClick={onSearch}
-              className="rounded-full p-2 text-[var(--wa-icon-default)] transition-colors hover:bg-[var(--wa-hover)]"
+              className="rounded-full p-2 text-wa-icon-default transition-colors hover:bg-wa-hover"
               aria-label="Search"
             >
               <SearchIcon />
@@ -184,7 +184,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
             <button
               type="button"
               onClick={onMenu}
-              className="rounded-full p-2 text-[var(--wa-icon-default)] transition-colors hover:bg-[var(--wa-hover)]"
+              className="rounded-full p-2 text-wa-icon-default transition-colors hover:bg-wa-hover"
               aria-label="Menu"
             >
               <MenuIcon />

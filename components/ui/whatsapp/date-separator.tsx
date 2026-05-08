@@ -16,7 +16,7 @@ const DateSeparator = React.forwardRef<HTMLDivElement, DateSeparatorProps>(
         className={cn("flex items-center justify-center py-2", className)}
         {...props}
       >
-        <span className="wa-font rounded-full bg-[var(--wa-bg)] px-3 py-1 text-[12.5px] leading-[20px] text-[var(--wa-text-secondary)] shadow-sm">
+        <span className="font-wa rounded-full bg-wa-bg px-3 py-1 text-[12.5px] leading-[20px] text-wa-text-secondary shadow-sm">
           {label}
         </span>
       </div>

@@ -89,17 +89,17 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
       >
         <div
           className={cn(
-            "wa-font relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[8px]",
-            isOutgoing ? "bg-[var(--wa-bubble-outgoing)]" : "bg-[var(--wa-bubble-incoming)]",
+            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[8px]",
+            isOutgoing ? "bg-wa-bubble-outgoing" : "bg-wa-bubble-incoming",
             showTail && (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
           )}
         >
           {showTail && (
             <svg viewBox="0 0 8 13" width="8" height="13" className={cn("absolute bottom-0", isOutgoing ? "-right-[8px]" : "-left-[8px]")}>
               {isOutgoing ? (
-                <path d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z" fill="var(--wa-bubble-outgoing)" />
+                <path d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z" className="fill-wa-bubble-outgoing" />
               ) : (
-                <path d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z" fill="var(--wa-bubble-incoming)" />
+                <path d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z" className="fill-wa-bubble-incoming" />
               )}
             </svg>
           )}
@@ -112,8 +112,8 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
               className={cn(
                 "flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full text-white transition-colors",
                 isOutgoing
-                  ? "bg-[var(--wa-emerald-600)] hover:bg-[var(--wa-emerald-500)]"
-                  : "bg-[var(--wa-emerald-500)] hover:bg-[var(--wa-emerald-400)]"
+                  ? "bg-wa-emerald-600 hover:bg-wa-emerald-500"
+                  : "bg-wa-emerald-500 hover:bg-wa-emerald-400"
               )}
               aria-label={isPlaying ? "Pause" : "Play"}
             >
@@ -137,7 +137,7 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
               </div>
 
               {/* Duration */}
-              <span className="text-[12px] leading-[16px] text-[var(--wa-text-secondary)]">
+              <span className="text-[12px] leading-[16px] text-wa-text-secondary">
                 {isPlaying
                   ? formatProgress(progress, duration)
                   : duration}
@@ -148,16 +148,16 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
           {/* Metadata */}
           <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
             {timestamp && (
-              <span className="text-[11px] leading-[15px] text-[var(--wa-bubble-meta)]">
+              <span className="text-[11px] leading-[15px] text-wa-bubble-meta">
                 {timestamp}
               </span>
             )}
             {isOutgoing && status && (
               status === "read"
-                ? <span className="text-[var(--wa-read)]"><DoubleCheckIcon /></span>
+                ? <span className="text-wa-read"><DoubleCheckIcon /></span>
                 : status === "delivered"
-                ? <span className="text-[var(--wa-delivered)]"><DoubleCheckIcon /></span>
-                : <span className="text-[var(--wa-delivered)]"><CheckIcon /></span>
+                ? <span className="text-wa-delivered"><DoubleCheckIcon /></span>
+                : <span className="text-wa-delivered"><CheckIcon /></span>
             )}
           </div>
         </div>

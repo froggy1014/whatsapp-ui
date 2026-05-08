@@ -3,6 +3,141 @@
  * Extracted from web.whatsapp.com WDS (WhatsApp Design System)
  */
 
+@theme inline {
+  /* === Primary Brand Colors === */
+  --color-wa-green-50: var(--wa-green-50);
+  --color-wa-green-75: var(--wa-green-75);
+  --color-wa-green-100: var(--wa-green-100);
+  --color-wa-green-200: var(--wa-green-200);
+  --color-wa-green-300: var(--wa-green-300);
+  --color-wa-green-400: var(--wa-green-400);
+  --color-wa-green-450: var(--wa-green-450);
+  --color-wa-green-500: var(--wa-green-500);
+  --color-wa-green-600: var(--wa-green-600);
+  --color-wa-green-700: var(--wa-green-700);
+  --color-wa-green-750: var(--wa-green-750);
+  --color-wa-green-800: var(--wa-green-800);
+
+  /* === Emerald (Teal) === */
+  --color-wa-emerald-400: var(--wa-emerald-400);
+  --color-wa-emerald-500: var(--wa-emerald-500);
+  --color-wa-emerald-600: var(--wa-emerald-600);
+
+  /* === Neutral Gray === */
+  --color-wa-gray-50: var(--wa-gray-50);
+  --color-wa-gray-75: var(--wa-gray-75);
+  --color-wa-gray-100: var(--wa-gray-100);
+  --color-wa-gray-200: var(--wa-gray-200);
+  --color-wa-gray-300: var(--wa-gray-300);
+  --color-wa-gray-400: var(--wa-gray-400);
+  --color-wa-gray-500: var(--wa-gray-500);
+  --color-wa-gray-600: var(--wa-gray-600);
+  --color-wa-gray-700: var(--wa-gray-700);
+  --color-wa-gray-800: var(--wa-gray-800);
+  --color-wa-gray-850: var(--wa-gray-850);
+  --color-wa-gray-900: var(--wa-gray-900);
+  --color-wa-gray-1000: var(--wa-gray-1000);
+
+  /* === Sky Blue (Read Receipts) === */
+  --color-wa-sky-blue-300: var(--wa-sky-blue-300);
+  --color-wa-sky-blue-400: var(--wa-sky-blue-400);
+
+  /* === Red (Destructive/Negative) === */
+  --color-wa-red-300: var(--wa-red-300);
+  --color-wa-red-400: var(--wa-red-400);
+
+  /* === Cobalt === */
+  --color-wa-cobalt-300: var(--wa-cobalt-300);
+  --color-wa-cobalt-400: var(--wa-cobalt-400);
+
+  /* === Persistent/Brand === */
+  --color-wa-verified: var(--wa-verified);
+  --color-wa-always-white: var(--wa-always-white);
+  --color-wa-always-black: var(--wa-always-black);
+
+  /* === Profile Photo Avatars === */
+  --color-wa-avatar-brown: var(--wa-avatar-brown);
+  --color-wa-avatar-cobalt: var(--wa-avatar-cobalt);
+  --color-wa-avatar-green: var(--wa-avatar-green);
+  --color-wa-avatar-orange: var(--wa-avatar-orange);
+  --color-wa-avatar-pink: var(--wa-avatar-pink);
+  --color-wa-avatar-purple: var(--wa-avatar-purple);
+  --color-wa-avatar-red: var(--wa-avatar-red);
+  --color-wa-avatar-sky-blue: var(--wa-avatar-sky-blue);
+  --color-wa-avatar-teal: var(--wa-avatar-teal);
+  --color-wa-avatar-yellow: var(--wa-avatar-yellow);
+
+  /* === Semantic Colors (theme-aware) === */
+  --color-wa-bg: var(--wa-bg);
+  --color-wa-bg-deeper: var(--wa-bg-deeper);
+  --color-wa-bg-wash: var(--wa-bg-wash);
+  --color-wa-panel-bg: var(--wa-panel-bg);
+  --color-wa-panel-header-bg: var(--wa-panel-header-bg);
+  --color-wa-conversation-bg: var(--wa-conversation-bg);
+  --color-wa-compose-bg: var(--wa-compose-bg);
+
+  --color-wa-text-primary: var(--wa-text-primary);
+  --color-wa-text-secondary: var(--wa-text-secondary);
+  --color-wa-text-deemphasized: var(--wa-text-deemphasized);
+
+  --color-wa-bubble-outgoing: var(--wa-bubble-outgoing);
+  --color-wa-bubble-incoming: var(--wa-bubble-incoming);
+  --color-wa-bubble-system: var(--wa-bubble-system);
+  --color-wa-bubble-meta: var(--wa-bubble-meta);
+
+  --color-wa-border: var(--wa-border);
+  --color-wa-divider: var(--wa-divider);
+
+  --color-wa-primary: var(--wa-primary);
+  --color-wa-primary-hover: var(--wa-primary-hover);
+  --color-wa-icon-default: var(--wa-icon-default);
+  --color-wa-icon-lighter: var(--wa-icon-lighter);
+  --color-wa-hover: var(--wa-hover);
+  --color-wa-active: var(--wa-active);
+
+  --color-wa-read: var(--wa-read);
+  --color-wa-delivered: var(--wa-delivered);
+
+  --color-wa-unread-marker: var(--wa-unread-marker);
+  --color-wa-typing-dot: var(--wa-typing-dot);
+  --color-wa-input-bg: var(--wa-input-bg);
+  --color-wa-input-border: var(--wa-input-border);
+
+  --color-wa-wallpaper-bg: var(--wa-wallpaper-bg);
+  --color-wa-wallpaper-fg: var(--wa-wallpaper-fg);
+
+  /* === Typography === */
+  --font-wa: "Segoe UI", "Helvetica Neue", Helvetica, "Lucida Grande", Arial,
+    Ubuntu, Cantarell, "Fira Sans", sans-serif;
+
+  /* === Layout Constants === */
+  --spacing-wa-sidebar-width: var(--wa-sidebar-width);
+  --spacing-wa-sidebar-min-width: var(--wa-sidebar-min-width);
+  --spacing-wa-header-height: var(--wa-header-height);
+  --spacing-wa-compose-height: var(--wa-compose-height);
+  --spacing-wa-chat-spacing: var(--wa-chat-spacing);
+  --spacing-wa-avatar-sm: var(--wa-avatar-size-sm);
+  --spacing-wa-avatar-md: var(--wa-avatar-size-md);
+  --spacing-wa-avatar-lg: var(--wa-avatar-size-lg);
+
+  /* === Border Radius === */
+  --radius-wa-bubble: var(--wa-bubble-radius);
+
+  /* === Animation === */
+  --animate-wa-typing-bounce: wa-typing-bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes wa-typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
 :root {
   /* === Primary Brand Colors === */
   --wa-green-50: #f2fdf0;
@@ -167,14 +302,6 @@
   /* Chat Wallpaper */
   --wa-wallpaper-bg: #0b141a;
   --wa-wallpaper-fg: rgba(255, 255, 255, 0.06);
-}
-
-/* === Typography === */
-.wa-font {
-  font-family: "Segoe UI", "Helvetica Neue", Helvetica, "Lucida Grande", Arial,
-    Ubuntu, Cantarell, "Fira Sans", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* === Layout Constants === */

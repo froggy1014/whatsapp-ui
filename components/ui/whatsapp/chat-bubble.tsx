@@ -46,25 +46,25 @@ function StatusIndicator({ status }: { status: MessageStatus }) {
   switch (status) {
     case "sending":
       return (
-        <span className="text-[var(--wa-delivered)] opacity-50">
+        <span className="text-wa-delivered opacity-50">
           <CheckIcon />
         </span>
       );
     case "sent":
       return (
-        <span className="text-[var(--wa-delivered)]">
+        <span className="text-wa-delivered">
           <CheckIcon />
         </span>
       );
     case "delivered":
       return (
-        <span className="text-[var(--wa-delivered)]">
+        <span className="text-wa-delivered">
           <DoubleCheckIcon />
         </span>
       );
     case "read":
       return (
-        <span className="text-[var(--wa-read)]">
+        <span className="text-wa-read">
           <DoubleCheckIcon />
         </span>
       );
@@ -103,10 +103,10 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
       >
         <div
           className={cn(
-            "wa-font relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[6px]",
+            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[6px]",
             isOutgoing
-              ? "bg-[var(--wa-bubble-outgoing)]"
-              : "bg-[var(--wa-bubble-incoming)]",
+              ? "bg-wa-bubble-outgoing"
+              : "bg-wa-bubble-incoming",
             showTail &&
               (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
           )}
@@ -125,12 +125,12 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
               {isOutgoing ? (
                 <path
                   d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z"
-                  fill="var(--wa-bubble-outgoing)"
+                  className="fill-wa-bubble-outgoing"
                 />
               ) : (
                 <path
                   d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z"
-                  fill="var(--wa-bubble-incoming)"
+                  className="fill-wa-bubble-incoming"
                 />
               )}
             </svg>
@@ -147,14 +147,14 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           )}
 
           {/* Message content */}
-          <div className="text-[14.2px] leading-[19px] text-[var(--wa-text-primary)]">
+          <div className="text-[14.2px] leading-[19px] text-wa-text-primary">
             {children}
           </div>
 
           {/* Metadata: timestamp + status */}
           <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
             {timestamp && (
-              <span className="text-[11px] leading-[15px] text-[var(--wa-bubble-meta)]">
+              <span className="text-[11px] leading-[15px] text-wa-bubble-meta">
                 {timestamp}
               </span>
             )}

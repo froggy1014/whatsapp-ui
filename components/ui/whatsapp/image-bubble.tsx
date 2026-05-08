@@ -69,7 +69,7 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
       if (status === "delivered")
         return <span className="text-white opacity-90"><DoubleCheckIcon /></span>;
       if (status === "read")
-        return <span className="text-[#53BDEB]"><DoubleCheckIcon /></span>;
+        return <span className="text-wa-read"><DoubleCheckIcon /></span>;
     };
 
     return (
@@ -85,7 +85,7 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
       >
         <div
           className={cn(
-            "wa-font relative max-w-[var(--wa-msg-max-width)] overflow-hidden rounded-lg",
+            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-hidden rounded-lg",
             showTail && (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
           )}
         >
@@ -102,12 +102,12 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
               {isOutgoing ? (
                 <path
                   d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z"
-                  fill="var(--wa-bubble-outgoing)"
+                  className="fill-wa-bubble-outgoing"
                 />
               ) : (
                 <path
                   d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z"
-                  fill="var(--wa-bubble-incoming)"
+                  className="fill-wa-bubble-incoming"
                 />
               )}
             </svg>
@@ -143,26 +143,26 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
               className={cn(
                 "px-[9px] pb-2 pt-[4px]",
                 isOutgoing
-                  ? "bg-[var(--wa-bubble-outgoing)]"
-                  : "bg-[var(--wa-bubble-incoming)]"
+                  ? "bg-wa-bubble-outgoing"
+                  : "bg-wa-bubble-incoming"
               )}
             >
-              <p className="text-[14.2px] leading-[19px] text-[var(--wa-text-primary)]">
+              <p className="text-[14.2px] leading-[19px] text-wa-text-primary">
                 {caption}
               </p>
               <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
                 {timestamp && (
-                  <span className="text-[11px] leading-[15px] text-[var(--wa-bubble-meta)]">
+                  <span className="text-[11px] leading-[15px] text-wa-bubble-meta">
                     {timestamp}
                   </span>
                 )}
                 {isOutgoing && status && (
                   <span>
                     {status === "read"
-                      ? <span className="text-[var(--wa-read)]"><DoubleCheckIcon /></span>
+                      ? <span className="text-wa-read"><DoubleCheckIcon /></span>
                       : status === "delivered"
-                      ? <span className="text-[var(--wa-delivered)]"><DoubleCheckIcon /></span>
-                      : <span className="text-[var(--wa-delivered)]"><CheckIcon /></span>}
+                      ? <span className="text-wa-delivered"><DoubleCheckIcon /></span>
+                      : <span className="text-wa-delivered"><CheckIcon /></span>}
                   </span>
                 )}
               </div>

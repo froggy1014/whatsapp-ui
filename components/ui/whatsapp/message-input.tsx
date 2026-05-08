@@ -89,7 +89,7 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
       <div
         ref={ref}
         className={cn(
-          "wa-font flex items-end gap-2 bg-[var(--wa-compose-bg)] px-[10px] py-[5px]",
+          "font-wa flex items-end gap-2 bg-wa-compose-bg px-[10px] py-[5px]",
           className
         )}
         {...props}
@@ -97,7 +97,7 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
         {/* Emoji button */}
         <button
           type="button"
-          className="mb-[7px] p-[5px] text-[var(--wa-icon-default)] transition-colors hover:text-[var(--wa-icon-lighter)]"
+          className="mb-[7px] p-[5px] text-wa-icon-default transition-colors hover:text-wa-icon-lighter"
           aria-label="Emoji"
           disabled={disabled}
         >
@@ -107,7 +107,7 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
         {/* Attach button */}
         <button
           type="button"
-          className="mb-[7px] p-[5px] text-[var(--wa-icon-default)] transition-colors hover:text-[var(--wa-icon-lighter)]"
+          className="mb-[7px] p-[5px] text-wa-icon-default transition-colors hover:text-wa-icon-lighter"
           aria-label="Attach"
           disabled={disabled}
         >
@@ -115,7 +115,7 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
         </button>
 
         {/* Text input */}
-        <div className="flex flex-1 items-center rounded-lg bg-[var(--wa-input-bg)] px-3 py-[9px]">
+        <div className="flex flex-1 items-center rounded-lg bg-wa-input-bg px-3 py-[9px]">
           <textarea
             ref={textareaRef}
             rows={1}
@@ -126,8 +126,8 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
             placeholder={placeholder}
             disabled={disabled}
             className={cn(
-              "max-h-[120px] w-full resize-none bg-transparent text-[15px] leading-[20px] text-[var(--wa-text-primary)] outline-none",
-              "placeholder:text-[var(--wa-text-secondary)]"
+              "max-h-[120px] w-full resize-none bg-transparent text-[15px] leading-[20px] text-wa-text-primary outline-none",
+              "placeholder:text-wa-text-secondary"
             )}
             style={{ height: "20px" }}
           />
@@ -136,13 +136,13 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
         {/* Send / Mic button */}
         <button
           type="button"
-          className="mb-[7px] p-[5px] text-[var(--wa-icon-default)] transition-colors hover:text-[var(--wa-icon-lighter)]"
+          className="mb-[7px] p-[5px] text-wa-icon-default transition-colors hover:text-wa-icon-lighter"
           onClick={message.trim() ? handleSubmit : undefined}
           aria-label={message.trim() ? "Send" : "Voice message"}
           disabled={disabled}
         >
           {message.trim() ? (
-            <SendIcon className="text-[var(--wa-primary)]" />
+            <SendIcon className="text-wa-primary" />
           ) : (
             <MicIcon />
           )}
