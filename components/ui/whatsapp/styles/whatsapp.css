@@ -76,8 +76,8 @@
   --wa-bg-deeper: #f0f2f5;
   --wa-bg-wash: #f7f8fa;
   --wa-panel-bg: #ffffff;
-  --wa-panel-header-bg: #f0f2f5;
-  --wa-conversation-bg: #efeae2;
+  --wa-panel-header-bg: #ffffff;
+  --wa-conversation-bg: #f5f0e8;
   --wa-compose-bg: #f0f2f5;
 
   /* Content */
@@ -86,7 +86,7 @@
   --wa-text-deemphasized: rgba(17, 27, 33, 0.4);
 
   /* Chat Bubbles */
-  --wa-bubble-outgoing: #d9fdd3;
+  --wa-bubble-outgoing: #e7ffdb;
   --wa-bubble-incoming: #ffffff;
   --wa-bubble-system: #ffecd2;
   --wa-bubble-radius: 7.5px;
@@ -115,8 +115,8 @@
   --wa-input-border: #e4e6eb;
 
   /* Chat Wallpaper */
-  --wa-wallpaper-bg: #efeae2;
-  --wa-wallpaper-fg: rgba(17, 27, 33, 0.06);
+  --wa-wallpaper-bg: #f5f0e8;
+  --wa-wallpaper-fg: rgba(17, 27, 33, 0.05);
 }
 
 /* === Dark Mode === */
