@@ -78,6 +78,120 @@
           "target": "components/ui/whatsapp/styles/whatsapp.css"
         }
       ]
+    },
+    {
+      "name": "date-separator",
+      "type": "registry:component",
+      "title": "Date Separator",
+      "description": "WhatsApp-style centered date pill divider (e.g. \"Today\", \"Yesterday\", \"Fri, Jul 26\") for separating messages by date.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/date-separator.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/date-separator.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "file-attachment-bubble",
+      "type": "registry:component",
+      "title": "File Attachment Bubble",
+      "description": "WhatsApp-style file/document message bubble with download button, file name, size, type, download progress bar, and read receipts.",
+      "registryDependencies": ["chat-bubble"],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/file-attachment-bubble.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/file-attachment-bubble.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "image-bubble",
+      "type": "registry:component",
+      "title": "Image Bubble",
+      "description": "WhatsApp-style image/photo message bubble with optional caption, timestamp overlay on image, and read receipts.",
+      "registryDependencies": ["chat-bubble"],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/image-bubble.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/image-bubble.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "voice-message-bubble",
+      "type": "registry:component",
+      "title": "Voice Message Bubble",
+      "description": "WhatsApp-style voice message bubble with play/pause button, waveform visualization, playback progress, duration, and read receipts.",
+      "registryDependencies": ["chat-bubble"],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/voice-message-bubble.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/voice-message-bubble.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "typing-indicator",
+      "type": "registry:component",
+      "title": "Typing Indicator",
+      "description": "WhatsApp-style animated typing indicator with three bouncing dots, optional sender name for group chats.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/typing-indicator.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/typing-indicator.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
+    },
+    {
+      "name": "reaction-pill",
+      "type": "registry:component",
+      "title": "Reaction Pill",
+      "description": "WhatsApp-style emoji reaction pill displayed below message bubbles, with count and active/reacted state.",
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/whatsapp/reaction-pill.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/reaction-pill.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/styles/whatsapp.css",
+          "type": "registry:file",
+          "target": "components/ui/whatsapp/styles/whatsapp.css"
+        }
+      ]
     }
   ]
 }
