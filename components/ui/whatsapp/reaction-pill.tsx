@@ -23,7 +23,7 @@ const ReactionPill = React.forwardRef<HTMLButtonElement, ReactionPillProps>(
         className={cn(
           "relative z-10 font-wa inline-flex items-center gap-[3px] rounded-full border px-[6px] py-[2px] text-[13px] leading-[18px] shadow-sm transition-colors",
           "border-wa-border bg-wa-bg text-wa-text-primary",
-          "data-[pressed]:border-wa-emerald-500 data-[pressed]:bg-wa-green-75",
+          "data-[pressed]:border-wa-emerald-500 data-[pressed]:bg-wa-green-75 dark:data-[pressed]:bg-[#005c4b]",
           className
         )}
       >

@@ -14,6 +14,8 @@ interface ChatHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   onSearch?: () => void;
   onMenu?: () => void;
   onBack?: () => void;
+  /** Slot for custom action buttons rendered before the standard actions */
+  customActions?: React.ReactNode;
 }
 
 function VideoCallIcon({ className }: { className?: string }) {
@@ -84,6 +86,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
       onSearch,
       onMenu,
       onBack,
+      customActions,
       ...props
     },
     ref
@@ -150,6 +153,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
 
         {/* Action buttons */}
         <div className="flex items-center gap-[10px]">
+          {customActions}
           {onVideoCall && (
             <button
               type="button"

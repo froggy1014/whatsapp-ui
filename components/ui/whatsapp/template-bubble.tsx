@@ -24,8 +24,8 @@ interface TemplateHeader {
 }
 
 export type TemplateButton =
-  | { type: "url"; label: string }
-  | { type: "phone"; label: string }
+  | { type: "url"; label: string; url?: string }
+  | { type: "phone"; label: string; phone?: string }
   | { type: "quick_reply"; label: string }
   | { type: "copy_code"; label?: string }
   | { type: "flow"; label: string }
@@ -131,14 +131,24 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
 
   switch (button.type) {
     case "url":
-      return (
+      return button.url ? (
+        <a href={button.url} target="_blank" rel="noopener noreferrer" className={cn(base, "text-wa-emerald-500")}>
+          <img src="/wa-icon-url.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
+          {button.label}
+        </a>
+      ) : (
         <button className={cn(base, "text-wa-emerald-500")}>
           <img src="/wa-icon-url.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
           {button.label}
         </button>
       );
     case "phone":
-      return (
+      return button.phone ? (
+        <a href={`tel:${button.phone}`} className={cn(base, "text-wa-emerald-500")}>
+          <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
+          {button.label}
+        </a>
+      ) : (
         <button className={cn(base, "text-wa-emerald-500")}>
           <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
           {button.label}
