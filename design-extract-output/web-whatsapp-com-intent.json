@@ -1,0 +1,24 @@
+{
+  "pageIntent": {
+    "type": "landing",
+    "confidence": 0.45,
+    "path": "/",
+    "title": "",
+    "description": "Log in to WhatsApp Web for simple, reliable and private messaging on your desktop. Send and receive messages and files with ease, all for free.",
+    "signals": [
+      {
+        "kind": "url",
+        "type": "landing",
+        "weight": 0.45,
+        "detail": "root-path"
+      }
+    ],
+    "alternates": [],
+    "needsSmart": true
+  },
+  "sectionRoles": {
+    "sections": [],
+    "counts": {},
+    "readingOrder": []
+  }
+}

@@ -21,25 +21,64 @@ interface FileAttachmentBubbleProps extends React.HTMLAttributes<HTMLDivElement>
   onDownload?: () => void;
 }
 
-function DocumentIcon({ className }: { className?: string }) {
+// File type → WDS color token
+const FILE_TYPE_COLORS: Record<string, string> = {
+  pdf:  "var(--wa-attachment-document)",
+  doc:  "var(--wa-attachment-document)",
+  docx: "var(--wa-attachment-document)",
+  xls:  "var(--wa-attachment-poll)",
+  xlsx: "var(--wa-attachment-poll)",
+  ppt:  "var(--wa-attachment-camera)",
+  pptx: "var(--wa-attachment-camera)",
+  mp3:  "var(--wa-attachment-audio)",
+  wav:  "var(--wa-attachment-audio)",
+  m4a:  "var(--wa-attachment-audio)",
+  mp4:  "var(--wa-attachment-photo)",
+  mov:  "var(--wa-attachment-photo)",
+  jpg:  "var(--wa-gray-400)",
+  jpeg: "var(--wa-gray-400)",
+  png:  "var(--wa-attachment-contact)",
+  gif:  "var(--wa-attachment-sticker)",
+  zip:  "var(--wa-gray-600)",
+  rar:  "var(--wa-gray-600)",
+  hwp:  "var(--wa-gray-500)",
+};
+
+function getFileColor(fileType?: string): string {
+  return FILE_TYPE_COLORS[fileType?.toLowerCase() ?? ""] ?? "var(--wa-gray-500)";
+}
+
+function FileTypeIcon({ fileType }: { fileType?: string }) {
+  const color = getFileColor(fileType);
+  const label = (fileType ?? "FILE").toUpperCase().slice(0, 4);
   return (
-    <svg viewBox="0 0 30 30" width="30" height="30" className={className}>
-      <path
-        d="M24.707 8.793l-6.5-6.5A1 1 0 0 0 17.5 2H7a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9.5a1 1 0 0 0-.293-.707zM18 10a1 1 0 0 1-1-1V3.904L23.096 10H18z"
-        fill="currentColor"
-      />
-    </svg>
+    <div
+      className="flex h-[46px] w-[46px] shrink-0 flex-col items-center justify-center rounded-lg"
+      style={{ backgroundColor: color }}
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="white" className="opacity-90">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z" />
+      </svg>
+      <span className="mt-[1px] text-[8px] font-bold leading-none text-white opacity-90">
+        {label}
+      </span>
+    </div>
   );
 }
 
-function DownloadIcon({ className }: { className?: string }) {
+function DownloadButton({ onClick, color }: { onClick?: () => void; color: string }) {
   return (
-    <svg viewBox="0 0 24 24" width="20" height="20" className={className}>
-      <path
-        d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"
-        fill="currentColor"
-      />
-    </svg>
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full border-2 transition-opacity hover:opacity-70"
+      style={{ borderColor: color, color }}
+      aria-label="Download"
+    >
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z" />
+      </svg>
+    </button>
   );
 }
 
@@ -147,35 +186,27 @@ const FileAttachmentBubble = React.forwardRef<
           )}
 
           {/* File row */}
-          <div className="flex items-center gap-[10px] pr-1">
-            {/* Icon / download button */}
-            <button
-              type="button"
-              onClick={onDownload}
-              className={cn(
-                "flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full transition-colors",
-                isOutgoing
-                  ? "bg-wa-emerald-600 text-white hover:bg-wa-emerald-500"
-                  : "bg-wa-gray-200 text-wa-icon-default hover:bg-wa-gray-300"
-              )}
-              aria-label="Download file"
-            >
-              {downloadStatus === "done" ? (
-                <DocumentIcon className="h-[22px] w-[22px]" />
-              ) : (
-                <DownloadIcon className="h-[20px] w-[20px]" />
-              )}
-            </button>
+          <div className="flex items-center gap-[10px]">
+            {/* Colored file type icon */}
+            <FileTypeIcon fileType={fileType} />
 
             {/* File info */}
-            <div className="flex min-w-0 flex-col">
+            <div className="flex min-w-0 flex-1 flex-col">
               <span className="truncate text-[14px] font-medium leading-[19px] text-wa-text-primary">
                 {fileName}
               </span>
               <span className="mt-[1px] text-[12px] leading-[16px] text-wa-text-secondary">
-                {[fileSize, fileType].filter(Boolean).join(" · ")}
+                {[fileSize, fileType?.toUpperCase()].filter(Boolean).join(" · ")}
               </span>
             </div>
+
+            {/* Download button — outlined circle */}
+            {downloadStatus !== "done" && (
+              <DownloadButton
+                onClick={onDownload}
+                color={isOutgoing ? "var(--wa-emerald-600)" : "var(--wa-icon-default)"}
+              />
+            )}
           </div>
 
           {/* Download progress bar */}

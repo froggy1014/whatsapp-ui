@@ -1,0 +1,162 @@
+{
+  "colors": {
+    "all": [
+      {
+        "hex": "#000000",
+        "rgb": {
+          "r": 0,
+          "g": 0,
+          "b": 0,
+          "a": 1
+        },
+        "hsl": {
+          "h": 0,
+          "s": 0,
+          "l": 0
+        },
+        "count": 92,
+        "contexts": [
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#3b4a54",
+        "rgb": {
+          "r": 59,
+          "g": 74,
+          "b": 84,
+          "a": 1
+        },
+        "hsl": {
+          "h": 204,
+          "s": 17,
+          "l": 28
+        },
+        "count": 40,
+        "contexts": [
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#1b8755",
+        "rgb": {
+          "r": 27,
+          "g": 135,
+          "b": 85,
+          "a": 1
+        },
+        "hsl": {
+          "h": 152,
+          "s": 67,
+          "l": 32
+        },
+        "count": 12,
+        "contexts": [
+          "text",
+          "border"
+        ]
+      },
+      {
+        "hex": "#dbd8d4",
+        "rgb": {
+          "r": 219,
+          "g": 216,
+          "b": 212,
+          "a": 1
+        },
+        "hsl": {
+          "h": 34,
+          "s": 9,
+          "l": 85
+        },
+        "count": 1,
+        "contexts": [
+          "background"
+        ]
+      }
+    ]
+  },
+  "regions": [],
+  "componentClusters": [
+    {
+      "kind": "button",
+      "structuralHash": "a",
+      "instanceCount": 1,
+      "variants": [
+        {
+          "css": {
+            "background": "rgba(0, 0, 0, 0)",
+            "color": "rgb(27, 135, 85)",
+            "padding": "0px 0px 0px 0px",
+            "borderRadius": "0px",
+            "border": "0px none rgb(27, 135, 85)",
+            "fontSize": "16px",
+            "fontWeight": "400"
+          },
+          "instanceCount": 1
+        }
+      ]
+    }
+  ],
+  "accessibility": {
+    "remediation": []
+  },
+  "cssHealth": {
+    "sheets": [
+      {
+        "url": "https://web.whatsapp.com/",
+        "totalBytes": 636,
+        "usedBytes": 0,
+        "unusedBytes": 636,
+        "unusedPercent": 100
+      },
+      {
+        "url": "https://web.whatsapp.com/",
+        "totalBytes": 337,
+        "usedBytes": 336,
+        "unusedBytes": 1,
+        "unusedPercent": 0
+      },
+      {
+        "url": "https://static.whatsapp.net/rsrc.php/v5/yI/l/0,cross/SnK8xG4YxBTMnMXZhYyGGOE6KiCft4N4Ilwij8nbyzl0.css",
+        "totalBytes": 1354675,
+        "usedBytes": 98229,
+        "unusedBytes": 1256446,
+        "unusedPercent": 93
+      }
+    ],
+    "totalBytes": 1355648,
+    "usedBytes": 98565,
+    "unusedBytes": 1257083,
+    "unusedPercent": 93,
+    "importantCount": 244,
+    "duplicates": 20382,
+    "vendorPrefixes": {
+      "webkit": 239,
+      "moz": 0,
+      "ms": 14,
+      "o": 0
+    },
+    "keyframes": [],
+    "specificity": {
+      "max": [
+        1,
+        4,
+        2
+      ],
+      "average": [
+        0,
+        1.16,
+        0.05
+      ],
+      "count": 9033
+    },
+    "issues": [
+      "244 !important rules",
+      "20382 duplicate declarations",
+      "93% unused CSS"
+    ]
+  }
+}

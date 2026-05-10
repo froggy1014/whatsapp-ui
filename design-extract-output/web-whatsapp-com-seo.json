@@ -1,0 +1,38 @@
+{
+  "openGraph": {
+    "description": "Log in to WhatsApp Web for simple, reliable and private messaging on your desktop. Send and receive messages and files with ease, all for free.",
+    "url": "https://web.whatsapp.com/",
+    "title": "WhatsApp Web",
+    "image": "https://static.whatsapp.net/rsrc.php/v4/yY/r/N3wx3_N3oMg.png"
+  },
+  "twitter": {},
+  "description": "Log in to WhatsApp Web for simple, reliable and private messaging on your desktop. Send and receive messages and files with ease, all for free.",
+  "canonical": null,
+  "themeColor": "#12181c",
+  "viewport": "width=device-width,initial-scale=1,maximum-scale=2,shrink-to-fit=no",
+  "favicons": [
+    {
+      "rel": "shortcut icon",
+      "href": "https://static.whatsapp.net/rsrc.php/yd/r/PfkSLByWV8O.webp",
+      "sizes": "",
+      "type": ""
+    },
+    {
+      "rel": "apple-touch-icon",
+      "href": "https://static.whatsapp.net/rsrc.php/yI/r/EoOh62-jiPS.webp",
+      "sizes": "192x192",
+      "type": ""
+    }
+  ],
+  "manifest": "https://web.whatsapp.com/data/manifest.json",
+  "structuredData": [],
+  "score": {
+    "hasOg": true,
+    "hasTwitter": false,
+    "hasDescription": true,
+    "hasCanonical": false,
+    "hasStructuredData": false,
+    "hasFavicon": true,
+    "hasThemeColor": true
+  }
+}

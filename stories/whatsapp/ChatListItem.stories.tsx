@@ -5,8 +5,14 @@ import { ChatListItem } from "@/components/ui/whatsapp/chat-list-item";
 const meta: Meta<typeof ChatListItem> = {
   title: "WhatsApp/ChatListItem",
   component: ChatListItem,
-  parameters: { layout: "fullscreen", backgrounds: { disable: true } },
   args: { name: "Sara", lastMessage: "Thanks for the heads up 👍", timestamp: "10:29" },
+  decorators: [
+    (Story) => (
+      <div style={{ background: "#fff", width: 360, borderRadius: 8, overflow: "hidden" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 export default meta;
 type Story = StoryObj<typeof ChatListItem>;
@@ -19,13 +25,20 @@ export const WithUnread: Story = {
 
 export const List: Story = {
   parameters: { layout: "fullscreen" },
+  decorators: [
+    (Story) => (
+      <div style={{ background: "#fff", width: 360 }}>
+        <Story />
+      </div>
+    ),
+  ],
   render: () => (
-    <div style={{ background: "#fff", width: 360 }}>
+    <>
       <ChatListItem name="Sara" lastMessage="Thanks for the heads up 👍" timestamp="10:29" isSelected isOnline />
       <ChatListItem name="James" lastMessage="Are you free this weekend?" timestamp="Yesterday" unreadCount={3} />
       <ChatListItem name="Alice Chen" lastMessage="📷 Photo" timestamp="Mon" isTyping />
       <ChatListItem name="Work Group" lastMessage="You: Meeting notes attached" timestamp="Sun" isMuted isPinned />
       <ChatListItem name="Mom" lastMessage="밥은 먹었어? ❤️" timestamp="Sat" />
-    </div>
+    </>
   ),
 };

@@ -106,6 +106,41 @@
   --color-wa-wallpaper-bg: var(--wa-wallpaper-bg);
   --color-wa-wallpaper-fg: var(--wa-wallpaper-fg);
 
+  /* === Additional Color Scales === */
+  --color-wa-teal-300: var(--wa-teal-300);
+  --color-wa-teal-400: var(--wa-teal-400);
+  --color-wa-teal-500: var(--wa-teal-500);
+
+  --color-wa-purple-300: var(--wa-purple-300);
+  --color-wa-purple-400: var(--wa-purple-400);
+
+  --color-wa-orange-300: var(--wa-orange-300);
+  --color-wa-orange-400: var(--wa-orange-400);
+
+  --color-wa-yellow-300: var(--wa-yellow-300);
+  --color-wa-yellow-400: var(--wa-yellow-400);
+
+  --color-wa-pink-300: var(--wa-pink-300);
+  --color-wa-pink-400: var(--wa-pink-400);
+
+  /* === Attachment Type Colors === */
+  --color-wa-attachment-document: var(--wa-attachment-document);
+  --color-wa-attachment-audio: var(--wa-attachment-audio);
+  --color-wa-attachment-photo: var(--wa-attachment-photo);
+  --color-wa-attachment-contact: var(--wa-attachment-contact);
+  --color-wa-attachment-camera: var(--wa-attachment-camera);
+  --color-wa-attachment-sticker: var(--wa-attachment-sticker);
+  --color-wa-attachment-poll: var(--wa-attachment-poll);
+  --color-wa-attachment-catalog: var(--wa-attachment-catalog);
+
+  /* === Semantic Text === */
+  --color-wa-text-disabled: var(--wa-text-disabled);
+  --color-wa-text-critical: var(--wa-text-critical);
+  --color-wa-text-success: var(--wa-text-success);
+  --color-wa-text-action: var(--wa-text-action);
+  --color-wa-system-msg: var(--wa-system-msg);
+  --color-wa-primary-title: var(--wa-primary-title);
+
   /* === Typography === */
   --font-wa: "Segoe UI", "Helvetica Neue", Helvetica, "Lucida Grande", Arial,
     Ubuntu, Cantarell, "Fira Sans", sans-serif;
@@ -261,6 +296,57 @@
 
   /* Template button icon — converts PNG to wa-emerald-500 (#00a884) */
   --wa-btn-icon-filter: brightness(0) saturate(100%) invert(50%) sepia(97%) saturate(372%) hue-rotate(128deg) brightness(97%);
+
+  /* === Additional Color Scales === */
+  --wa-teal-300: #42c7b8;
+  --wa-teal-400: #02a698;
+  --wa-teal-500: #028377;
+
+  --wa-purple-300: #a791ff;
+  --wa-purple-400: #7f66ff;
+
+  --wa-orange-300: #fc9775;
+  --wa-orange-400: #fa6533;
+
+  --wa-yellow-300: #ffd279;
+  --wa-yellow-400: #ffb938;
+
+  --wa-pink-300: #ff72a1;
+  --wa-pink-400: #ff2e74;
+
+  /* === Attachment Type Colors === */
+  --wa-attachment-document: #7f66ff;
+  --wa-attachment-audio: #fa6533;
+  --wa-attachment-photo: #007bfc;
+  --wa-attachment-contact: #009de2;
+  --wa-attachment-camera: #ff2e74;
+  --wa-attachment-sticker: #02a698;
+  --wa-attachment-poll: #ffbc38;
+  --wa-attachment-catalog: #3a5564;
+
+  /* === Semantic Text === */
+  --wa-text-disabled: #d1d7db;
+  --wa-text-critical: #ea0038;
+  --wa-text-success: #1fa855;
+  --wa-text-action: #008069;
+  --wa-system-msg: #54656f;
+  --wa-primary-title: #41525d;
+
+  /* === Shadows === */
+  --wa-shadow-light: rgba(11, 20, 26, .08);
+  --wa-shadow-medium: rgba(11, 20, 26, .15);
+  --wa-border-bubble: rgba(17, 27, 33, .06);
+
+  /* === Button States === */
+  --wa-button-primary-hover: #017561;
+  --wa-filter-text: #54656f;
+  --wa-filter-active: #008069;
+  --wa-filter-bg-active: #d9fdd3;
+
+  /* === Spacing === */
+  --wa-text-size-small: 12.6px;
+  --wa-bubble-padding-start: 9px;
+  --wa-bubble-padding-end: 7px;
 }
 
 /* === Dark Mode === */
@@ -320,6 +406,25 @@
 
   /* Template button icon — converts PNG to wa-emerald-400 (#06cf9c) */
   --wa-btn-icon-filter: brightness(0) saturate(100%) invert(68%) sepia(60%) saturate(400%) hue-rotate(118deg) brightness(100%);
+
+  /* === Semantic Text (dark) === */
+  --wa-text-disabled: #3b4a54;
+  --wa-text-critical: #ff6b7a;
+  --wa-text-success: #25d366;
+  --wa-text-action: #00a884;
+  --wa-system-msg: #8696a0;
+  --wa-primary-title: #8696a0;
+
+  /* === Shadows (dark) === */
+  --wa-shadow-light: rgba(0, 0, 0, .3);
+  --wa-shadow-medium: rgba(0, 0, 0, .4);
+  --wa-border-bubble: rgba(255, 255, 255, .06);
+
+  /* === Button States (dark) === */
+  --wa-button-primary-hover: #06cf9c;
+  --wa-filter-text: #8696a0;
+  --wa-filter-active: #00a884;
+  --wa-filter-bg-active: #005c4b;
 }
 
 /* === Wallpaper === */
@@ -338,6 +443,12 @@
   background-size: 412px auto;
   opacity: 0.12;
   pointer-events: none;
+}
+
+.dark .wa-wallpaper::before,
+[data-theme="dark"] .wa-wallpaper::before {
+  filter: invert(1);
+  opacity: 0.08;
 }
 
 /* === Layout Constants === */
