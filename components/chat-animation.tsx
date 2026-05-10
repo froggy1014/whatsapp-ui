@@ -181,8 +181,8 @@ export function ChatAnimation() {
         return; // step advances in onDone
       }
 
-      // Incoming with typing indicator
-      if (typingFor > 0) {
+      // Incoming with typing indicator (outgoing variants skip indicator)
+      if (typingFor > 0 && chatMsg.variant === "incoming") {
         setIncoming(true);
         const t2 = setTimeout(() => {
           setIncoming(false);
@@ -286,13 +286,12 @@ export function ChatAnimation() {
         }
       />
 
+      {/* Wallpaper fixed layer — outside scroll so pattern covers full area */}
+      <div className="wa-wallpaper relative flex-1 overflow-hidden" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
       <div
         ref={scrollRef}
-        className="wa-wallpaper flex flex-1 flex-col overflow-y-auto px-4 py-4"
-        style={{
-          background: "var(--wa-conversation-bg, #f5f0e8)",
-          scrollbarWidth: "none",
-        }}
+        className="absolute inset-0 flex flex-col overflow-y-auto px-4 py-4"
+        style={{ scrollbarWidth: "none" }}
       >
         <div className="flex-1" />
         {messages.length > 0 && <DateSeparator label="Today" />}
@@ -350,6 +349,7 @@ export function ChatAnimation() {
 
         {incoming && <TypingIndicator />}
         <div />
+      </div>
       </div>
 
       {outgoingText !== null
