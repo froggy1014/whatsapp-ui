@@ -9,6 +9,7 @@ import { TemplateBubble } from "@/components/ui/whatsapp/template-bubble";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
 import { VoiceMessageBubble } from "@/components/ui/whatsapp/voice-message-bubble";
 import { ScrollArea } from "@base-ui/react/scroll-area";
+import { ChatMenu } from "@/components/ui/whatsapp/chat-menu";
 import { AnimatedInput } from "@/components/animated-input";
 import { MessageInput } from "@/components/ui/whatsapp/message-input";
 
@@ -213,6 +214,25 @@ export function ChatAnimation() {
         status={incoming ? undefined : "shadcn registry · 14 components"}
         customActions={
           <>
+            <ChatMenu
+              items={[
+                {
+                  label: "Restart demo",
+                  icon: (
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
+                    </svg>
+                  ),
+                  onClick: () => {
+                    setMessages([]);
+                    setReactions({});
+                    setStep(0);
+                    setOutgoing(null);
+                    setIncoming(false);
+                  },
+                },
+              ]}
+            />
             <button
               onClick={() => setDark((d) => !d)}
               className="rounded-full p-2 text-wa-icon-default transition-colors hover:bg-wa-hover"
