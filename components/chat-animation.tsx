@@ -9,6 +9,7 @@ import { ReactionPill } from "@/components/ui/whatsapp/reaction-pill";
 import { TemplateBubble } from "@/components/ui/whatsapp/template-bubble";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
 import { VoiceMessageBubble } from "@/components/ui/whatsapp/voice-message-bubble";
+import { ScrollArea } from "@base-ui/react/scroll-area";
 import { AnimatedInput } from "@/components/animated-input";
 import { MessageInput } from "@/components/ui/whatsapp/message-input";
 
@@ -48,7 +49,7 @@ const SCRIPT: Step[] = [
       title: "WhatsApp UI",
       body: "Production-ready WhatsApp Web components. Tailwind v4, @base-ui/react, dark mode, WDS tokens included.",
       btnLabel: "View Registry",
-      btnUrl: "https://whatsapp-ui.vercel.app",
+      btnUrl: "https://github.com/froggy1014/whatsapp-ui",
   } },
   { delay: 800,  typingFor: 0,    msg: { id: 10, type: "reaction", targetId: 9, emoji: "🔥" } },
   { delay: 600,  typingFor: 0,    msg: { id: 11, type: "text",     variant: "outgoing", text: "wait... ChatBubble, MessageInput, Templates — it's all there?!", status: "read"    } },
@@ -217,11 +218,9 @@ export function ChatAnimation() {
         }
       />
 
-      <div
-        ref={scrollRef}
-        className="wa-wallpaper flex flex-col flex-1 overflow-y-auto px-4 py-4"
-        style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
-      >
+      <ScrollArea.Root className="wa-wallpaper flex-1" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+        <ScrollArea.Viewport ref={scrollRef} className="flex h-full flex-col px-4 py-4">
+          <ScrollArea.Content className="flex flex-col">
         <div className="flex-1" />
         {messages.length > 0 && <DateSeparator label="Today" />}
 
@@ -268,7 +267,12 @@ export function ChatAnimation() {
 
         {incoming && <TypingIndicator />}
         <div />
-      </div>
+          </ScrollArea.Content>
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar orientation="vertical" className="flex w-[6px] flex-col p-[2px] opacity-0 transition-opacity data-[hovering]:opacity-100">
+          <ScrollArea.Thumb className="flex-1 rounded-full bg-wa-gray-300" />
+        </ScrollArea.Scrollbar>
+      </ScrollArea.Root>
 
       {outgoingText !== null
         ? <AnimatedInput text={typedText} />
