@@ -68,9 +68,9 @@ const SCRIPT: Step[] = [
   { delay: 500,  typingFor: 900,  msg: { id: 21, type: "carousel", variant: "incoming",
       body: "here's a taste of what's in the registry 👇",
       cards: [
-        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View", btnUrl: "https://whatsapp-ui.vercel.app/registry/chat-bubble" },
-        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View", btnUrl: "https://whatsapp-ui.vercel.app/registry/template-bubble" },
-        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View", btnUrl: "https://whatsapp-ui.vercel.app/registry/voice-message-bubble" },
+        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View", btnUrl: "https://github.com/froggy1014/whatsapp-ui" },
+        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View", btnUrl: "https://github.com/froggy1014/whatsapp-ui" },
+        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View", btnUrl: "https://github.com/froggy1014/whatsapp-ui" },
       ],
   } },
   { delay: 500,  typingFor: 800,  msg: { id: 16, type: "text",     variant: "incoming", text: "lol go build something 🚀" } },
