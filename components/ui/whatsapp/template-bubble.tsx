@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Button } from "@base-ui/react/button";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
 
@@ -127,70 +128,51 @@ function LocationHeader({ location }: { location?: LocationHeader }) {
 // ─── Buttons ──────────────────────────────────────────────────────────────────
 
 function TemplateButtonRow({ button }: { button: TemplateButton }) {
-  const base = "flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium";
+  const base = "flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500";
 
-  switch (button.type) {
-    case "url":
-      return button.url ? (
-        <a href={button.url} target="_blank" rel="noopener noreferrer" className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-url.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label}
-        </a>
-      ) : (
-        <button className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-url.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label}
-        </button>
-      );
-    case "phone":
-      return button.phone ? (
-        <a href={`tel:${button.phone}`} className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label}
-        </a>
-      ) : (
-        <button className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label}
-        </button>
-      );
-    case "quick_reply":
-      return (
-        <button className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label}
-        </button>
-      );
-    case "copy_code":
-      return (
-        <button className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-copy.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label ?? "Copy offer code"}
-        </button>
-      );
-    case "flow":
-      return (
-        <button className={cn(base, "text-wa-emerald-500")}>
-          <img src="/wa-icon-flow.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-          {button.label}
-        </button>
-      );
-    case "call_permission":
-      return (
-        <button className={cn(base, "flex-col gap-0.5 py-3 text-wa-text-primary")}>
-          <div className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-wa-emerald-500 text-white">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-              </svg>
-            </div>
-            <span className="text-[14px] font-medium">
-              Can <span className="font-semibold">{button.bizName}</span> call you?
-            </span>
+  // Determine the element to render based on button type
+  const renderEl = (() => {
+    if (button.type === "url" && button.url)
+      return <a href={button.url} target="_blank" rel="noopener noreferrer" />;
+    if (button.type === "phone" && button.phone)
+      return <a href={`tel:${button.phone}`} />;
+    return undefined; // renders as <button>
+  })();
+
+  const icon = (() => {
+    switch (button.type) {
+      case "url":         return <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "phone":       return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "quick_reply": return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "copy_code":   return <img src="/wa-icon-copy.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "flow":        return <img src="/wa-icon-flow.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      default: return null;
+    }
+  })();
+
+  if (button.type === "call_permission") {
+    return (
+      <Button className={cn(base, "flex-col gap-0.5 py-3 text-wa-text-primary")}>
+        <div className="flex items-center gap-2">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-wa-emerald-500 text-white">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
           </div>
-        </button>
-      );
+          <span className="text-[14px] font-medium">
+            Can <span className="font-semibold">{button.bizName}</span> call you?
+          </span>
+        </div>
+      </Button>
+    );
   }
+
+  return (
+    <Button render={renderEl} className={base}>
+      {icon}
+      {button.type === "copy_code" ? (button.label ?? "Copy offer code") : button.label}
+    </Button>
+  );
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────

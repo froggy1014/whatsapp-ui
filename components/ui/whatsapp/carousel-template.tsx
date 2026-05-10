@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Button } from "@base-ui/react/button";
 import { ScrollArea } from "@base-ui/react/scroll-area";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
@@ -20,10 +21,16 @@ export interface CarouselTemplateProps extends React.HTMLAttributes<HTMLDivEleme
 
 function CardButton({ button }: { button: TemplateButton }) {
   const base = "flex w-full items-center justify-center gap-1.5 py-[9px] text-[13px] font-medium text-wa-emerald-500";
-  const label = button.type === "call_permission" ? `Call ${button.bizName}` : button.type === "copy_code" ? (button.label ?? "Copy offer code") : button.label;
+  const label = button.type === "call_permission" ? `Call ${button.bizName}` : button.type === "copy_code" ? (button.label ?? "Copy offer code") : "label" in button ? button.label : "";
+
+  const renderEl = button.type === "url" && button.url
+    ? <a href={button.url} target="_blank" rel="noopener noreferrer" />
+    : button.type === "phone" && button.phone
+    ? <a href={`tel:${button.phone}`} />
+    : undefined;
 
   return (
-    <button className={base}>
+    <Button render={renderEl} className={base}>
       {button.type === "url" && (
         <img src="/wa-icon-url.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
       )}
@@ -31,7 +38,7 @@ function CardButton({ button }: { button: TemplateButton }) {
         <img src="/wa-icon-flow.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
       )}
       {label}
-    </button>
+    </Button>
   );
 }
 
