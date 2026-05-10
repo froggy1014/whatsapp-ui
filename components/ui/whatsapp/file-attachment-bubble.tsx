@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Button } from "@base-ui/react/button";
 import { Progress } from "@base-ui/react/progress";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
@@ -18,6 +19,8 @@ interface FileAttachmentBubbleProps extends React.HTMLAttributes<HTMLDivElement>
   downloadStatus?: DownloadStatus;
   downloadProgress?: number;
   showTail?: boolean;
+  /** Direct download URL — renders button as <a download> for native browser download */
+  downloadUrl?: string;
   onDownload?: () => void;
 }
 
@@ -66,10 +69,25 @@ function FileTypeIcon({ fileType }: { fileType?: string }) {
   );
 }
 
-function DownloadButton({ onClick, color }: { onClick?: () => void; color: string }) {
+function DownloadButton({
+  onClick,
+  color,
+  downloadUrl,
+  fileName,
+}: {
+  onClick?: () => void;
+  color: string;
+  downloadUrl?: string;
+  fileName?: string;
+}) {
+  const renderEl = downloadUrl
+    ? <a href={downloadUrl} download={fileName ?? true} />
+    : undefined;
+
   return (
-    <button
-      type="button"
+    <Button
+      render={renderEl}
+      nativeButton={!downloadUrl}
       onClick={onClick}
       className="flex h-[32px] w-[32px] shrink-0 items-center justify-center rounded-full border-2 transition-opacity hover:opacity-70"
       style={{ borderColor: color, color }}
@@ -78,7 +96,7 @@ function DownloadButton({ onClick, color }: { onClick?: () => void; color: strin
       <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
         <path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z" />
       </svg>
-    </button>
+    </Button>
   );
 }
 
@@ -124,6 +142,7 @@ const FileAttachmentBubble = React.forwardRef<
       downloadStatus = "idle",
       downloadProgress,
       showTail = false,
+      downloadUrl,
       onDownload,
       ...props
     },
@@ -205,6 +224,8 @@ const FileAttachmentBubble = React.forwardRef<
               <DownloadButton
                 onClick={onDownload}
                 color={isOutgoing ? "var(--wa-emerald-600)" : "var(--wa-icon-default)"}
+                downloadUrl={downloadUrl}
+                fileName={fileName}
               />
             )}
           </div>
