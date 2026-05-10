@@ -150,7 +150,7 @@ export function ChatAnimation() {
               )}
               {reaction && (
                 <div className={`-mt-1 mb-1 flex ${msg.variant === "outgoing" ? "justify-end pr-2" : "justify-start pl-2"}`}>
-                  <ReactionPill emoji={reaction} count={1} reacted />
+                  <ReactionPill emoji={reaction} reacted />
                 </div>
               )}
             </div>
