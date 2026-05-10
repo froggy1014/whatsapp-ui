@@ -18,6 +18,7 @@ interface TemplateHeader {
   type: HeaderType;
   text?: string;
   imageUrl?: string;
+  videoUrl?: string;
   documentName?: string;
   location?: LocationHeader;
 }
