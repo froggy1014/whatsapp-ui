@@ -5,6 +5,7 @@ import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 import { DateSeparator } from "@/components/ui/whatsapp/date-separator";
 import { MessageInput } from "@/components/ui/whatsapp/message-input";
+import { AnimatedInput } from "@/components/animated-input";
 import { ReactionPill } from "@/components/ui/whatsapp/reaction-pill";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
 import { VoiceMessageBubble } from "@/components/ui/whatsapp/voice-message-bubble";
@@ -159,10 +160,10 @@ export function ChatAnimation() {
         <div />
       </div>
 
-      <MessageInput
-        placeholder={outgoingTyping ? "" : "Type a message"}
-        displayValue={outgoingTyping ? typedText : undefined}
-      />
+      {outgoingTyping
+        ? <AnimatedInput text={typedText} />
+        : <MessageInput placeholder="Type a message" />
+      }
     </div>
   );
 }

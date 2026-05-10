@@ -9,8 +9,6 @@ interface MessageInputProps
   onSubmit?: (message: string) => void;
   placeholder?: string;
   disabled?: boolean;
-  /** Override displayed text (for animation purposes) */
-  displayValue?: string;
 }
 
 function EmojiIcon({ className }: { className?: string }) {
@@ -58,7 +56,7 @@ function SendIcon({ className }: { className?: string }) {
 }
 
 const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
-  ({ className, onSubmit, placeholder = "Type a message", disabled = false, displayValue, ...props }, ref) => {
+  ({ className, onSubmit, placeholder = "Type a message", disabled = false, ...props }, ref) => {
     const [message, setMessage] = React.useState("");
     const textareaRef = React.useRef<HTMLTextAreaElement>(null);
 
@@ -121,8 +119,8 @@ const MessageInput = React.forwardRef<HTMLDivElement, MessageInputProps>(
           <textarea
             ref={textareaRef}
             rows={1}
-            value={displayValue ?? message}
-            onChange={(e) => { if (!displayValue) setMessage(e.target.value); }}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             onInput={handleInput}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
