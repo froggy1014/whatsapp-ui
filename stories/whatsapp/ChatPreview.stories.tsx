@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import React from "react";
+import { ScrollArea } from "@base-ui/react/scroll-area";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 import { ChatListItem } from "@/components/ui/whatsapp/chat-list-item";
@@ -62,11 +63,18 @@ function Sidebar() {
       </div>
 
       {/* Chat list */}
-      <div className="flex-1 overflow-y-auto">
-        {CHAT_LIST.map((chat) => (
-          <ChatListItem key={chat.name} {...chat} />
-        ))}
-      </div>
+      <ScrollArea.Root className="flex-1 overflow-hidden">
+        <ScrollArea.Viewport className="h-full w-full py-1">
+          <ScrollArea.Content>
+            {CHAT_LIST.map((chat) => (
+              <ChatListItem key={chat.name} {...chat} />
+            ))}
+          </ScrollArea.Content>
+        </ScrollArea.Viewport>
+        <ScrollArea.Scrollbar orientation="vertical" className="flex w-[6px] flex-col p-[2px] opacity-0 transition-opacity hover:opacity-100 data-[hovering]:opacity-100">
+          <ScrollArea.Thumb className="flex-1 rounded-full bg-wa-gray-300" />
+        </ScrollArea.Scrollbar>
+      </ScrollArea.Root>
     </div>
   );
 }

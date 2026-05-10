@@ -107,46 +107,44 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
               ? "bg-wa-bubble-outgoing"
               : "bg-wa-bubble-incoming",
             showTail &&
-              (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
+              (isOutgoing ? "rounded-br-none" : "rounded-bl-none")
           )}
         >
           {/* Tail: based on actual WhatsApp Web SVG paths, flipped for bottom positioning */}
-          {showTail && (
+          {showTail && isOutgoing && (
             <svg
               viewBox="0 0 8 13"
               width="8"
               height="13"
-              preserveAspectRatio="xMidYMid meet"
-              className={cn(
-                "absolute bottom-0",
-                isOutgoing ? "-right-[8px]" : "-left-[8px]"
-              )}
+              className="absolute bottom-0 -right-[8px]"
             >
-              {isOutgoing ? (
-                <>
-                  <path
-                    opacity="0.13"
-                    d="M5.188,1H0v11.193l6.467-8.625C7.526,2.156,6.958,1,5.188,1z"
-                    className="fill-wa-always-black"
-                  />
-                  <path
-                    d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z"
-                    className="fill-wa-bubble-outgoing"
-                  />
-                </>
-              ) : (
-                <>
-                  <path
-                    opacity="0.13"
-                    d="M2.812,1H8v11.193L1.533,3.568C0.474,2.156,1.042,1,2.812,1z"
-                    className="fill-wa-always-black"
-                  />
-                  <path
-                    d="M2.812,0H8v11.193L1.533,2.568C0.474,1.156,1.042,0,2.812,0z"
-                    className="fill-wa-bubble-incoming"
-                  />
-                </>
-              )}
+              <path
+                opacity="0.13"
+                d="M5.188 12H0V0.807l6.467 8.625C7.526 10.844 6.958 12 5.188 12z"
+                className="fill-wa-always-black"
+              />
+              <path
+                d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z"
+                className="fill-wa-bubble-outgoing"
+              />
+            </svg>
+          )}
+          {showTail && !isOutgoing && (
+            <svg
+              viewBox="0 0 8 13"
+              width="8"
+              height="13"
+              className="absolute bottom-0 -left-[8px]"
+            >
+              <path
+                opacity="0.13"
+                d="M2.812 12H8V0.807L1.533 9.432C0.474 10.844 1.042 12 2.812 12z"
+                className="fill-wa-always-black"
+              />
+              <path
+                d="M2.812 13H8V1.807L1.533 10.432C0.474 11.844 1.042 13 2.812 13z"
+                className="fill-wa-bubble-incoming"
+              />
             </svg>
           )}
 
