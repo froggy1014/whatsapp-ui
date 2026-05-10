@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { Progress } from "@base-ui/react/progress";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
 import { type MessageStatus } from "@/components/ui/whatsapp/chat-bubble";
@@ -179,12 +180,11 @@ const FileAttachmentBubble = React.forwardRef<
 
           {/* Download progress bar */}
           {downloadStatus === "downloading" && (
-            <div className="mt-2 h-[2px] w-full overflow-hidden rounded-full bg-wa-border">
-              <div
-                className="h-full rounded-full bg-wa-emerald-500 transition-all duration-200"
-                style={{ width: `${downloadProgress ?? 0}%` }}
-              />
-            </div>
+            <Progress.Root value={downloadProgress ?? 0} className="mt-2">
+              <Progress.Track className="h-[2px] w-full overflow-hidden rounded-full bg-wa-border">
+                <Progress.Indicator className="h-full rounded-full bg-wa-emerald-500 transition-all duration-200" />
+              </Progress.Track>
+            </Progress.Root>
           )}
 
           {/* Metadata */}
