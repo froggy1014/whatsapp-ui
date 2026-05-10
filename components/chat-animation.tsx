@@ -8,7 +8,6 @@ import { ImageBubble } from "@/components/ui/whatsapp/image-bubble";
 import { TemplateBubble } from "@/components/ui/whatsapp/template-bubble";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
 import { VoiceMessageBubble } from "@/components/ui/whatsapp/voice-message-bubble";
-import { ScrollArea } from "@base-ui/react/scroll-area";
 import { ChatMenu } from "@/components/ui/whatsapp/chat-menu";
 import { AnimatedInput } from "@/components/animated-input";
 import { MessageInput } from "@/components/ui/whatsapp/message-input";
@@ -287,9 +286,14 @@ export function ChatAnimation() {
         }
       />
 
-      <ScrollArea.Root className="wa-wallpaper flex-1" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-        <ScrollArea.Viewport ref={scrollRef} className="flex h-full flex-col px-4 py-4">
-          <ScrollArea.Content className="flex min-h-full flex-col">
+      <div
+        ref={scrollRef}
+        className="wa-wallpaper flex flex-1 flex-col overflow-y-auto px-4 py-4"
+        style={{
+          background: "var(--wa-conversation-bg, #f5f0e8)",
+          scrollbarWidth: "none",
+        }}
+      >
         <div className="flex-1" />
         {messages.length > 0 && <DateSeparator label="Today" />}
 
@@ -346,12 +350,7 @@ export function ChatAnimation() {
 
         {incoming && <TypingIndicator />}
         <div />
-          </ScrollArea.Content>
-        </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar orientation="vertical" className="flex w-[6px] flex-col p-[2px] opacity-0 transition-opacity data-[hovering]:opacity-100">
-          <ScrollArea.Thumb className="flex-1 rounded-full bg-wa-gray-300" />
-        </ScrollArea.Scrollbar>
-      </ScrollArea.Root>
+      </div>
 
       {outgoingText !== null
         ? <AnimatedInput text={typedText} />

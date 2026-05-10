@@ -95,7 +95,7 @@ const ChatHeader = React.forwardRef<HTMLDivElement, ChatHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          "font-wa flex h-wa-header-height items-center gap-[10px] bg-wa-panel-header-bg px-4",
+          "font-wa flex h-wa-header-height items-center gap-[10px] bg-wa-panel-header-bg px-4 py-2",
           className
         )}
         {...props}
