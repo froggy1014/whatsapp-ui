@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import React from "react";
 import { ReactionPill } from "@/components/ui/whatsapp/reaction-pill";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 
@@ -13,28 +12,26 @@ export default meta;
 type Story = StoryObj<typeof ReactionPill>;
 
 export const Default: Story = {};
-
 export const Reacted: Story = { args: { reacted: true } };
 
-/** 1:1 chat — no count, sits on bubble corner */
+/** 1:1 — individual pills, no count */
 export const DirectChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
     <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-      <div className="relative mb-5 inline-block">
-        <ChatBubble variant="incoming" timestamp="10:29" showTail>
-          See you there! 🙌
-        </ChatBubble>
-        <div className="absolute -bottom-[10px] left-[12px] flex gap-1">
-          <ReactionPill emoji="😊" reacted />
-          <ReactionPill emoji="👍" />
-        </div>
-      </div>
+      <ChatBubble
+        variant="incoming"
+        timestamp="10:29"
+        showTail
+        reactions={[{ emoji: "😊", reacted: true }, { emoji: "👍" }]}
+      >
+        See you there! 🙌
+      </ChatBubble>
     </div>
   ),
 };
 
-/** Group chat — single pill with all emojis + total count */
+/** Group — overlapping emojis + total count */
 export const GroupChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
@@ -55,19 +52,20 @@ export const GroupChat: Story = {
   ),
 };
 
-/** Outgoing bubble */
+/** Outgoing */
 export const OutgoingBubble: Story = {
   parameters: { layout: "padded" },
   render: () => (
     <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-      <div className="relative mb-5">
-        <ChatBubble variant="outgoing" timestamp="10:29" status="read" showTail>
-          That sounds amazing! 🔥
-        </ChatBubble>
-        <div className="absolute -bottom-[10px] right-[12px] flex gap-1">
-          <ReactionPill emoji="🔥" reacted />
-        </div>
-      </div>
+      <ChatBubble
+        variant="outgoing"
+        timestamp="10:29"
+        status="read"
+        showTail
+        reactions={[{ emoji: "🔥", reacted: true }]}
+      >
+        That sounds amazing!
+      </ChatBubble>
     </div>
   ),
 };
