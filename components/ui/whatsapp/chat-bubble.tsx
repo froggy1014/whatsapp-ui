@@ -187,7 +187,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           <div
             className={cn(
               "absolute flex gap-[3px]",
-              isOutgoing ? "right-[48px]" : "left-[8px]"
+              isOutgoing ? "right-[8px]" : "left-[8px]"
             )}
             style={{ bottom: "-20px" }}
           >
