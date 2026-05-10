@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import React from "react";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 
 const meta: Meta<typeof ChatBubble> = {
@@ -18,41 +19,16 @@ export const Outgoing: Story = {
   args: { variant: "outgoing", timestamp: "10:26", status: "read", showTail: true },
 };
 
-export const Sending: Story = {
-  args: { variant: "outgoing", timestamp: "10:26", status: "sending", showTail: true },
-};
-
-export const Delivered: Story = {
-  args: { variant: "outgoing", timestamp: "10:26", status: "delivered", showTail: true },
-};
-
-export const GroupIncoming: Story = {
-  args: {
-    variant: "incoming",
-    timestamp: "10:24",
-    showTail: true,
-    isGroupChat: true,
-    sender: "Alice",
-    senderColor: "#FF6B6B",
-    children: "Japan looks amazing! Can't wait to see your photos.",
-  },
-};
-
-export const StackedMessages: Story = {
+export const Conversation: Story = {
+  parameters: { layout: "padded" },
   render: () => (
-    <div className="flex flex-col gap-[2px] p-4" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-      <ChatBubble variant="outgoing" timestamp="10:26" status="read" showTail={false}>Yes, I'll be there!</ChatBubble>
-      <ChatBubble variant="outgoing" timestamp="10:26" status="read" showTail={false}>Just finishing up some work first.</ChatBubble>
-      <ChatBubble variant="outgoing" timestamp="10:27" status="delivered" showTail={true}>Thanks for the heads up 👍</ChatBubble>
+    <div className="wa-wallpaper flex flex-col px-4 py-4" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+      <ChatBubble variant="incoming" timestamp="10:20" showTail>Hey! Are you coming to the meeting later? 😊</ChatBubble>
+      <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail={false}>Yes, just finishing up some stuff</ChatBubble>
+      <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail>Should be there in 10 mins 👍</ChatBubble>
+      <ChatBubble variant="incoming" timestamp="10:22" showTail={false}>Perfect, I'll save you a seat!</ChatBubble>
+      <ChatBubble variant="incoming" timestamp="10:22" showTail isGroupChat sender="Alice" senderColor="#FF6B6B">Also can you grab some coffee on the way?</ChatBubble>
+      <ChatBubble variant="outgoing" timestamp="10:23" status="sending" showTail>On it ☕</ChatBubble>
     </div>
   ),
-};
-
-export const LongMessage: Story = {
-  args: {
-    variant: "incoming",
-    timestamp: "11:40",
-    showTail: true,
-    children: "Do you know what time is it? I've been waiting for so long and I'm starting to wonder if the meeting was rescheduled without anyone telling me.",
-  },
 };

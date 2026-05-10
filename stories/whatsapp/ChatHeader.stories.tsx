@@ -4,7 +4,7 @@ import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 const meta: Meta<typeof ChatHeader> = {
   title: "WhatsApp/ChatHeader",
   component: ChatHeader,
-  parameters: { layout: "fullscreen", backgrounds: { default: "white" } },
+  parameters: { layout: "fullscreen", backgrounds: { disable: true } },
   args: { name: "Martha Craig" },
 };
 export default meta;
@@ -18,10 +18,6 @@ export const WithStatus: Story = {
   args: { status: "last seen today at 10:29", onVideoCall: () => {}, onVoiceCall: () => {}, onMenu: () => {} },
 };
 
-export const MobileWithBack: Story = {
-  args: { isOnline: true, onBack: () => {}, onVideoCall: () => {}, onVoiceCall: () => {}, onMenu: () => {} },
-};
-
-export const NoActions: Story = {
-  args: { status: "online" },
+export const Mobile: Story = {
+  args: { isOnline: true, onBack: () => {}, onVoiceCall: () => {}, onMenu: () => {} },
 };
