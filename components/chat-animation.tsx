@@ -257,7 +257,7 @@ export function ChatAnimation() {
 
       <ScrollArea.Root className="wa-wallpaper flex-1" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
         <ScrollArea.Viewport ref={scrollRef} className="flex h-full flex-col px-4 py-4">
-          <ScrollArea.Content className="flex flex-col">
+          <ScrollArea.Content className="flex min-h-full flex-col">
         <div className="flex-1" />
         {messages.length > 0 && <DateSeparator label="Today" />}
 

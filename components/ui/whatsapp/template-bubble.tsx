@@ -25,11 +25,21 @@ interface TemplateHeader {
 }
 
 export type TemplateButton =
-  | { type: "url"; label: string; url?: string }
-  | { type: "phone"; label: string; phone?: string }
-  | { type: "quick_reply"; label: string }
-  | { type: "copy_code"; label?: string; code?: string }
-  | { type: "flow"; label: string }
+  // CTA — opens URL in browser
+  | { type: "url";          label: string; url?: string }
+  // CTA — initiates phone call
+  | { type: "phone_number"; label: string; phone_number?: string }
+  // User reply with pre-set text
+  | { type: "quick_reply";  label: string }
+  // Copies a coupon/promo code to clipboard
+  | { type: "copy_code";    label?: string; code?: string }
+  // Opens a WhatsApp Flow
+  | { type: "flow";         label: string }
+  // Opens a WhatsApp Catalog
+  | { type: "catalog";      label?: string }
+  // One-tap autofill OTP (authentication templates)
+  | { type: "otp";          label?: string }
+  // Calling permission request (custom display type)
   | { type: "call_permission"; bizName: string };
 
 export interface TemplateBubbleProps
@@ -134,18 +144,20 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
   const renderEl = (() => {
     if (button.type === "url" && button.url)
       return <a href={button.url} target="_blank" rel="noopener noreferrer" />;
-    if (button.type === "phone" && button.phone)
-      return <a href={`tel:${button.phone}`} />;
+    if (button.type === "phone_number" && button.phone_number)
+      return <a href={`tel:${button.phone_number}`} />;
     return undefined; // renders as <button>
   })();
 
   const icon = (() => {
     switch (button.type) {
-      case "url":         return <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "phone":       return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "quick_reply": return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "copy_code":   return <img src="/wa-icon-copy.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "flow":        return <img src="/wa-icon-flow.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "url":          return <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "phone_number": return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "quick_reply":  return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "copy_code":    return <img src="/wa-icon-copy.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "flow":         return <img src="/wa-icon-flow.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "otp":          return <img src="/wa-icon-copy.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
+      case "catalog":      return <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
       default: return null;
     }
   })();
@@ -167,7 +179,11 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
     );
   }
 
-  const label = button.type === "copy_code" ? (button.label ?? "Copy offer code") : button.label;
+  const label =
+    button.type === "copy_code" ? (button.label ?? "Copy offer code") :
+    button.type === "otp"       ? (button.label ?? "Copy code") :
+    button.type === "catalog"   ? (button.label ?? "View catalog") :
+    "label" in button           ? button.label : "";
   const copyCode = button.type === "copy_code" ? button.code : undefined;
 
   return (

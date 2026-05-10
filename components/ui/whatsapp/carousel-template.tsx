@@ -25,8 +25,8 @@ function CardButton({ button }: { button: TemplateButton }) {
 
   const renderEl = button.type === "url" && button.url
     ? <a href={button.url} target="_blank" rel="noopener noreferrer" />
-    : button.type === "phone" && button.phone
-    ? <a href={`tel:${button.phone}`} />
+    : button.type === "phone_number" && button.phone_number
+    ? <a href={`tel:${button.phone_number}`} />
     : undefined;
 
   return (
