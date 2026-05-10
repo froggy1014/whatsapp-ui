@@ -64,9 +64,30 @@ export default function Home() {
       {/* ── Divider ── */}
       <div className="shrink-0 border-t border-dashed border-[rgba(233,237,239,0.15)]" />
 
-      {/* ── Chat demo fills remaining space ── */}
-      <div className="min-h-0 flex-1">
-        <ChatAnimation />
+      {/* ── Chat demo ── */}
+      <div
+        className="wa-wallpaper min-h-0 flex-1 flex items-center justify-center py-6 px-4"
+        style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
+      >
+        <div
+          className="relative flex flex-col overflow-hidden shadow-2xl"
+          style={{
+            width: "min(70vw, 100%)",
+            minWidth: 350,
+            height: "100%",
+            borderRadius: "2rem",
+            border: "8px solid #1a1a1a",
+            boxShadow: "0 0 0 2px #333, 0 30px 80px rgba(0,0,0,0.5)",
+          }}
+        >
+          {/* Phone notch */}
+          <div
+            className="absolute top-0 left-1/2 -translate-x-1/2 z-20 h-[28px] w-[80px] rounded-b-2xl bg-[#1a1a1a]"
+          />
+          <div className="pt-[28px] flex flex-col flex-1 min-h-0 overflow-hidden">
+            <ChatAnimation />
+          </div>
+        </div>
       </div>
 
     </div>

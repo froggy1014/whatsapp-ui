@@ -21,36 +21,84 @@ type ChatMessage = TextMsg | ImageMsg | VoiceMsg;
 interface Step { delay: number; typingFor: number; msg: Message }
 
 const SCRIPT: Step[] = [
-  { delay: 600,  typingFor: 1400, msg: { id: 1,  type: "text",     variant: "incoming", text: "Hey! 👋 Are you free this weekend?",             showTail: true  } },
-  { delay: 800,  typingFor: 1000, msg: { id: 2,  type: "text",     variant: "outgoing", text: "Yeah! What's up? 😊",                             status: "read", showTail: true  } },
-  { delay: 600,  typingFor: 1800, msg: { id: 3,  type: "text",     variant: "incoming", text: "I'm going on a hike Saturday. Want to join?",     showTail: false } },
-  { delay: 400,  typingFor: 0,    msg: { id: 4,  type: "reaction", targetId: 3, emoji: "🔥" } },
-  { delay: 800,  typingFor: 1200, msg: { id: 5,  type: "text",     variant: "outgoing", text: "That sounds amazing!",                             status: "read", showTail: false } },
-  { delay: 300,  typingFor: 1000, msg: { id: 6,  type: "text",     variant: "outgoing", text: "Where are you thinking?",                         status: "read", showTail: true  } },
-  { delay: 700,  typingFor: 1600, msg: { id: 7,  type: "image",    variant: "incoming", src: "https://picsum.photos/seed/hike/400/280", caption: "Bukhansan! The view is incredible 🏔️", showTail: true } },
-  { delay: 500,  typingFor: 900,  msg: { id: 8,  type: "text",     variant: "outgoing", text: "Wow I've always wanted to go there!",              status: "read", showTail: false } },
-  { delay: 400,  typingFor: 1000, msg: { id: 9,  type: "text",     variant: "outgoing", text: "Count me in 🙌",                                   status: "delivered", showTail: true  } },
-  { delay: 600,  typingFor: 800,  msg: { id: 10, type: "voice",    variant: "incoming", duration: "0:12",                                         showTail: true  } },
-  { delay: 500,  typingFor: 1100, msg: { id: 11, type: "text",     variant: "incoming", text: "Perfect! Let's meet at 7am at the entrance 🥾",   showTail: true  } },
-  { delay: 600,  typingFor: 900,  msg: { id: 12, type: "text",     variant: "outgoing", text: "See you there! ☀️",                                status: "read", showTail: true  } },
+  { delay: 1000, typingFor: 2200, msg: { id: 1,  type: "text",     variant: "incoming", text: "Hey! 👋 Are you free this weekend?",             showTail: true  } },
+  { delay: 1200, typingFor: 2800, msg: { id: 2,  type: "text",     variant: "outgoing", text: "Yeah! What's up? 😊",                             status: "read", showTail: true  } },
+  { delay: 800,  typingFor: 3200, msg: { id: 3,  type: "text",     variant: "incoming", text: "I'm going on a hike Saturday. Want to join?",     showTail: false } },
+  { delay: 600,  typingFor: 0,    msg: { id: 4,  type: "reaction", targetId: 3, emoji: "🔥" } },
+  { delay: 1000, typingFor: 2800, msg: { id: 5,  type: "text",     variant: "outgoing", text: "That sounds amazing!",                             status: "read", showTail: false } },
+  { delay: 400,  typingFor: 2400, msg: { id: 6,  type: "text",     variant: "outgoing", text: "Where are you thinking?",                         status: "read", showTail: true  } },
+  { delay: 900,  typingFor: 2400, msg: { id: 7,  type: "image",    variant: "incoming", src: "https://picsum.photos/seed/hike/400/280", caption: "Bukhansan! The view is incredible 🏔️", showTail: true } },
+  { delay: 700,  typingFor: 3200, msg: { id: 8,  type: "text",     variant: "outgoing", text: "Wow I've always wanted to go there!",              status: "read", showTail: false } },
+  { delay: 500,  typingFor: 2200, msg: { id: 9,  type: "text",     variant: "outgoing", text: "Count me in 🙌",                                   status: "delivered", showTail: true  } },
+  { delay: 800,  typingFor: 1400, msg: { id: 10, type: "voice",    variant: "incoming", duration: "0:12",                                         showTail: true  } },
+  { delay: 700,  typingFor: 2800, msg: { id: 11, type: "text",     variant: "incoming", text: "Perfect! Let's meet at 7am at the entrance 🥾",   showTail: true  } },
+  { delay: 900,  typingFor: 2000, msg: { id: 12, type: "text",     variant: "outgoing", text: "See you there! ☀️",                                status: "read", showTail: true  } },
 ];
 
-// Simulate typing the outgoing text letter by letter
-function useTypingText(fullText: string, active: boolean, durationMs: number) {
+// Adjacent keys on QWERTY for realistic typos
+const NEARBY: Record<string, string> = {
+  a:"sqwz", b:"vghn", c:"xdfv", d:"serfcx", e:"wsdr", f:"drtgvc",
+  g:"ftyhbv", h:"gyujbn", i:"uojk", j:"huikn", k:"jiolm", l:"kop",
+  m:"njk", n:"bhjm", o:"ipl", p:"ol", q:"wa", r:"edft", s:"awedxz",
+  t:"rfgy", u:"yihjk", v:"cfgb", w:"qase", x:"zsdc", y:"tugh",
+  z:"asx", " ":" ",
+};
+function nearbyKey(ch: string): string {
+  const pool = NEARBY[ch.toLowerCase()] ?? "abcde";
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+type Keystroke = { type: "char"; ch: string } | { type: "backspace" } | { type: "pause"; ms: number };
+
+function buildKeystrokes(text: string): Keystroke[] {
+  const result: Keystroke[] = [];
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    // ~12% chance of typo on real characters (not spaces at start)
+    if (ch !== " " && i > 0 && Math.random() < 0.12) {
+      const wrong = nearbyKey(ch);
+      result.push({ type: "char", ch: wrong });
+      result.push({ type: "pause", ms: 180 + Math.random() * 200 });
+      result.push({ type: "backspace" });
+      result.push({ type: "pause", ms: 60 + Math.random() * 80 });
+    }
+    result.push({ type: "char", ch });
+    // occasional mid-word pause
+    if (Math.random() < 0.08) {
+      result.push({ type: "pause", ms: 200 + Math.random() * 300 });
+    }
+  }
+  return result;
+}
+
+function useTypingText(fullText: string, active: boolean) {
   const [displayed, setDisplayed] = useState("");
   useEffect(() => {
     if (!active) { setDisplayed(""); return; }
     setDisplayed("");
-    const chars = [...fullText];
-    const interval = durationMs / chars.length;
+    const keystrokes = buildKeystrokes(fullText);
+    let current = "";
     let i = 0;
-    const t = setInterval(() => {
-      i++;
-      setDisplayed(fullText.slice(0, i));
-      if (i >= chars.length) clearInterval(t);
-    }, interval);
-    return () => clearInterval(t);
-  }, [active, fullText, durationMs]);
+    let timeout: ReturnType<typeof setTimeout>;
+
+    function next() {
+      if (i >= keystrokes.length) return;
+      const k = keystrokes[i++];
+      if (k.type === "char") {
+        current += k.ch;
+        setDisplayed(current);
+        timeout = setTimeout(next, 60 + Math.random() * 90);
+      } else if (k.type === "backspace") {
+        current = current.slice(0, -1);
+        setDisplayed(current);
+        timeout = setTimeout(next, 80 + Math.random() * 60);
+      } else {
+        timeout = setTimeout(next, k.ms);
+      }
+    }
+    timeout = setTimeout(next, 80);
+    return () => clearTimeout(timeout);
+  }, [active, fullText]);
   return displayed;
 }
 
@@ -58,14 +106,13 @@ export function ChatAnimation() {
   const [messages, setMessages]   = useState<ChatMessage[]>([]);
   const [reactions, setReactions] = useState<Record<number, string>>({});
   const [incomingTyping, setIncomingTyping] = useState(false);
-  const [outgoingTyping, setOutgoingTyping] = useState<{ text: string; duration: number } | null>(null);
+  const [outgoingTyping, setOutgoingTyping] = useState<{ text: string } | null>(null);
   const [step, setStep] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const typedText = useTypingText(
     outgoingTyping?.text ?? "",
     !!outgoingTyping,
-    outgoingTyping?.duration ?? 800,
   );
 
   useEffect(() => {
@@ -86,7 +133,7 @@ export function ChatAnimation() {
       if (typingFor > 0) {
         if (msg.variant === "outgoing" && msg.type === "text") {
           // Show text being typed in the input bar
-          setOutgoingTyping({ text: msg.text, duration: typingFor * 0.8 });
+          setOutgoingTyping({ text: msg.text });
           const t2 = setTimeout(() => {
             setOutgoingTyping(null);
             setMessages((m) => [...m, msg]);
