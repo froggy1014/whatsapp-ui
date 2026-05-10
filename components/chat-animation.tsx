@@ -333,6 +333,7 @@ export function ChatAnimation() {
               {msg.type === "template" && (
                 <div className={`flex w-full ${msg.variant === "outgoing" ? "justify-end" : "justify-start"} ${showTail ? "mb-[6px]" : "mb-[2px]"}`}>
                   <TemplateBubble
+                    variant={msg.variant}
                     header={{ type: "text", text: msg.title }}
                     body={msg.body}
                     buttons={msg.btnCode

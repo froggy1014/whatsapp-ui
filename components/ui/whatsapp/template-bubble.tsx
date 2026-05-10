@@ -44,6 +44,7 @@ export type TemplateButton =
 
 export interface TemplateBubbleProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: "incoming" | "outgoing";
   header?: TemplateHeader;
   body: string;
   footer?: string;
@@ -226,8 +227,9 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
-  ({ className, header, body, footer, buttons = [], timestamp, ...props }, ref) => {
+  ({ className, variant = "incoming", header, body, footer, buttons = [], timestamp, ...props }, ref) => {
     const hasButtons = buttons.length > 0;
+    const isOutgoing = variant === "outgoing";
 
     return (
       <div
@@ -236,7 +238,7 @@ const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
         {...props}
       >
         {/* Bubble */}
-        <div className="overflow-hidden rounded-lg bg-wa-bubble-incoming shadow-sm">
+        <div className={cn("overflow-hidden rounded-lg shadow-sm", isOutgoing ? "bg-wa-bubble-outgoing" : "bg-wa-bubble-incoming")}>
           {/* Header */}
           {header?.type === "image" && <ImageHeader imageUrl={header.imageUrl} />}
           {header?.type === "video" && <VideoHeader videoUrl={header.videoUrl} />}
