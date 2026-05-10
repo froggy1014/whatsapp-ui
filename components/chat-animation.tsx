@@ -41,8 +41,6 @@ const SCRIPT: Step[] = [
   { delay: 600,  typingFor: 0,    msg: { id: 2,  type: "text",     variant: "outgoing", text: "yeah lol, matching the exact UX is the hardest part",           status: "read"      } },
   { delay: 300,  typingFor: 0,    msg: { id: 3,  type: "text",     variant: "outgoing", text: "building every component from scratch is killing me 😵",         status: "read"      } },
   { delay: 600,  typingFor: 1200, msg: { id: 5,  type: "text",     variant: "incoming", text: "ok wait — I think I found exactly what you need" } },
-  { delay: 400,  typingFor: 0,    msg: { id: 6,  type: "voice",    variant: "incoming", duration: "0:08" } },
-  { delay: 500,  typingFor: 0,    msg: { id: 7,  type: "text",     variant: "outgoing", text: "haha ok let me listen",                                          status: "read"      } },
   { delay: 400,  typingFor: 1100, msg: { id: 8,  type: "text",     variant: "incoming", text: "it's whatsapp-ui — a shadcn registry with the official WDS design tokens" } },
   { delay: 400,  typingFor: 800,  msg: { id: 9,  type: "template", variant: "incoming",
       title: "WhatsApp UI",
