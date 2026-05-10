@@ -77,7 +77,7 @@ export function ChatAnimation() {
   }, [messages, typing]);
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-xl shadow-2xl border border-[rgba(0,0,0,0.1)]">
+    <div className="flex h-full flex-col overflow-hidden">
       <ChatHeader
         name="Alice"
         isOnline={typing}
