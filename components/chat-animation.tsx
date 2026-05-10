@@ -23,7 +23,7 @@ interface MultiImgMsg { id: number; type: "multi-image";variant: "incoming" | "o
 interface VoiceMsg    { id: number; type: "voice";      variant: "incoming" | "outgoing"; duration: string; status?: "read" | "delivered" }
 interface FileMsg     { id: number; type: "file";       variant: "incoming" | "outgoing"; fileName: string; fileSize: string; fileType: string; downloadUrl?: string; status?: "read" | "delivered" }
 interface TplMsg      { id: number; type: "template";   variant: "incoming" | "outgoing"; title: string; body: string; btnLabel: string; btnUrl?: string; btnCode?: string }
-interface CarouselMsg { id: number; type: "carousel";   variant: "incoming" | "outgoing"; body: string; cards: Array<{ body: string; btnLabel: string }> }
+interface CarouselMsg { id: number; type: "carousel";   variant: "incoming" | "outgoing"; body: string; cards: Array<{ body: string; btnLabel: string; btnUrl?: string }> }
 interface ReactMsg    { id: number; type: "reaction";   targetId: number; emoji: string }
 
 type ChatMessage = TextMsg | ImgMsg | MultiImgMsg | VoiceMsg | FileMsg | TplMsg | CarouselMsg;
@@ -68,9 +68,9 @@ const SCRIPT: Step[] = [
   { delay: 500,  typingFor: 900,  msg: { id: 21, type: "carousel", variant: "incoming",
       body: "here's a taste of what's in the registry 👇",
       cards: [
-        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View" },
-        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View" },
-        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View" },
+        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View", btnUrl: "https://whatsapp-ui.vercel.app/registry/chat-bubble" },
+        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View", btnUrl: "https://whatsapp-ui.vercel.app/registry/template-bubble" },
+        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View", btnUrl: "https://whatsapp-ui.vercel.app/registry/voice-message-bubble" },
       ],
   } },
   { delay: 500,  typingFor: 800,  msg: { id: 16, type: "text",     variant: "incoming", text: "lol go build something 🚀" } },
@@ -336,7 +336,7 @@ export function ChatAnimation() {
                     timestamp="10:24"
                     cards={msg.cards.map((c) => ({
                       body: c.body,
-                      buttons: [{ type: "url" as const, label: c.btnLabel }],
+                      buttons: [{ type: "url" as const, label: c.btnLabel, url: c.btnUrl }],
                     }))}
                   />
                 </div>
