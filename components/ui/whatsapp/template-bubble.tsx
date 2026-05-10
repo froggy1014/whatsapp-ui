@@ -242,4 +242,4 @@ const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
 );
 TemplateBubble.displayName = "TemplateBubble";
 
-export { TemplateBubble, type TemplateBubbleProps };
+export { TemplateBubble };
