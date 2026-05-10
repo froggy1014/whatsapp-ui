@@ -108,15 +108,20 @@ function MediaGrid({ items }: { items: MediaItem[] }) {
   const extra = items.length - 4;
   const count = visible.length;
 
+  // Single image/video
   if (count === 1) {
-    return <MediaCell item={visible[0]} className="min-w-[200px] w-full" naturalSize />;
+    const h = visible[0].type === "video" ? "h-[171px]" : "max-h-[330px]";
+    return <MediaCell item={visible[0]} className={cn("w-full", h)} naturalSize={visible[0].type !== "video"} />;
   }
+
+  // Grid cells are always 165×165px
+  const cellClass = "h-[165px] w-[165px]";
 
   if (count === 2) {
     return (
       <div className="grid grid-cols-2 gap-[2px]">
         {visible.map((item, i) => (
-          <MediaCell key={i} item={item} className="aspect-square" />
+          <MediaCell key={i} item={item} className={cellClass} />
         ))}
       </div>
     );
@@ -125,9 +130,9 @@ function MediaGrid({ items }: { items: MediaItem[] }) {
   if (count === 3) {
     return (
       <div className="grid grid-cols-2 gap-[2px]">
-        <MediaCell item={visible[0]} className="row-span-2 aspect-[2/3]" />
-        <MediaCell item={visible[1]} className="aspect-square" />
-        <MediaCell item={visible[2]} className="aspect-square" />
+        <MediaCell item={visible[0]} className="h-[332px] w-[165px]" />
+        <MediaCell item={visible[1]} className={cellClass} />
+        <MediaCell item={visible[2]} className={cellClass} />
       </div>
     );
   }
@@ -140,7 +145,7 @@ function MediaGrid({ items }: { items: MediaItem[] }) {
           <MediaCell
             key={i}
             item={item}
-            className="aspect-square"
+            className={cellClass}
             overlay={
               isLast ? (
                 <div className="flex h-full items-center justify-center bg-black/50">
@@ -195,7 +200,7 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
       >
         <div
           className={cn(
-            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-hidden rounded-lg",
+            "font-wa relative max-w-[336px] overflow-hidden rounded-lg",
             showTail && (isOutgoing ? "rounded-br-[3px]" : "rounded-bl-[3px]")
           )}
         >

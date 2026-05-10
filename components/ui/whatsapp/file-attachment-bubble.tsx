@@ -26,7 +26,7 @@ interface FileAttachmentBubbleProps extends React.HTMLAttributes<HTMLDivElement>
 
 // File type → WDS color token
 const FILE_TYPE_COLORS: Record<string, string> = {
-  pdf:  "var(--wa-attachment-document)",
+  pdf:  "#ea0038",   // WDS red — PDF always red
   doc:  "var(--wa-attachment-document)",
   docx: "var(--wa-attachment-document)",
   xls:  "var(--wa-attachment-poll)",
