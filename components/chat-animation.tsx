@@ -75,7 +75,7 @@ function buildKS(text: string): KS[] {
   const r: KS[] = [];
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
-    if (/[a-z]/i.test(ch) && i > 0 && Math.random() < 0.09) {
+    if (/[a-z]/i.test(ch) && i > 2 && Math.random() < 0.03) {
       r.push({ type:"char", ch: nearbyKey(ch) });
       r.push({ type:"pause", ms: 160 + Math.random() * 220 });
       r.push({ type:"backspace" });
