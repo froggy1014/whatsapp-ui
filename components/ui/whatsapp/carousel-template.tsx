@@ -30,7 +30,7 @@ function CardButton({ button }: { button: TemplateButton }) {
     : undefined;
 
   return (
-    <Button render={renderEl} className={base}>
+    <Button render={renderEl} nativeButton={renderEl == null} className={base}>
       {button.type === "url" && (
         <img src="/wa-icon-url.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
       )}

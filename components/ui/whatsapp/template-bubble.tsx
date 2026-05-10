@@ -168,7 +168,7 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
   }
 
   return (
-    <Button render={renderEl} className={base}>
+    <Button render={renderEl} nativeButton={renderEl == null} className={base}>
       {icon}
       {button.type === "copy_code" ? (button.label ?? "Copy offer code") : button.label}
     </Button>
