@@ -28,7 +28,7 @@ export type TemplateButton =
   | { type: "url"; label: string; url?: string }
   | { type: "phone"; label: string; phone?: string }
   | { type: "quick_reply"; label: string }
-  | { type: "copy_code"; label?: string }
+  | { type: "copy_code"; label?: string; code?: string }
   | { type: "flow"; label: string }
   | { type: "call_permission"; bizName: string };
 
@@ -167,10 +167,18 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
     );
   }
 
+  const label = button.type === "copy_code" ? (button.label ?? "Copy offer code") : button.label;
+  const copyCode = button.type === "copy_code" ? button.code : undefined;
+
   return (
-    <Button render={renderEl} nativeButton={renderEl == null} className={base}>
+    <Button
+      render={renderEl}
+      nativeButton={renderEl == null}
+      className={base}
+      onClick={copyCode ? () => navigator.clipboard.writeText(copyCode) : undefined}
+    >
       {icon}
-      {button.type === "copy_code" ? (button.label ?? "Copy offer code") : button.label}
+      {label}
     </Button>
   );
 }

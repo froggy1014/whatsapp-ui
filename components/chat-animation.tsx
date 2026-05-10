@@ -17,7 +17,7 @@ import { MessageInput } from "@/components/ui/whatsapp/message-input";
 interface TextMsg  { id: number; type: "text";     variant: "incoming" | "outgoing"; text: string;  status?: "read" | "delivered" }
 interface ImgMsg   { id: number; type: "image";    variant: "incoming" | "outgoing"; src: string;   caption?: string; status?: "read" | "delivered" }
 interface VoiceMsg { id: number; type: "voice";    variant: "incoming" | "outgoing"; duration: string; status?: "read" | "delivered" }
-interface TplMsg   { id: number; type: "template"; variant: "incoming" | "outgoing"; title: string; body: string; btnLabel: string; btnUrl?: string }
+interface TplMsg   { id: number; type: "template"; variant: "incoming" | "outgoing"; title: string; body: string; btnLabel: string; btnUrl?: string; btnCode?: string }
 interface ReactMsg { id: number; type: "reaction"; targetId: number; emoji: string }
 
 type ChatMessage = TextMsg | ImgMsg | VoiceMsg | TplMsg;
@@ -57,6 +57,13 @@ const SCRIPT: Step[] = [
   { delay: 800,  typingFor: 0,    msg: { id: 14, type: "text",     variant: "outgoing", text: "bro this is insane",                                           status: "read"      } },
   { delay: 300,  typingFor: 0,    msg: { id: 15, type: "text",     variant: "outgoing", text: "you just saved me weeks 😭",                                   status: "read" } },
   { delay: 700,  typingFor: 1200, msg: { id: 16, type: "text",     variant: "incoming", text: "lol go build something 🚀" } },
+  { delay: 600,  typingFor: 800,  msg: { id: 17, type: "voice",    variant: "incoming", duration: "0:42" } },
+  { delay: 800,  typingFor: 1600, msg: { id: 17, type: "template", variant: "incoming",
+      title: "Here's a little gift 🎁",
+      body: "Use this code to get free access. Copy the code and paste it at checkout.",
+      btnLabel: "Copy code — WA-UI-2025",
+      btnCode: "WA-UI-2025",
+  } },
 ];
 
 // ─── Human-like typing ────────────────────────────────────────────────────────
@@ -120,7 +127,11 @@ export function ChatAnimation() {
   const [incoming, setIncoming]   = useState(false);
   const [outgoingText, setOutgoing] = useState<string | null>(null);
   const [step, setStep]           = useState(0);
-  const [dark, setDark]           = useState(true);
+  const [dark, setDark]           = useState(() =>
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("dark")
+      : true
+  );
   const scrollRef                 = useRef<HTMLDivElement>(null);
 
   const applyTheme = useCallback((isDark: boolean) => {
@@ -277,14 +288,23 @@ export function ChatAnimation() {
                 <ImageBubble variant={msg.variant} src={msg.src} caption={msg.caption} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={showTail} />
               )}
               {msg.type === "voice" && (
-                <VoiceMessageBubble variant={msg.variant} duration={msg.duration} timestamp="10:24" showTail={showTail} />
+                <VoiceMessageBubble
+                  variant={msg.variant}
+                  duration={msg.duration}
+                  timestamp="10:24"
+                  showTail={showTail}
+                  audioSrc={msg.variant === "incoming" ? "/file_example_MP3_700KB.mp3" : undefined}
+                />
               )}
               {msg.type === "template" && (
                 <div className={`flex w-full ${msg.variant === "outgoing" ? "justify-end" : "justify-start"} ${showTail ? "mb-[6px]" : "mb-[2px]"}`}>
                   <TemplateBubble
                     header={{ type: "text", text: msg.title }}
                     body={msg.body}
-                    buttons={[{ type: "url", label: msg.btnLabel, url: msg.btnUrl }]}
+                    buttons={msg.btnCode
+                      ? [{ type: "copy_code", label: msg.btnLabel, code: msg.btnCode }]
+                      : [{ type: "url", label: msg.btnLabel, url: msg.btnUrl }]
+                    }
                     timestamp="10:24"
                   />
                 </div>
