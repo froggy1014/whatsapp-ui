@@ -229,7 +229,7 @@ export function ChatAnimation() {
         {messages.map((msg, index) => {
           const next    = messages[index + 1];
           const isLast  = index === messages.length - 1;
-          const showTail = isLast
+          const showTail = (isLast || next == null)
             ? (msg.variant === "incoming" ? !incoming : outgoingText === null)
             : next.variant !== msg.variant;
           const reaction = reactions[msg.id];
