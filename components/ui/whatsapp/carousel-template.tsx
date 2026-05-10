@@ -103,4 +103,4 @@ const CarouselTemplate = React.forwardRef<HTMLDivElement, CarouselTemplateProps>
 );
 CarouselTemplate.displayName = "CarouselTemplate";
 
-export { CarouselTemplate, type CarouselTemplateProps };
+export { CarouselTemplate };
