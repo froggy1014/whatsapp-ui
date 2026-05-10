@@ -252,6 +252,15 @@
   /* Chat Wallpaper */
   --wa-wallpaper-bg: #f5f0e8;
   --wa-wallpaper-fg: rgba(17, 27, 33, 0.05);
+  --wa-wallpaper-image: url("/wa-wallpaper.png");
+  --wa-wallpaper-tint: rgba(229, 221, 213, 0.85);
+
+  /* Template header placeholder */
+  --wa-placeholder-bg: #ccd0d5;
+  --wa-placeholder-icon: brightness(0) saturate(100%) invert(42%) sepia(9%) saturate(621%) hue-rotate(155deg) brightness(94%) contrast(87%);
+
+  /* Template button icon — converts PNG to wa-emerald-500 (#00a884) */
+  --wa-btn-icon-filter: brightness(0) saturate(100%) invert(50%) sepia(97%) saturate(372%) hue-rotate(128deg) brightness(97%);
 }
 
 /* === Dark Mode === */
@@ -302,6 +311,33 @@
   /* Chat Wallpaper */
   --wa-wallpaper-bg: #0b141a;
   --wa-wallpaper-fg: rgba(255, 255, 255, 0.06);
+  --wa-wallpaper-image: url("/wa-wallpaper.png");
+  --wa-wallpaper-tint: rgba(11, 20, 26, 0.88);
+
+  /* Template header placeholder */
+  --wa-placeholder-bg: #2a3942;
+  --wa-placeholder-icon: brightness(0) saturate(100%) invert(62%) sepia(10%) saturate(400%) hue-rotate(155deg) brightness(95%) contrast(85%);
+
+  /* Template button icon — converts PNG to wa-emerald-400 (#06cf9c) */
+  --wa-btn-icon-filter: brightness(0) saturate(100%) invert(68%) sepia(60%) saturate(400%) hue-rotate(118deg) brightness(100%);
+}
+
+/* === Wallpaper === */
+.wa-wallpaper {
+  position: relative;
+  z-index: 0;
+  background-color: var(--wa-wallpaper-bg);
+}
+.wa-wallpaper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--wa-wallpaper-image);
+  background-repeat: repeat;
+  background-size: 412px auto;
+  opacity: 0.12;
+  pointer-events: none;
 }
 
 /* === Layout Constants === */
