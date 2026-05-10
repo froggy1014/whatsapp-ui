@@ -135,31 +135,39 @@ function LocationHeader({ location }: { location?: LocationHeader }) {
   );
 }
 
+// ─── Icons ────────────────────────────────────────────────────────────────────
+
+const ICONS: Partial<Record<TemplateButton["type"], React.ReactNode>> = {
+  url:          <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />,
+  phone_number: <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />,
+  quick_reply:  <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />,
+  flow:         <img src="/wa-icon-flow.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />,
+  catalog:      <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />,
+  // copy_code / otp — inline SVG clipboard icon
+  copy_code: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ filter: "var(--wa-btn-icon-filter)" }}>
+      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+    </svg>
+  ),
+  otp: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ filter: "var(--wa-btn-icon-filter)" }}>
+      <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+    </svg>
+  ),
+};
+
 // ─── Buttons ──────────────────────────────────────────────────────────────────
 
 function TemplateButtonRow({ button }: { button: TemplateButton }) {
+  const [copied, setCopied] = React.useState(false);
   const base = "flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500";
 
-  // Determine the element to render based on button type
   const renderEl = (() => {
     if (button.type === "url" && button.url)
       return <a href={button.url} target="_blank" rel="noopener noreferrer" />;
     if (button.type === "phone_number" && button.phone_number)
       return <a href={`tel:${button.phone_number}`} />;
-    return undefined; // renders as <button>
-  })();
-
-  const icon = (() => {
-    switch (button.type) {
-      case "url":          return <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "phone_number": return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "quick_reply":  return <img src="/wa-icon-phone.png" width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "copy_code":    return <img src="/wa-icon-copy.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "flow":         return <img src="/wa-icon-flow.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "otp":          return <img src="/wa-icon-copy.png"  width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      case "catalog":      return <img src="/wa-icon-url.png"   width={16} height={16} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />;
-      default: return null;
-    }
+    return undefined;
   })();
 
   if (button.type === "call_permission") {
@@ -184,17 +192,33 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
     button.type === "otp"       ? (button.label ?? "Copy code") :
     button.type === "catalog"   ? (button.label ?? "View catalog") :
     "label" in button           ? button.label : "";
-  const copyCode = button.type === "copy_code" ? button.code : undefined;
+
+  const isCopyType = button.type === "copy_code" || button.type === "otp";
+  const copyCode = isCopyType && "code" in button ? button.code : undefined;
+
+  const handleClick = copyCode
+    ? () => {
+        navigator.clipboard.writeText(copyCode);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    : undefined;
 
   return (
     <Button
       render={renderEl}
       nativeButton={renderEl == null}
       className={base}
-      onClick={copyCode ? () => navigator.clipboard.writeText(copyCode) : undefined}
+      onClick={handleClick}
     >
-      {icon}
-      {label}
+      {copied ? (
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ filter: "var(--wa-btn-icon-filter)" }}>
+          <path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+        </svg>
+      ) : (
+        ICONS[button.type] ?? null
+      )}
+      {copied ? "Copied!" : label}
     </Button>
   );
 }
