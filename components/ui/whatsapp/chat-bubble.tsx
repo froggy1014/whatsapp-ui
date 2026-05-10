@@ -24,18 +24,33 @@ interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   reactions?: Reaction[];
 }
 
-function ReactionPillInline({ emoji, count, reacted }: Reaction) {
+function ReactionsDisplay({ reactions }: { reactions: Reaction[] }) {
+  const hasCount = reactions.some((r) => r.count !== undefined && r.count > 0);
+
+  if (hasCount) {
+    // Group chat: single pill, all emojis + total count
+    const total = reactions.reduce((sum, r) => sum + (r.count ?? 1), 0);
+    return (
+      <span className="relative z-10 inline-flex items-center gap-[4px] rounded-full border border-wa-border bg-wa-bg px-[8px] py-[4px] text-[16px] leading-none shadow-sm">
+        {reactions.map((r, i) => <span key={i}>{r.emoji}</span>)}
+        <span className="text-[13px] font-medium text-wa-text-secondary">{total}</span>
+      </span>
+    );
+  }
+
+  // 1:1 chat: separate pill per emoji
   return (
-    <span className={cn(
-      "relative z-10 inline-flex items-center gap-[3px] rounded-full border px-[6px] py-[2px] text-[13px] leading-[18px] shadow-sm",
-      "border-wa-border bg-wa-bg",
-      reacted && "border-wa-emerald-500 bg-wa-green-75 dark:bg-[#005c4b]"
-    )}>
-      {emoji}
-      {count !== undefined && count > 0 && (
-        <span className="text-[12px] text-wa-text-secondary">{count}</span>
-      )}
-    </span>
+    <>
+      {reactions.map((r, i) => (
+        <span key={i} className={cn(
+          "relative z-10 inline-flex items-center rounded-full border px-[6px] py-[2px] text-[14px] leading-none shadow-sm",
+          "border-wa-border bg-wa-bg",
+          r.reacted && "border-wa-emerald-500 bg-wa-green-75 dark:bg-[#005c4b]"
+        )}>
+          {r.emoji}
+        </span>
+      ))}
+    </>
   );
 }
 
@@ -200,15 +215,13 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           </div>
         </div>
 
-        {/* Reactions — bottom corner of the bubble */}
+        {/* Reactions — overlaps 1px onto the bubble bottom */}
         {hasReactions && (
           <div className={cn(
             "absolute flex gap-[3px]",
             isOutgoing ? "right-[8px]" : "left-[8px]"
-          )} style={{ bottom: "-12px" }}>
-            {reactions!.map((r, i) => (
-              <ReactionPillInline key={i} {...r} />
-            ))}
+          )} style={{ bottom: "-11px" }}>
+            <ReactionsDisplay reactions={reactions!} />
           </div>
         )}
       </div>

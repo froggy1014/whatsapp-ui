@@ -34,21 +34,23 @@ export const DirectChat: Story = {
   ),
 };
 
-/** Group chat — with count */
+/** Group chat — single pill with all emojis + total count */
 export const GroupChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
     <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-      <div className="relative mb-5 inline-block">
-        <ChatBubble variant="incoming" timestamp="10:29" showTail>
-          See you there! 🙌
-        </ChatBubble>
-        <div className="absolute -bottom-[10px] left-[12px] flex gap-1">
-          <ReactionPill emoji="😊" count={3} reacted />
-          <ReactionPill emoji="👍" count={7} />
-          <ReactionPill emoji="❤️" count={12} />
-        </div>
-      </div>
+      <ChatBubble
+        variant="incoming"
+        timestamp="09:32"
+        showTail
+        reactions={[
+          { emoji: "❤️", count: 5 },
+          { emoji: "👍", count: 7 },
+          { emoji: "🙏", count: 2 },
+        ]}
+      >
+        Let me know if you are still on for dinner on Saturday
+      </ChatBubble>
     </div>
   ),
 };
