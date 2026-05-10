@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getRegistryItem, getRegistryItems } from "@/lib/registry";
 import { CopyButton } from "@/components/copy-button";
-import { OpenInV0Button } from "@/components/open-in-v0";
 
 const BASE_URL =
   process.env.VERCEL_PROJECT_PRODUCTION_URL
@@ -62,9 +61,7 @@ export default async function RegistryItemPage({
             </div>
             <p className="text-[14px] text-[#667781] max-w-xl">{item.description}</p>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <OpenInV0Button registryUrl={registryUrl} title={item.title} />
-          </div>
+          <CopyButton text={npxCmd} />
         </div>
 
         {/* Install */}
