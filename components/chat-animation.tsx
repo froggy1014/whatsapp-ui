@@ -128,12 +128,11 @@ export function ChatAnimation() {
     outgoingText ?? "",
     outgoingText !== null,
     () => {
-      // Typing finished — commit message and advance
-      if (pendingMsg.current) {
-        setMessages((m) => [...m, pendingMsg.current!]);
-        pendingMsg.current = null;
-      }
+      // Capture before clearing to avoid concurrent null access
+      const pending = pendingMsg.current;
+      pendingMsg.current = null;
       setOutgoing(null);
+      if (pending) setMessages((m) => [...m, pending]);
       setStep((s) => s + 1);
     },
   );
@@ -227,6 +226,7 @@ export function ChatAnimation() {
         {messages.length > 0 && <DateSeparator label="Today" />}
 
         {messages.map((msg, index) => {
+          if (!msg) return null;
           const next    = messages[index + 1];
           const isLast  = index === messages.length - 1;
           const showTail = (isLast || next == null)
