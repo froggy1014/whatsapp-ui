@@ -60,7 +60,7 @@ const SCRIPT: Step[] = [
   { delay: 600,  typingFor: 1000, msg: { id: 18, type: "template", variant: "outgoing",
       title: "Here's a little gift 🎁",
       body: "Use this code to get free access. Copy the code and paste it at checkout.",
-      btnLabel: "Copy code — WA-UI-2025",
+      btnLabel: "Copy code",
       btnCode: "WA-UI-2025",
   } },
 ];
