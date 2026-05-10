@@ -56,7 +56,7 @@ const SCRIPT: Step[] = [
   { delay: 400,  typingFor: 1400, msg: { id: 12, type: "text",     variant: "incoming", text: "yep 😄 one command and you're done" } },
   { delay: 500,  typingFor: 1200, msg: { id: 13, type: "image",    variant: "incoming", src: IMG, caption: "dark mode works too 🌙" } },
   { delay: 800,  typingFor: 0,    msg: { id: 14, type: "text",     variant: "outgoing", text: "bro this is insane",                                           status: "read"      } },
-  { delay: 300,  typingFor: 0,    msg: { id: 15, type: "text",     variant: "outgoing", text: "you just saved me weeks 😭",                                   status: "delivered" } },
+  { delay: 300,  typingFor: 0,    msg: { id: 15, type: "text",     variant: "outgoing", text: "you just saved me weeks 😭",                                   status: "read" } },
   { delay: 700,  typingFor: 1200, msg: { id: 16, type: "text",     variant: "incoming", text: "lol go build something 🚀" } },
 ];
 

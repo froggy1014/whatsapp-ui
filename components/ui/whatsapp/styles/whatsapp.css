@@ -386,7 +386,7 @@
 
   /* Read Receipts */
   --wa-read: #53bdeb;
-  --wa-delivered: rgba(255, 255, 255, 0.5);
+  --wa-delivered: #aebac1;
 
   /* Misc */
   --wa-unread-marker: #00a884;
