@@ -94,8 +94,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
         className={cn(
           "flex w-full",
           isOutgoing ? "justify-end" : "justify-start",
-          // Extra bottom margin when tail is shown to make room for protruding tail
-          showTail ? "mb-[6px]" : "",
+          showTail ? "mb-[6px]" : "mb-[2px]",
           className
         )}
         {...props}
@@ -103,7 +102,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
       >
         <div
           className={cn(
-            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[6px]",
+            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-3 pb-[7px] pt-[6px]",
             isOutgoing
               ? "bg-wa-bubble-outgoing"
               : "bg-wa-bubble-incoming",
