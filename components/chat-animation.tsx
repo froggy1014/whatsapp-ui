@@ -39,7 +39,7 @@ export function ChatAnimation() {
   const [reactions, setReactions] = useState<Record<number, string>>({});
   const [typing, setTyping] = useState(false);
   const [step, setStep] = useState(0);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (step >= SCRIPT.length) {
@@ -72,7 +72,8 @@ export function ChatAnimation() {
   }, [step]);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = scrollRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [messages, typing]);
 
   return (
@@ -85,6 +86,7 @@ export function ChatAnimation() {
         onMenu={() => {}}
       />
       <div
+        ref={scrollRef}
         className="wa-wallpaper flex-1 overflow-y-auto px-4 py-4"
         style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
       >
@@ -113,7 +115,7 @@ export function ChatAnimation() {
           );
         })}
         {typing && <TypingIndicator />}
-        <div ref={bottomRef} />
+        <div />
       </div>
       <MessageInput placeholder="Type a message" disabled />
     </div>
