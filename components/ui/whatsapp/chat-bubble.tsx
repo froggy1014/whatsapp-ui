@@ -28,12 +28,22 @@ function ReactionsDisplay({ reactions }: { reactions: Reaction[] }) {
   const hasCount = reactions.some((r) => r.count !== undefined && r.count > 0);
 
   if (hasCount) {
-    // Group chat: single pill, all emojis + total count
+    // Group chat: overlapping emoji circles + total count
     const total = reactions.reduce((sum, r) => sum + (r.count ?? 1), 0);
     return (
-      <span className="relative z-10 inline-flex items-center gap-[3px] rounded-full border border-wa-border bg-wa-bg px-[6px] py-[2px] text-[13px] leading-none shadow-sm">
-        {reactions.map((r, i) => <span key={i}>{r.emoji}</span>)}
-        <span className="text-[12px] font-medium text-wa-text-secondary">{total}</span>
+      <span className="relative z-10 inline-flex items-center rounded-full border border-wa-border bg-wa-bg px-[7px] py-[3px] shadow-sm">
+        <span className="flex items-center">
+          {reactions.map((r, i) => (
+            <span
+              key={i}
+              className="inline-flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 border-wa-bg bg-wa-bg text-[13px] leading-none"
+              style={{ marginLeft: i > 0 ? "-6px" : "0", zIndex: reactions.length - i }}
+            >
+              {r.emoji}
+            </span>
+          ))}
+        </span>
+        <span className="ml-[6px] text-[12px] font-medium text-wa-text-secondary">{total}</span>
       </span>
     );
   }
@@ -135,7 +145,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           "relative flex w-full",
           isOutgoing ? "justify-end" : "justify-start",
           showTail ? "mb-[6px]" : "mb-[2px]",
-          hasReactions && "mb-[18px]",
+          hasReactions && "mb-[24px]",
           className
         )}
         {...props}
@@ -220,7 +230,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           <div className={cn(
             "absolute flex gap-[3px]",
             isOutgoing ? "right-[8px]" : "left-[8px]"
-          )} style={{ bottom: "-8px" }}>
+          )} style={{ bottom: "-20px" }}>
             <ReactionsDisplay reactions={reactions!} />
           </div>
         )}
