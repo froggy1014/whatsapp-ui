@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
+import { CarouselTemplate } from "@/components/ui/whatsapp/carousel-template";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 import { DateSeparator } from "@/components/ui/whatsapp/date-separator";
+import { FileAttachmentBubble } from "@/components/ui/whatsapp/file-attachment-bubble";
 import { ImageBubble } from "@/components/ui/whatsapp/image-bubble";
 import { TemplateBubble } from "@/components/ui/whatsapp/template-bubble";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
@@ -15,13 +17,16 @@ import { MessageInput } from "@/components/ui/whatsapp/message-input";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-interface TextMsg  { id: number; type: "text";     variant: "incoming" | "outgoing"; text: string;  status?: "read" | "delivered" }
-interface ImgMsg   { id: number; type: "image";    variant: "incoming" | "outgoing"; src: string;   caption?: string; status?: "read" | "delivered" }
-interface VoiceMsg { id: number; type: "voice";    variant: "incoming" | "outgoing"; duration: string; status?: "read" | "delivered" }
-interface TplMsg   { id: number; type: "template"; variant: "incoming" | "outgoing"; title: string; body: string; btnLabel: string; btnUrl?: string; btnCode?: string }
-interface ReactMsg { id: number; type: "reaction"; targetId: number; emoji: string }
+interface TextMsg     { id: number; type: "text";       variant: "incoming" | "outgoing"; text: string;   status?: "read" | "delivered" }
+interface ImgMsg      { id: number; type: "image";      variant: "incoming" | "outgoing"; src: string;   caption?: string; status?: "read" | "delivered" }
+interface MultiImgMsg { id: number; type: "multi-image";variant: "incoming" | "outgoing"; srcs: string[]; caption?: string; status?: "read" | "delivered" }
+interface VoiceMsg    { id: number; type: "voice";      variant: "incoming" | "outgoing"; duration: string; status?: "read" | "delivered" }
+interface FileMsg     { id: number; type: "file";       variant: "incoming" | "outgoing"; fileName: string; fileSize: string; fileType: string; status?: "read" | "delivered" }
+interface TplMsg      { id: number; type: "template";   variant: "incoming" | "outgoing"; title: string; body: string; btnLabel: string; btnUrl?: string; btnCode?: string }
+interface CarouselMsg { id: number; type: "carousel";   variant: "incoming" | "outgoing"; body: string; cards: Array<{ body: string; btnLabel: string }> }
+interface ReactMsg    { id: number; type: "reaction";   targetId: number; emoji: string }
 
-type ChatMessage = TextMsg | ImgMsg | VoiceMsg | TplMsg;
+type ChatMessage = TextMsg | ImgMsg | MultiImgMsg | VoiceMsg | FileMsg | TplMsg | CarouselMsg;
 type Message     = ChatMessage | ReactMsg;
 
 interface Step {
@@ -52,8 +57,22 @@ const SCRIPT: Step[] = [
   { delay: 400,  typingFor: 0,    msg: { id: 11, type: "text",     variant: "outgoing", text: "wait... ChatBubble, MessageInput, Templates — it's all there?!", status: "read"    } },
   { delay: 300,  typingFor: 900,  msg: { id: 12, type: "text",     variant: "incoming", text: "yep 😄 one command and you're done" } },
   { delay: 400,  typingFor: 800,  msg: { id: 13, type: "image",    variant: "incoming", src: IMG, caption: "dark mode works too 🌙" } },
-  { delay: 500,  typingFor: 0,    msg: { id: 14, type: "text",     variant: "outgoing", text: "bro this is insane",                                             status: "read"      } },
-  { delay: 300,  typingFor: 0,    msg: { id: 15, type: "text",     variant: "outgoing", text: "you just saved me weeks 😭",                                     status: "read" } },
+  { delay: 500,  typingFor: 0,    msg: { id: 14, type: "text",     variant: "outgoing", text: "bro this is insane",                                                     status: "read"      } },
+  { delay: 300,  typingFor: 900,  msg: { id: 19, type: "file",     variant: "incoming", fileName: "whatsapp-ui-quickstart.pdf", fileSize: "512 KB", fileType: "pdf" } },
+  { delay: 500,  typingFor: 0,    msg: { id: 15, type: "text",     variant: "outgoing", text: "already started 👀",                                                 status: "read" } },
+  { delay: 400,  typingFor: 0,    msg: { id: 20, type: "multi-image", variant: "outgoing",
+      srcs: [IMG, IMG, IMG, IMG],
+      caption: "built these in 30 mins 🤯",
+      status: "read",
+  } },
+  { delay: 500,  typingFor: 900,  msg: { id: 21, type: "carousel", variant: "incoming",
+      body: "here's a taste of what's in the registry 👇",
+      cards: [
+        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View" },
+        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View" },
+        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View" },
+      ],
+  } },
   { delay: 500,  typingFor: 800,  msg: { id: 16, type: "text",     variant: "incoming", text: "lol go build something 🚀" } },
   { delay: 400,  typingFor: 600,  msg: { id: 17, type: "voice",    variant: "incoming", duration: "0:42" } },
   { delay: 600,  typingFor: 1000, msg: { id: 18, type: "template", variant: "outgoing",
@@ -271,6 +290,12 @@ export function ChatAnimation() {
               {msg.type === "image" && (
                 <ImageBubble variant={msg.variant} src={msg.src} caption={msg.caption} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={showTail} />
               )}
+              {msg.type === "multi-image" && (
+                <ImageBubble variant={msg.variant} images={msg.srcs} caption={msg.caption} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={showTail} />
+              )}
+              {msg.type === "file" && (
+                <FileAttachmentBubble variant={msg.variant} fileName={msg.fileName} fileSize={msg.fileSize} fileType={msg.fileType} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} downloadStatus="idle" showTail={showTail} />
+              )}
               {msg.type === "voice" && (
                 <VoiceMessageBubble
                   variant={msg.variant}
@@ -291,6 +316,18 @@ export function ChatAnimation() {
                       : [{ type: "url", label: msg.btnLabel, url: msg.btnUrl }]
                     }
                     timestamp="10:24"
+                  />
+                </div>
+              )}
+              {msg.type === "carousel" && (
+                <div className={`flex w-full ${msg.variant === "outgoing" ? "justify-end" : "justify-start"} ${showTail ? "mb-[6px]" : "mb-[2px]"}`}>
+                  <CarouselTemplate
+                    body={msg.body}
+                    timestamp="10:24"
+                    cards={msg.cards.map((c) => ({
+                      body: c.body,
+                      buttons: [{ type: "url" as const, label: c.btnLabel }],
+                    }))}
                   />
                 </div>
               )}
