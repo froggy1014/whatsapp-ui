@@ -7,7 +7,7 @@ const meta: Meta<typeof ReactionPill> = {
   title: "WhatsApp/ReactionPill",
   component: ReactionPill,
   parameters: { layout: "padded" },
-  args: { emoji: "😊", count: 1 },
+  args: { emoji: "😊" },
 };
 export default meta;
 type Story = StoryObj<typeof ReactionPill>;
@@ -16,16 +16,16 @@ export const Default: Story = {};
 
 export const Reacted: Story = { args: { reacted: true } };
 
-/** 1:1 chat — no count shown */
+/** 1:1 chat — no count, sits on bubble corner */
 export const DirectChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper p-4" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-      <div className="relative mb-4 inline-flex flex-col items-start">
+    <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+      <div className="relative mb-5 inline-block">
         <ChatBubble variant="incoming" timestamp="10:29" showTail>
           See you there! 🙌
         </ChatBubble>
-        <div className="-mt-1 flex gap-1 pl-2">
+        <div className="absolute -bottom-[10px] left-[12px] flex gap-1">
           <ReactionPill emoji="😊" reacted />
           <ReactionPill emoji="👍" />
         </div>
@@ -34,19 +34,36 @@ export const DirectChat: Story = {
   ),
 };
 
-/** Group chat — count shown */
+/** Group chat — with count */
 export const GroupChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper p-4" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
-      <div className="relative mb-4 inline-flex flex-col items-start">
+    <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+      <div className="relative mb-5 inline-block">
         <ChatBubble variant="incoming" timestamp="10:29" showTail>
           See you there! 🙌
         </ChatBubble>
-        <div className="-mt-1 flex gap-1 pl-2">
+        <div className="absolute -bottom-[10px] left-[12px] flex gap-1">
           <ReactionPill emoji="😊" count={3} reacted />
           <ReactionPill emoji="👍" count={7} />
           <ReactionPill emoji="❤️" count={12} />
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+/** Outgoing bubble */
+export const OutgoingBubble: Story = {
+  parameters: { layout: "padded" },
+  render: () => (
+    <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+      <div className="relative mb-5">
+        <ChatBubble variant="outgoing" timestamp="10:29" status="read" showTail>
+          That sounds amazing! 🔥
+        </ChatBubble>
+        <div className="absolute -bottom-[10px] right-[12px] flex gap-1">
+          <ReactionPill emoji="🔥" reacted />
         </div>
       </div>
     </div>

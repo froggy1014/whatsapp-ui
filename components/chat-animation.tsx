@@ -5,7 +5,6 @@ import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 import { DateSeparator } from "@/components/ui/whatsapp/date-separator";
 import { ImageBubble } from "@/components/ui/whatsapp/image-bubble";
-import { ReactionPill } from "@/components/ui/whatsapp/reaction-pill";
 import { TemplateBubble } from "@/components/ui/whatsapp/template-bubble";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
 import { VoiceMessageBubble } from "@/components/ui/whatsapp/voice-message-bubble";
@@ -124,16 +123,17 @@ export function ChatAnimation() {
   const [dark, setDark]           = useState(true);
   const scrollRef                 = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const applyTheme = React.useCallback((isDark: boolean) => {
     const root = document.documentElement;
-    if (dark) {
-      root.classList.add("dark");
-      root.setAttribute("data-theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      root.setAttribute("data-theme", "light");
-    }
-  }, [dark]);
+    root.classList.toggle("dark", isDark);
+    root.setAttribute("data-theme", isDark ? "dark" : "light");
+  }, []);
+
+  // Apply on mount immediately (no delay)
+  useEffect(() => { applyTheme(dark); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Apply on toggle
+  useEffect(() => { applyTheme(dark); }, [dark, applyTheme]);
   // Holds the message to commit once typing animation finishes
   const pendingMsg                = useRef<ChatMessage | null>(null);
 
@@ -263,7 +263,13 @@ export function ChatAnimation() {
           return (
             <div key={msg.id}>
               {msg.type === "text" && (
-                <ChatBubble variant={msg.variant} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={showTail}>
+                <ChatBubble
+                  variant={msg.variant}
+                  timestamp="10:24"
+                  status={msg.variant === "outgoing" ? msg.status : undefined}
+                  showTail={showTail}
+                  reactions={reaction ? [{ emoji: reaction, reacted: true }] : undefined}
+                >
                   {msg.text}
                 </ChatBubble>
               )}
@@ -281,11 +287,6 @@ export function ChatAnimation() {
                     buttons={[{ type: "url", label: msg.btnLabel, url: msg.btnUrl }]}
                     timestamp="10:24"
                   />
-                </div>
-              )}
-              {reaction && (
-                <div className={`-mt-1 mb-1 flex ${msg.variant === "outgoing" ? "justify-end pr-2" : "justify-start pl-2"}`}>
-                  <ReactionPill emoji={reaction} reacted />
                 </div>
               )}
             </div>

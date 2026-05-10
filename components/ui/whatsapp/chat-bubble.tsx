@@ -4,7 +4,13 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
 
-type MessageStatus = "sending" | "sent" | "delivered" | "read";
+export type MessageStatus = "sending" | "sent" | "delivered" | "read";
+
+export interface Reaction {
+  emoji: string;
+  count?: number;
+  reacted?: boolean;
+}
 
 interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "incoming" | "outgoing";
@@ -14,6 +20,23 @@ interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   showTail?: boolean;
   isGroupChat?: boolean;
   senderColor?: string;
+  /** Emoji reactions shown on the bottom corner of the bubble */
+  reactions?: Reaction[];
+}
+
+function ReactionPillInline({ emoji, count, reacted }: Reaction) {
+  return (
+    <span className={cn(
+      "relative z-10 inline-flex items-center gap-[3px] rounded-full border px-[6px] py-[2px] text-[13px] leading-[18px] shadow-sm",
+      "border-wa-border bg-wa-bg",
+      reacted && "border-wa-emerald-500 bg-wa-green-75 dark:bg-[#005c4b]"
+    )}>
+      {emoji}
+      {count !== undefined && count > 0 && (
+        <span className="text-[12px] text-wa-text-secondary">{count}</span>
+      )}
+    </span>
+  );
 }
 
 function CheckIcon({ className }: { className?: string }) {
@@ -82,19 +105,22 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
       showTail = false,
       isGroupChat = false,
       senderColor,
+      reactions,
       children,
       ...props
     },
     ref
   ) => {
     const isOutgoing = variant === "outgoing";
+    const hasReactions = reactions && reactions.length > 0;
 
     return (
       <div
         className={cn(
-          "flex w-full",
+          "relative flex w-full",
           isOutgoing ? "justify-end" : "justify-start",
           showTail ? "mb-[6px]" : "mb-[2px]",
+          hasReactions && "mb-[18px]",
           className
         )}
         {...props}
@@ -173,10 +199,22 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
             {isOutgoing && status && <StatusIndicator status={status} />}
           </div>
         </div>
+
+        {/* Reactions — sits on the bottom corner of the bubble */}
+        {hasReactions && (
+          <div className={cn(
+            "absolute bottom-[-10px] flex gap-[3px]",
+            isOutgoing ? "right-[10px]" : "left-[10px]"
+          )}>
+            {reactions!.map((r, i) => (
+              <ReactionPillInline key={i} {...r} />
+            ))}
+          </div>
+        )}
       </div>
     );
   }
 );
 ChatBubble.displayName = "ChatBubble";
 
-export { ChatBubble, type ChatBubbleProps, type MessageStatus };
+export { ChatBubble, type ChatBubbleProps, type MessageStatus, type Reaction };
