@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WhatsApp UI
 
-## Getting Started
+Production-ready WhatsApp Web components for React. Built on the official WDS (WhatsApp Design System) tokens with full dark mode and `@base-ui/react` primitives.
 
-First, run the development server:
+**[Demo](https://whatsapp-ui.vercel.app)** · **[Registry](https://whatsapp-ui.vercel.app/r/registry.json)**
+
+---
+
+## Install a component
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx shadcn@latest add https://whatsapp-ui.vercel.app/r/chat-bubble.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Component | Description |
+|-----------|-------------|
+| `chat-bubble` | Text message bubble — incoming/outgoing, group chat, reactions, read receipts |
+| `chat-header` | Conversation header with avatar, status, action buttons, custom slot |
+| `chat-list-item` | Sidebar list row — avatar initials, unread badge, mute/pin, read receipt |
+| `message-input` | Compose bar with emoji, attachment, auto-resize textarea, send/voice toggle |
+| `date-separator` | Centered date pill between message groups |
+| `typing-indicator` | Animated three-dot incoming indicator |
+| `reaction-pill` | Emoji reaction pill — 1:1 (no count) and group (overlapping + total) modes |
+| `image-bubble` | Single image, multi-image 2×2 grid (+N overflow), video with play overlay |
+| `voice-message-bubble` | Audio playback with waveform, progress, avatar, real `<audio>` support |
+| `file-attachment-bubble` | File download with type-color badge, progress bar, native `<a download>` |
+| `template-bubble` | Meta Business template — all button types (URL, phone, copy_code, flow, OTP…) |
+| `carousel-template` | Horizontal scrollable product cards via `@base-ui/react` ScrollArea |
+| `call-permission` | Calling permission request with animated bottom sheet and radio options |
+| `message-bubble` | Universal wrapper — attaches reactions to any bubble type |
+| `action-button` | Outlined pill button with icon slot, polymorphic via `render` prop |
+| `chat-menu` | Context dropdown using `@base-ui/react` Menu with animated popup |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Tech stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Tailwind CSS v4** with `@tailwindcss/vite`
+- **@base-ui/react** — Toggle, Progress, ScrollArea, Drawer, Menu, RadioGroup, Button
+- **WDS tokens** — Official WhatsApp Design System color/spacing values in CSS custom properties
+- **shadcn/ui registry** format — `npx shadcn add` compatible
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Local development
 
-## Deploy on Vercel
+```bash
+pnpm install
+pnpm dev          # Next.js app (demo)
+pnpm storybook    # Component stories
+pnpm registry:build  # Rebuild /public/r/*.json
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design system
+
+See [`DESIGN.md`](./DESIGN.md) for the full token reference — colors, typography, spacing, component patterns, and dark mode behavior.
+
+---
+
+## License
+
+MIT
