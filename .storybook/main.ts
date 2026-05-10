@@ -1,4 +1,6 @@
 import type { StorybookConfig } from '@storybook/nextjs-vite';
+import tailwindcss from '@tailwindcss/vite';
+import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   "stories": [
@@ -13,6 +15,11 @@ const config: StorybookConfig = {
   "framework": "@storybook/nextjs-vite",
   "staticDirs": [
     "../public"
-  ]
+  ],
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      plugins: [tailwindcss()],
+    });
+  },
 };
 export default config;
