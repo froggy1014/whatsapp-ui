@@ -176,10 +176,13 @@ export function ChatAnimation() {
 
       <div
         ref={scrollRef}
-        className="wa-wallpaper flex-1 overflow-y-auto px-4 py-4"
+        className="wa-wallpaper flex flex-col flex-1 overflow-y-auto px-4 py-4"
         style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
       >
-        <DateSeparator label="Today" />
+        {/* Spacer — pushes content to bottom */}
+        <div className="flex-1" />
+
+        {messages.length > 0 && <DateSeparator label="Today" />}
         {messages.map((msg) => {
           const reaction = reactions[msg.id];
           return (
