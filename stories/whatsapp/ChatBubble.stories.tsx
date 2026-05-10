@@ -5,7 +5,6 @@ import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 const meta: Meta<typeof ChatBubble> = {
   title: "WhatsApp/ChatBubble",
   component: ChatBubble,
-  parameters: { layout: "padded" },
   args: { children: "Hey! Are you coming to the meeting later? 😊" },
 };
 export default meta;
@@ -17,6 +16,30 @@ export const Incoming: Story = {
 
 export const Outgoing: Story = {
   args: { variant: "outgoing", timestamp: "10:26", status: "read", showTail: true },
+};
+
+export const MessageStatus: Story = {
+  parameters: { layout: "padded" },
+  render: () => (
+    <div className="wa-wallpaper flex flex-col px-4 py-4" style={{ background: "var(--wa-conversation-bg, #f5f0e8)", minWidth: 320 }}>
+      <ChatBubble variant="outgoing" timestamp="10:25" status="sending" showTail={false}>Sending…</ChatBubble>
+      <ChatBubble variant="outgoing" timestamp="10:25" status="sent" showTail={false}>Sent</ChatBubble>
+      <ChatBubble variant="outgoing" timestamp="10:25" status="delivered" showTail={false}>Delivered</ChatBubble>
+      <ChatBubble variant="outgoing" timestamp="10:26" status="read" showTail>Read ✓✓</ChatBubble>
+    </div>
+  ),
+};
+
+export const GroupChat: Story = {
+  args: {
+    variant: "incoming",
+    timestamp: "10:24",
+    showTail: true,
+    isGroupChat: true,
+    sender: "Alice",
+    senderColor: "#FF6B6B",
+    children: "Japan looks amazing! Can't wait to see your photos 🗼",
+  },
 };
 
 export const Conversation: Story = {

@@ -6,8 +6,12 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const bg = context.globals?.backgrounds?.value ?? "#f5f0e8";
+      const isFullscreen = context.parameters?.layout === "fullscreen";
       return (
-        <div className="wa-wallpaper" style={{ background: bg, minHeight: "100vh" }}>
+        <div
+          className="wa-wallpaper"
+          style={{ background: bg, minHeight: "100vh", padding: isFullscreen ? "0" : "24px" }}
+        >
           <Story />
         </div>
       );
