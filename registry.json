@@ -238,11 +238,6 @@
           "target": "public/wa-icon-phone.png"
         },
         {
-          "path": "public/wa-icon-copy.png",
-          "type": "registry:file",
-          "target": "public/wa-icon-copy.png"
-        },
-        {
           "path": "public/wa-icon-flow.png",
           "type": "registry:file",
           "target": "public/wa-icon-flow.png"
@@ -292,6 +287,135 @@
           "type": "registry:file",
           "target": "components/ui/whatsapp/styles/whatsapp.css"
         }
+      ]
+    },
+    {
+      "name": "message-status",
+      "type": "registry:component",
+      "title": "Message Status",
+      "description": "Shared MessageStatus type and MessageStatusIcon — sending, sent, delivered, read, failed.",
+      "files": [
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "location-bubble",
+      "type": "registry:component",
+      "title": "Location Bubble",
+      "description": "WhatsApp-style location message with map preview, name/address, and Open in Maps CTA.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/location-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/location-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "contact-bubble",
+      "type": "registry:component",
+      "title": "Contact Bubble",
+      "description": "WhatsApp-style contact card — single or multiple contacts with name, phone, avatar, and action buttons.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/contact-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/contact-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "sticker-bubble",
+      "type": "registry:component",
+      "title": "Sticker Bubble",
+      "description": "WhatsApp-style sticker message — 160×160px, no bubble background, animated badge support.",
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/sticker-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/sticker-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "system-message-bubble",
+      "type": "registry:component",
+      "title": "System Message Bubble",
+      "description": "Centered system notice pill — encryption notices, number changes, and other system events.",
+      "files": [
+        { "path": "components/ui/whatsapp/system-message-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/system-message-bubble.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "reply-preview",
+      "type": "registry:component",
+      "title": "Reply Preview",
+      "description": "Quoted message strip shown inside a bubble — author, body preview, media type icon, thumbnail.",
+      "files": [
+        { "path": "components/ui/whatsapp/reply-preview.tsx", "type": "registry:component", "target": "components/ui/whatsapp/reply-preview.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "forwarded-label",
+      "type": "registry:component",
+      "title": "Forwarded Label",
+      "description": "Small italic label indicating a forwarded or frequently forwarded message.",
+      "files": [
+        { "path": "components/ui/whatsapp/forwarded-label.tsx", "type": "registry:component", "target": "components/ui/whatsapp/forwarded-label.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "unsupported-message-bubble",
+      "type": "registry:component",
+      "title": "Unsupported Message Bubble",
+      "description": "Fallback bubble for unknown or unsupported WhatsApp message types.",
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/unsupported-message-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/unsupported-message-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "interactive-button-bubble",
+      "type": "registry:component",
+      "title": "Interactive Button Bubble",
+      "description": "WhatsApp interactive button message — up to 3 reply buttons with header/body/footer.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/interactive-button-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/interactive-button-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "cta-url-bubble",
+      "type": "registry:component",
+      "title": "CTA URL Bubble",
+      "description": "WhatsApp interactive CTA URL message — single external link button with body/footer.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/cta-url-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/cta-url-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "list-message-bubble",
+      "type": "registry:component",
+      "title": "List Message Bubble",
+      "description": "WhatsApp interactive list message — CTA opens a bottom sheet with selectable sections and rows.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": ["message-status"],
+      "files": [
+        { "path": "components/ui/whatsapp/list-message-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/list-message-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
       ]
     }
   ]
