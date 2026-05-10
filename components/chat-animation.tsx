@@ -183,20 +183,28 @@ export function ChatAnimation() {
         <div className="flex-1" />
 
         {messages.length > 0 && <DateSeparator label="Today" />}
-        {messages.map((msg) => {
+        {messages.map((msg, index) => {
+          const next = messages[index + 1];
+          const isLast = index === messages.length - 1;
+
+          // Show tail only on the last message of a consecutive group
+          const showTail = isLast
+            ? msg.variant === "incoming" ? !incomingTyping : !outgoingTyping
+            : next.variant !== msg.variant;
+
           const reaction = reactions[msg.id];
           return (
             <div key={msg.id}>
               {msg.type === "text" && (
-                <ChatBubble variant={msg.variant} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={msg.showTail}>
+                <ChatBubble variant={msg.variant} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={showTail}>
                   {msg.text}
                 </ChatBubble>
               )}
               {msg.type === "image" && (
-                <ImageBubble variant={msg.variant} src={msg.src} caption={msg.caption} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={msg.showTail} />
+                <ImageBubble variant={msg.variant} src={msg.src} caption={msg.caption} timestamp="10:24" status={msg.variant === "outgoing" ? msg.status : undefined} showTail={showTail} />
               )}
               {msg.type === "voice" && (
-                <VoiceMessageBubble variant={msg.variant} duration={msg.duration} timestamp="10:24" showTail={msg.showTail} />
+                <VoiceMessageBubble variant={msg.variant} duration={msg.duration} timestamp="10:24" showTail={showTail} />
               )}
               {reaction && (
                 <div className={`-mt-1 mb-1 flex ${msg.variant === "outgoing" ? "justify-end pr-2" : "justify-start pl-2"}`}>

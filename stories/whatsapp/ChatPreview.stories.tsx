@@ -103,11 +103,11 @@ function ChatPanel({ isTyping = false }: { isTyping?: boolean }) {
           Hey! Are you coming to the meeting later? 😊
         </ChatBubble>
 
-        <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail>
+        <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail={false}>
           Yes! Just finishing up some stuff
         </ChatBubble>
 
-        <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail={false}>
+        <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail>
           Should be there in 10 mins
         </ChatBubble>
 
@@ -123,7 +123,7 @@ function ChatPanel({ isTyping = false }: { isTyping?: boolean }) {
           Yeah I looked at it briefly
         </ChatBubble>
 
-        <ChatBubble variant="incoming" timestamp="10:30" showTail>
+        <ChatBubble variant="incoming" timestamp="10:30" showTail={!isTyping}>
           Some really good points in there. Let's discuss at the meeting!
         </ChatBubble>
 

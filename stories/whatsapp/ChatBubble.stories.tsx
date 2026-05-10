@@ -50,7 +50,8 @@ export const Conversation: Story = {
       <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail={false}>Yes, just finishing up some stuff</ChatBubble>
       <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail>Should be there in 10 mins 👍</ChatBubble>
       <ChatBubble variant="incoming" timestamp="10:22" showTail={false}>Perfect, I'll save you a seat!</ChatBubble>
-      <ChatBubble variant="incoming" timestamp="10:22" showTail isGroupChat sender="Alice" senderColor="#FF6B6B">Also can you grab some coffee on the way?</ChatBubble>
+      <ChatBubble variant="incoming" timestamp="10:22" showTail={false} isGroupChat sender="Alice" senderColor="#FF6B6B">Also can you grab some coffee on the way?</ChatBubble>
+      <ChatBubble variant="incoming" timestamp="10:22" showTail isGroupChat sender="Alice" senderColor="#FF6B6B">And maybe some snacks? 🙏</ChatBubble>
       <ChatBubble variant="outgoing" timestamp="10:23" status="sending" showTail>On it ☕</ChatBubble>
     </div>
   ),
