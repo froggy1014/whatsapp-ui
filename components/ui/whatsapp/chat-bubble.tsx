@@ -116,21 +116,36 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
               viewBox="0 0 8 13"
               width="8"
               height="13"
+              preserveAspectRatio="xMidYMid meet"
               className={cn(
                 "absolute bottom-0",
                 isOutgoing ? "-right-[8px]" : "-left-[8px]"
               )}
             >
               {isOutgoing ? (
-                <path
-                  d="M5.188 13H0V1.807l6.467 8.625C7.526 11.844 6.958 13 5.188 13z"
-                  className="fill-wa-bubble-outgoing"
-                />
+                <>
+                  <path
+                    opacity="0.13"
+                    d="M5.188,1H0v11.193l6.467-8.625C7.526,2.156,6.958,1,5.188,1z"
+                    className="fill-wa-always-black"
+                  />
+                  <path
+                    d="M5.188,0H0v11.193l6.467-8.625C7.526,1.156,6.958,0,5.188,0z"
+                    className="fill-wa-bubble-outgoing"
+                  />
+                </>
               ) : (
-                <path
-                  d="M1.533 10.432L8 1.807V13H2.812C1.042 13 .474 11.844 1.533 10.432z"
-                  className="fill-wa-bubble-incoming"
-                />
+                <>
+                  <path
+                    opacity="0.13"
+                    d="M2.812,1H8v11.193L1.533,3.568C0.474,2.156,1.042,1,2.812,1z"
+                    className="fill-wa-always-black"
+                  />
+                  <path
+                    d="M2.812,0H8v11.193L1.533,2.568C0.474,1.156,1.042,0,2.812,0z"
+                    className="fill-wa-bubble-incoming"
+                  />
+                </>
               )}
             </svg>
           )}
