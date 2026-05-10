@@ -128,7 +128,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
       >
         <div
           className={cn(
-            "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-3 pb-[7px] pt-[6px]",
+            "font-wa relative min-w-[80px] max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-3 pb-[7px] pt-[6px]",
             isOutgoing
               ? "bg-wa-bubble-outgoing"
               : "bg-wa-bubble-incoming",
@@ -200,12 +200,12 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
           </div>
         </div>
 
-        {/* Reactions — sits on the bottom corner of the bubble */}
+        {/* Reactions — bottom corner of the bubble */}
         {hasReactions && (
           <div className={cn(
-            "absolute bottom-[-10px] flex gap-[3px]",
-            isOutgoing ? "right-[10px]" : "left-[10px]"
-          )}>
+            "absolute flex gap-[3px]",
+            isOutgoing ? "right-[8px]" : "left-[8px]"
+          )} style={{ bottom: "-12px" }}>
             {reactions!.map((r, i) => (
               <ReactionPillInline key={i} {...r} />
             ))}
@@ -217,4 +217,4 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
 );
 ChatBubble.displayName = "ChatBubble";
 
-export { ChatBubble, type ChatBubbleProps, type MessageStatus, type Reaction };
+export { ChatBubble, type ChatBubbleProps };

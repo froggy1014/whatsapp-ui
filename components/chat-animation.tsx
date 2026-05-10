@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 import { DateSeparator } from "@/components/ui/whatsapp/date-separator";
@@ -123,7 +123,7 @@ export function ChatAnimation() {
   const [dark, setDark]           = useState(true);
   const scrollRef                 = useRef<HTMLDivElement>(null);
 
-  const applyTheme = React.useCallback((isDark: boolean) => {
+  const applyTheme = useCallback((isDark: boolean) => {
     const root = document.documentElement;
     root.classList.toggle("dark", isDark);
     root.setAttribute("data-theme", isDark ? "dark" : "light");
