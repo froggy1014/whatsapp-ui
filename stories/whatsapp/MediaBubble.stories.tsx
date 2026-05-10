@@ -119,9 +119,18 @@ export const VoiceIncoming: Story = {
   render: () => <VoiceMessageBubble variant="incoming" duration="0:32" timestamp="10:30" showTail />,
 };
 
-export const VoicePlaying: Story = {
-  name: "Voice / Playing",
-  render: () => <VoiceMessageBubble variant="incoming" duration="0:32" timestamp="10:30" isPlaying progress={40} showTail />,
+export const VoiceWithAudio: Story = {
+  name: "Voice / With Audio (playable)",
+  render: () => (
+    <VoiceMessageBubble
+      variant="incoming"
+      duration="0:42"
+      timestamp="10:30"
+      audioSrc="/file_example_MP3_700KB.mp3"
+      avatarSrc="https://i.pravatar.cc/150?img=3"
+      showTail
+    />
+  ),
 };
 
 // ─── File ─────────────────────────────────────────────────────────────────────

@@ -11,9 +11,13 @@ interface VoiceMessageBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   timestamp?: string;
   status?: MessageStatus;
   showTail?: boolean;
+  /** When provided, the component manages playback internally */
+  audioSrc?: string;
+  /** Avatar image shown on the left when playing (incoming) */
+  avatarSrc?: string;
+  /** Controlled mode — ignored when audioSrc is set */
   isPlaying?: boolean;
   progress?: number;
-  avatarSrc?: string;
   onPlayPause?: () => void;
 }
 
@@ -62,17 +66,33 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
       timestamp,
       status,
       showTail = false,
-      isPlaying = false,
-      progress = 0,
+      audioSrc,
       avatarSrc,
+      isPlaying: isPlayingProp = false,
+      progress: progressProp = 0,
       onPlayPause,
       ...props
     },
     ref
   ) => {
     const isOutgoing = variant === "outgoing";
-    const playedBars = Math.floor((progress / 100) * WAVEFORM_BARS.length);
+    const audioRef = React.useRef<HTMLAudioElement>(null);
+    const [internalPlaying, setInternalPlaying] = React.useState(false);
+    const [internalProgress, setInternalProgress] = React.useState(0);
+    const [internalDuration, setInternalDuration] = React.useState(duration);
 
+    // Use internal state when audioSrc provided, otherwise use props
+    const isPlaying = audioSrc ? internalPlaying : isPlayingProp;
+    const progress  = audioSrc ? internalProgress : progressProp;
+
+    const handlePlayPause = () => {
+      if (!audioSrc) { onPlayPause?.(); return; }
+      const audio = audioRef.current;
+      if (!audio) return;
+      if (internalPlaying) { audio.pause(); } else { audio.play(); }
+    };
+
+    const playedBars = Math.floor((progress / 100) * WAVEFORM_BARS.length);
     const activeColor = isOutgoing ? "var(--wa-emerald-600)" : "var(--wa-emerald-500)";
     const inactiveColor = isOutgoing ? "rgba(0,128,105,0.35)" : "rgba(134,150,160,0.5)";
 
@@ -87,6 +107,27 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
         {...props}
         ref={ref}
       >
+        {audioSrc && (
+          <audio
+            ref={audioRef}
+            src={audioSrc}
+            onPlay={() => setInternalPlaying(true)}
+            onPause={() => setInternalPlaying(false)}
+            onEnded={() => { setInternalPlaying(false); setInternalProgress(0); }}
+            onTimeUpdate={() => {
+              const audio = audioRef.current;
+              if (!audio || !audio.duration) return;
+              setInternalProgress((audio.currentTime / audio.duration) * 100);
+            }}
+            onLoadedMetadata={() => {
+              const audio = audioRef.current;
+              if (!audio || !audio.duration) return;
+              const m = Math.floor(audio.duration / 60);
+              const s = Math.floor(audio.duration % 60);
+              setInternalDuration(`${m}:${s.toString().padStart(2, "0")}`);
+            }}
+          />
+        )}
         <div
           className={cn(
             "font-wa relative max-w-[var(--wa-msg-max-width)] overflow-visible rounded-lg px-[9px] pb-2 pt-[8px]",
@@ -105,20 +146,33 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
           )}
 
           <div className="flex items-center gap-[8px]">
-            {/* Avatar or play button */}
-            <button
-              type="button"
-              onClick={onPlayPause}
-              className={cn(
-                "flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-full text-white transition-colors",
-                isOutgoing
-                  ? "bg-wa-emerald-600 hover:bg-wa-emerald-500"
-                  : "bg-wa-emerald-500 hover:bg-wa-emerald-400"
+            {/* Avatar (shown when playing) or play/pause button */}
+            <div className="relative shrink-0 h-[40px] w-[40px]">
+              {avatarSrc && (
+                <div
+                  className={cn(
+                    "absolute inset-0 overflow-hidden rounded-full transition-opacity duration-200",
+                    isPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+                  )}
+                >
+                  <img src={avatarSrc} alt="" className="h-full w-full object-cover" />
+                </div>
               )}
-              aria-label={isPlaying ? "Pause" : "Play"}
-            >
-              {isPlaying ? <PauseIcon /> : <PlayIcon />}
-            </button>
+              <button
+                type="button"
+                onClick={handlePlayPause}
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center rounded-full text-white transition-all duration-200",
+                  isOutgoing
+                    ? "bg-wa-emerald-600 hover:bg-wa-emerald-500"
+                    : "bg-wa-emerald-500 hover:bg-wa-emerald-400",
+                  avatarSrc && isPlaying && "opacity-0 hover:opacity-80"
+                )}
+                aria-label={isPlaying ? "Pause" : "Play"}
+              >
+                {isPlaying ? <PauseIcon /> : <PlayIcon />}
+              </button>
+            </div>
 
             {/* Waveform + duration */}
             <div className="flex flex-col gap-[4px]">
@@ -139,8 +193,8 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
               {/* Duration */}
               <span className="text-[12px] leading-[16px] text-wa-text-secondary">
                 {isPlaying
-                  ? formatProgress(progress, duration)
-                  : duration}
+                  ? formatProgress(progress, internalDuration)
+                  : internalDuration}
               </span>
             </div>
           </div>

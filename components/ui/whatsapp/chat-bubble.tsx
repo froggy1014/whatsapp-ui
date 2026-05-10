@@ -189,7 +189,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
               "absolute flex gap-[3px]",
               isOutgoing ? "right-[8px]" : "left-[8px]"
             )}
-            style={{ bottom: isOutgoing ? "-14px" : "-20px" }}
+            style={{ bottom: isOutgoing ? "-16px" : "-20px" }}
           >
             <ReactionsDisplay reactions={reactions!} />
           </div>
