@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "whatsapp-ui",
-  "homepage": "https://whatsapp-ui.vercel.app",
+  "homepage": "https://whatsapp-ui-omega.vercel.app",
   "items": [
     {
       "name": "chat-bubble",
