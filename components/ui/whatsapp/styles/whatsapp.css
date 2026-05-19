@@ -430,25 +430,16 @@
 /* === Wallpaper === */
 .wa-wallpaper {
   position: relative;
-  z-index: 0;
   background-color: var(--wa-wallpaper-bg);
-}
-.wa-wallpaper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
   background-image: var(--wa-wallpaper-image);
   background-repeat: repeat;
   background-size: 412px auto;
-  opacity: 0.12;
-  pointer-events: none;
+  background-blend-mode: overlay;
 }
 
-.dark .wa-wallpaper::before,
-[data-theme="dark"] .wa-wallpaper::before {
-  filter: invert(1);
-  opacity: 0.08;
+.dark .wa-wallpaper,
+[data-theme="dark"] .wa-wallpaper {
+  background-blend-mode: soft-light;
 }
 
 /* === Layout Constants === */
