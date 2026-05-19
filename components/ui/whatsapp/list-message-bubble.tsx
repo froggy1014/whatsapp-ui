@@ -74,7 +74,7 @@ const ListMessageBubble = React.forwardRef<HTMLDivElement, ListMessageBubbleProp
             {footer && (
               <p className="mt-[4px] text-[12.5px] leading-[17px] text-wa-text-secondary">{footer}</p>
             )}
-            <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
+            <div className="float-right ml-2 mt-0.5 flex items-center gap-[3px]">
               {timestamp && <span className="text-[11px] leading-[15px] text-wa-bubble-meta">{timestamp}</span>}
               {isOutgoing && status && <MessageStatusIcon status={status} />}
             </div>

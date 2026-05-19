@@ -234,7 +234,7 @@ const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
     return (
       <div
         ref={ref}
-        className={cn("font-wa w-full max-w-[320px]", className)}
+        className={cn("font-wa w-full min-w-[200px] max-w-[320px]", className)}
         {...props}
       >
         {/* Bubble */}
@@ -246,7 +246,7 @@ const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
           {header?.type === "location" && <LocationHeader location={header.location} />}
 
           {/* Body */}
-          <div className="px-[9px] pb-2 pt-[6px]">
+          <div className="px-[9px] pb-[7px] pt-[6px]">
             {header?.type === "text" && header.text && (
               <p className="mb-1 text-[14.2px] font-bold leading-[19px] text-wa-text-primary">
                 <BodyText text={header.text} />
@@ -261,8 +261,8 @@ const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
               </p>
             )}
             {timestamp && (
-              <div className="mt-1 flex justify-end">
-                <span className="text-[11px] text-wa-bubble-meta">{timestamp}</span>
+              <div className="mt-[2px] flex justify-end">
+                <span className="text-[11px] leading-[15px] text-wa-bubble-meta">{timestamp}</span>
               </div>
             )}
           </div>
