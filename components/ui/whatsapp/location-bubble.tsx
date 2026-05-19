@@ -89,30 +89,32 @@ const LocationBubble = React.forwardRef<HTMLDivElement, LocationBubbleProps>(
                 </svg>
               </div>
             )}
+            {/* Timestamp overlay on map — only when no name/address */}
+            {!name && !address && timestamp && (
+              <div className="absolute bottom-[4px] right-[6px] flex items-center gap-[3px] rounded-full bg-black/45 px-[6px] py-[2px]">
+                <span className="text-[11px] leading-[15px] text-white">{timestamp}</span>
+                {isOutgoing && status && <MessageStatusIcon status={status} />}
+              </div>
+            )}
           </button>
 
-          {/* Info */}
-          <div className="px-[9px] pb-[7px] pt-[6px]">
-            {name && (
-              <p className="text-[14.2px] font-semibold leading-[19px] text-wa-text-primary">{name}</p>
-            )}
-            {address && (
-              <p className="text-[13px] leading-[18px] text-wa-text-secondary">{address}</p>
-            )}
-            {!name && !address && (
-              <p className="text-[13px] leading-[18px] text-wa-text-secondary">
-                {latitude.toFixed(5)}, {longitude.toFixed(5)}
-              </p>
-            )}
-
-            {/* Meta row */}
-            <div className="float-right -mb-1 ml-2 mt-1 flex items-center gap-[3px]">
-              {timestamp && (
-                <span className="text-[11px] leading-[15px] text-wa-bubble-meta">{timestamp}</span>
+          {/* Info — only when name or address exists */}
+          {(name || address) && (
+            <div className="px-[9px] pb-[7px] pt-[6px]">
+              {name && (
+                <p className="text-[14.2px] font-semibold leading-[19px] text-wa-text-primary">{name}</p>
               )}
-              {isOutgoing && status && <MessageStatusIcon status={status} />}
+              <p className="text-[13px] leading-[18px] text-wa-text-secondary">
+                <span className="float-right ml-2 mt-[2px] flex items-center gap-[3px]">
+                  {timestamp && (
+                    <span className="text-[11px] leading-[15px] text-wa-bubble-meta">{timestamp}</span>
+                  )}
+                  {isOutgoing && status && <MessageStatusIcon status={status} />}
+                </span>
+                {address || "\u00A0"}
+              </p>
             </div>
-          </div>
+          )}
 
           {/* Open in Maps CTA */}
           <div className="border-t border-wa-border">
