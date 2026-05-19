@@ -3,9 +3,7 @@
   "name": "unsupported-message-bubble",
   "title": "Unsupported Message Bubble",
   "description": "Fallback bubble for unknown or unsupported WhatsApp message types.",
-  "registryDependencies": [
-    "message-status"
-  ],
+  "registryDependencies": [],
   "files": [
     {
       "path": "components/ui/whatsapp/unsupported-message-bubble.tsx",

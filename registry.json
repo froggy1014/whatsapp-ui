@@ -255,12 +255,17 @@
       "title": "Carousel Template",
       "description": "WhatsApp Business carousel template with horizontal scrollable cards using @base-ui/react ScrollArea.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["template-bubble"],
+      "registryDependencies": [],
       "files": [
         {
           "path": "components/ui/whatsapp/carousel-template.tsx",
           "type": "registry:component",
           "target": "components/ui/whatsapp/carousel-template.tsx"
+        },
+        {
+          "path": "components/ui/whatsapp/template-bubble.tsx",
+          "type": "registry:component",
+          "target": "components/ui/whatsapp/template-bubble.tsx"
         },
         {
           "path": "components/ui/whatsapp/styles/whatsapp.css",
@@ -305,7 +310,7 @@
       "title": "Location Bubble",
       "description": "WhatsApp-style location message with map preview, name/address, and Open in Maps CTA.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/location-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/location-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
@@ -318,7 +323,7 @@
       "title": "Contact Bubble",
       "description": "WhatsApp-style contact card — single or multiple contacts with name, phone, avatar, and action buttons.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/contact-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/contact-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
@@ -330,7 +335,7 @@
       "type": "registry:component",
       "title": "Sticker Bubble",
       "description": "WhatsApp-style sticker message — 160×160px, no bubble background, animated badge support.",
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/sticker-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/sticker-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
@@ -372,7 +377,7 @@
       "type": "registry:component",
       "title": "Unsupported Message Bubble",
       "description": "Fallback bubble for unknown or unsupported WhatsApp message types.",
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/unsupported-message-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/unsupported-message-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
@@ -385,7 +390,7 @@
       "title": "Interactive Button Bubble",
       "description": "WhatsApp interactive button message — up to 3 reply buttons with header/body/footer.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/interactive-button-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/interactive-button-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
@@ -398,7 +403,7 @@
       "title": "CTA URL Bubble",
       "description": "WhatsApp interactive CTA URL message — single external link button with body/footer.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/cta-url-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/cta-url-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
@@ -411,10 +416,45 @@
       "title": "List Message Bubble",
       "description": "WhatsApp interactive list message — CTA opens a bottom sheet with selectable sections and rows.",
       "dependencies": ["@base-ui/react"],
-      "registryDependencies": ["message-status"],
+      "registryDependencies": [],
       "files": [
         { "path": "components/ui/whatsapp/list-message-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/list-message-bubble.tsx" },
         { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "reaction",
+      "type": "registry:component",
+      "title": "Reaction",
+      "description": "WhatsApp-style emoji reaction display — single reaction with count or overlapping multi-reaction group.",
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/reaction.tsx", "type": "registry:component", "target": "components/ui/whatsapp/reaction.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "action-button",
+      "type": "registry:component",
+      "title": "Action Button",
+      "description": "WhatsApp-style outlined pill action button with optional icon, using @base-ui/react Button.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/action-button.tsx", "type": "registry:component", "target": "components/ui/whatsapp/action-button.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "chat-menu",
+      "type": "registry:component",
+      "title": "Chat Menu",
+      "description": "WhatsApp-style context dropdown menu with icons, links, danger items, using @base-ui/react Menu.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/chat-menu.tsx", "type": "registry:component", "target": "components/ui/whatsapp/chat-menu.tsx" },
         { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
       ]
     }

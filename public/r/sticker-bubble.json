@@ -3,9 +3,7 @@
   "name": "sticker-bubble",
   "title": "Sticker Bubble",
   "description": "WhatsApp-style sticker message — 160×160px, no bubble background, animated badge support.",
-  "registryDependencies": [
-    "message-status"
-  ],
+  "registryDependencies": [],
   "files": [
     {
       "path": "components/ui/whatsapp/sticker-bubble.tsx",

@@ -6,9 +6,7 @@
   "dependencies": [
     "@base-ui/react"
   ],
-  "registryDependencies": [
-    "message-status"
-  ],
+  "registryDependencies": [],
   "files": [
     {
       "path": "components/ui/whatsapp/list-message-bubble.tsx",
