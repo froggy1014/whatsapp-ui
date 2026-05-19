@@ -171,8 +171,8 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
             {children}
           </div>
 
-          {/* Metadata: timestamp + status */}
-          <div className="float-right -mb-1 ml-2 mt-0.5 flex items-center gap-[3px]">
+          {/* Metadata: timestamp + status — next line, right-aligned */}
+          <div className="mt-[2px] flex items-center justify-end gap-[3px]">
             {timestamp && (
               <span className="text-[11px] leading-[15px] text-wa-bubble-meta">
                 {timestamp}
