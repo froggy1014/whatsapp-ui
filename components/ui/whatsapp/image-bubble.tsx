@@ -5,21 +5,12 @@ import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
 import { type MessageStatus } from "@/components/ui/whatsapp/chat-bubble";
 
-export interface MediaItem {
-  src: string;
-  type?: "image" | "video";
-  /** Video duration label e.g. "0:42" */
-  duration?: string;
-}
-
 interface ImageBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "incoming" | "outgoing";
   /** Single image (shorthand) */
   src?: string;
-  /** Multiple media items — renders grid layout */
+  /** Multiple image URLs — renders grid layout */
   images?: string[];
-  /** Mixed image/video grid */
-  media?: MediaItem[];
   alt?: string;
   caption?: string;
   timestamp?: string;
@@ -48,29 +39,27 @@ function DoubleCheckIcon({ className }: { className?: string }) {
 
 // ─── Media cell with loading skeleton ────────────────────────────────────────
 
-function MediaCell({
-  item,
+function ImageCell({
+  src,
   overlay,
   className,
   naturalSize = false,
 }: {
-  item: MediaItem;
+  src: string;
   overlay?: React.ReactNode;
   className?: string;
   naturalSize?: boolean;
 }) {
   const [loaded, setLoaded] = React.useState(false);
-  const isVideo = item.type === "video";
 
   return (
     <div className={cn("relative overflow-hidden bg-wa-gray-800", className)}>
-      {/* Skeleton */}
       {!loaded && (
         <div className={cn("animate-pulse bg-wa-gray-700", naturalSize ? "min-h-[160px] w-full" : "absolute inset-0")} />
       )}
 
       <img
-        src={item.src}
+        src={src}
         alt=""
         onLoad={() => setLoaded(true)}
         className={cn(
@@ -80,22 +69,6 @@ function MediaCell({
         )}
       />
 
-      {/* Video overlay: play button + duration */}
-      {isVideo && loaded && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-black/50">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
-          {item.duration && (
-            <span className="absolute bottom-[6px] left-[6px] rounded bg-black/50 px-[5px] py-[2px] text-[11px] font-medium text-white">
-              {item.duration}
-            </span>
-          )}
-        </div>
-      )}
-
       {overlay && <div className="absolute inset-0">{overlay}</div>}
     </div>
   );
@@ -103,25 +76,22 @@ function MediaCell({
 
 // ─── Grid layouts ─────────────────────────────────────────────────────────────
 
-function MediaGrid({ items }: { items: MediaItem[] }) {
+function ImageGrid({ items }: { items: string[] }) {
   const visible = items.slice(0, 4);
   const extra = items.length - 4;
   const count = visible.length;
 
-  // Single image/video
   if (count === 1) {
-    const h = visible[0].type === "video" ? "h-[171px]" : "max-h-[330px]";
-    return <MediaCell item={visible[0]} className={cn("w-full", h)} naturalSize={visible[0].type !== "video"} />;
+    return <ImageCell src={visible[0]} className="w-full max-h-[330px]" naturalSize />;
   }
 
-  // Grid cells are always 165×165px
   const cellClass = "h-[165px] w-[165px]";
 
   if (count === 2) {
     return (
       <div className="grid grid-cols-2 gap-[2px]">
-        {visible.map((item, i) => (
-          <MediaCell key={i} item={item} className={cellClass} />
+        {visible.map((src, i) => (
+          <ImageCell key={i} src={src} className={cellClass} />
         ))}
       </div>
     );
@@ -130,21 +100,21 @@ function MediaGrid({ items }: { items: MediaItem[] }) {
   if (count === 3) {
     return (
       <div className="grid grid-cols-2 gap-[2px]">
-        <MediaCell item={visible[0]} className="h-[332px] w-[165px]" />
-        <MediaCell item={visible[1]} className={cellClass} />
-        <MediaCell item={visible[2]} className={cellClass} />
+        <ImageCell src={visible[0]} className="h-[332px] w-[165px]" />
+        <ImageCell src={visible[1]} className={cellClass} />
+        <ImageCell src={visible[2]} className={cellClass} />
       </div>
     );
   }
 
   return (
     <div className="grid grid-cols-2 gap-[2px]">
-      {visible.map((item, i) => {
+      {visible.map((src, i) => {
         const isLast = i === 3 && extra > 0;
         return (
-          <MediaCell
+          <ImageCell
             key={i}
-            item={item}
+            src={src}
             className={cellClass}
             overlay={
               isLast ? (
@@ -169,7 +139,6 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
       variant = "incoming",
       src,
       images,
-      media,
       alt = "",
       caption,
       timestamp,
@@ -180,7 +149,7 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
     ref
   ) => {
     const isOutgoing = variant === "outgoing";
-    const items: MediaItem[] = media ?? images?.map((s) => ({ src: s })) ?? (src ? [{ src }] : []);
+    const items: string[] = images ?? (src ? [src] : []);
 
     const statusIcon = () => {
       if (!isOutgoing || !status) return null;
@@ -215,7 +184,7 @@ const ImageBubble = React.forwardRef<HTMLDivElement, ImageBubbleProps>(
 
           {/* Media / Grid */}
           <div className="relative">
-            <MediaGrid items={items} />
+            <ImageGrid items={items} />
 
             {/* Timestamp overlay (no caption) */}
             {!caption && (

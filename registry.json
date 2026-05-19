@@ -140,8 +140,8 @@
     {
       "name": "image-bubble",
       "type": "registry:component",
-      "title": "Image / Video Bubble",
-      "description": "WhatsApp-style media bubble supporting single image, multi-image/video grid (2x2 with +N overflow), loading skeleton, and captions.",
+      "title": "Image Bubble",
+      "description": "WhatsApp-style image bubble supporting single image, multi-image grid (2x2 with +N overflow), loading skeleton, and captions.",
       "registryDependencies": [],
       "files": [
         {
@@ -154,6 +154,18 @@
           "type": "registry:file",
           "target": "components/ui/whatsapp/styles/whatsapp.css"
         }
+      ]
+    },
+    {
+      "name": "video-bubble",
+      "type": "registry:component",
+      "title": "Video Bubble",
+      "description": "WhatsApp-style video message bubble with play/pause, duration badge, caption, and read receipts.",
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/video-bubble.tsx", "type": "registry:component", "target": "components/ui/whatsapp/video-bubble.tsx" },
+        { "path": "components/ui/whatsapp/message-status.tsx", "type": "registry:component", "target": "components/ui/whatsapp/message-status.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
       ]
     },
     {

@@ -14,6 +14,7 @@ interface FileAttachmentBubbleProps extends React.HTMLAttributes<HTMLDivElement>
   fileName: string;
   fileSize?: string;
   fileType?: string;
+  caption?: string;
   timestamp?: string;
   status?: MessageStatus;
   downloadStatus?: DownloadStatus;
@@ -137,6 +138,7 @@ const FileAttachmentBubble = React.forwardRef<
       fileName,
       fileSize,
       fileType,
+      caption,
       timestamp,
       status,
       downloadStatus = "idle",
@@ -239,8 +241,13 @@ const FileAttachmentBubble = React.forwardRef<
             </Progress.Root>
           )}
 
+          {/* Caption */}
+          {caption && (
+            <p className="mt-[4px] text-[14.2px] leading-[19px] text-wa-text-primary">{caption}</p>
+          )}
+
           {/* Metadata */}
-          <div className="float-right -mb-1 ml-2 mt-1 flex items-center gap-[3px]">
+          <div className="mt-[2px] flex items-center justify-end gap-[3px]">
             {timestamp && (
               <span className="text-[11px] leading-[15px] text-wa-bubble-meta">
                 {timestamp}
