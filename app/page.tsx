@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getRegistryItems } from "@/lib/registry";
 import { CopyButton } from "@/components/copy-button";
 import { ChatAnimation } from "@/components/chat-animation";
@@ -129,19 +128,17 @@ export default function Home() {
                 const installCmd = `npx shadcn@latest add ${BASE_URL}/r/${item.name}.json`;
                 return (
                   <div key={item.name} className="group flex flex-col rounded-xl border border-page-border bg-page-card hover:border-page-muted/30 hover:bg-page-card-hover transition-all overflow-hidden">
-                    <Link href={`/registry/${item.name}`} className="block flex-1">
-                      {/* Live preview */}
-                      <div className="border-b border-page-border pointer-events-none">
-                        <ComponentPreview name={item.name} />
-                      </div>
-                    </Link>
+                    {/* Live preview — not wrapped in <Link> to avoid nested <a> from interactive previews */}
+                    <div className="border-b border-page-border pointer-events-none flex-1">
+                      <ComponentPreview name={item.name} />
+                    </div>
                     {/* Info + install pinned to bottom */}
                     <div className="mt-auto p-4 pb-3 space-y-2">
                       <div>
                         <div className="flex items-start justify-between gap-2 mb-1">
-                          <Link href={`/registry/${item.name}`} className="text-sm font-semibold text-page-fg group-hover:text-page-accent transition-colors">
+                          <span className="text-sm font-semibold text-page-fg">
                             {item.title}
-                          </Link>
+                          </span>
                           {item.dependencies?.includes("@base-ui/react") && (
                             <span className="shrink-0 rounded-full bg-page-accent-soft px-2 py-0.5 text-[10px] font-medium text-page-accent">
                               base-ui

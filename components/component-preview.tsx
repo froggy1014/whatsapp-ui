@@ -263,7 +263,7 @@ export function ComponentPreview({ name }: { name: string }) {
   if (!render) return null;
 
   return (
-    <div className="wa-wallpaper rounded-lg overflow-hidden p-3" style={{ background: "var(--wa-conversation-bg, #0b141a)" }}>
+    <div className="wa-wallpaper rounded-lg overflow-hidden p-3">
       {render()}
     </div>
   );

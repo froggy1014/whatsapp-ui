@@ -248,7 +248,7 @@ export function ChatAnimation() {
       />
 
       {/* Wallpaper fixed layer — outside scroll so pattern covers full area */}
-      <div className="wa-wallpaper relative flex-1 overflow-hidden" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+      <div className="wa-wallpaper relative flex-1 overflow-hidden">
       <div
         ref={scrollRef}
         className="absolute inset-0 flex flex-col overflow-y-auto px-4 py-4"
