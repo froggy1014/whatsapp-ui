@@ -43,29 +43,35 @@ const StickerBubble = React.forwardRef<HTMLDivElement, StickerBubbleProps>(
         {...props}
         ref={ref}
       >
-        {/* No bubble background — sticker floats directly */}
-        <div className="relative h-[160px] w-[160px]">
-          <img
-            src={src}
-            alt={alt}
-            className="h-full w-full object-contain"
-            draggable={false}
-          />
+        <div className="flex flex-col items-end">
+          {/* No bubble background — sticker floats directly */}
+          <div className="relative h-[160px] w-[160px]">
+            <img
+              src={src}
+              alt={alt}
+              className="h-full w-full object-contain"
+              draggable={false}
+            />
 
-          {/* Animated badge */}
-          {animated && (
-            <span className="absolute left-1 top-1 rounded bg-black/50 px-[5px] py-[2px] text-[10px] font-bold uppercase tracking-wide text-white">
-              GIF
-            </span>
-          )}
-
-          {/* Timestamp overlay */}
-          <div className="absolute bottom-[4px] right-[4px] flex items-center gap-[3px] rounded-full bg-black/40 px-[6px] py-[2px]">
-            {timestamp && (
-              <span className="text-[11px] leading-[15px] text-white">{timestamp}</span>
+            {/* Animated badge */}
+            {animated && (
+              <span className="absolute left-1 top-1 rounded bg-black/50 px-[5px] py-[2px] text-[10px] font-bold uppercase tracking-wide text-white">
+                GIF
+              </span>
             )}
-            {isOutgoing && status && <MessageStatusIcon status={status} />}
           </div>
+
+          {/* Timestamp pill below sticker */}
+          {(timestamp || (isOutgoing && status)) && (
+            <div className="mt-[-4px] flex items-center gap-[3px] rounded-full bg-black/40 px-[6px] py-[2px]">
+              {timestamp && (
+                <span className="text-[11px] leading-[15px] text-white">{timestamp}</span>
+              )}
+              {isOutgoing && status && (
+                <span className="text-white"><MessageStatusIcon status={status} /></span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );

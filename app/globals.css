@@ -118,6 +118,49 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Page-level semantic tokens (landing page) */
+:root {
+  --page-bg: #ffffff;
+  --page-fg: #111b21;
+  --page-muted: #667781;
+  --page-subtle: #8696a0;
+  --page-border: #e9edef;
+  --page-card: #f0f2f5;
+  --page-card-hover: #e9edef;
+  --page-code-bg: #f0f2f5;
+  --page-accent: #00a884;
+  --page-accent-soft: rgba(0, 168, 132, 0.08);
+  --page-section-bg: #f8f9fa;
+}
+
+.dark {
+  --page-bg: #111b21;
+  --page-fg: #e9edef;
+  --page-muted: #667781;
+  --page-subtle: #8696a0;
+  --page-border: rgba(233, 237, 239, 0.08);
+  --page-card: rgba(233, 237, 239, 0.02);
+  --page-card-hover: rgba(233, 237, 239, 0.04);
+  --page-code-bg: rgba(233, 237, 239, 0.06);
+  --page-accent: #00a884;
+  --page-accent-soft: rgba(0, 168, 132, 0.12);
+  --page-section-bg: rgba(233, 237, 239, 0.02);
+}
+
+@theme inline {
+  --color-page-bg: var(--page-bg);
+  --color-page-fg: var(--page-fg);
+  --color-page-muted: var(--page-muted);
+  --color-page-subtle: var(--page-subtle);
+  --color-page-border: var(--page-border);
+  --color-page-card: var(--page-card);
+  --color-page-card-hover: var(--page-card-hover);
+  --color-page-code-bg: var(--page-code-bg);
+  --color-page-accent: var(--page-accent);
+  --color-page-accent-soft: var(--page-accent-soft);
+  --color-page-section-bg: var(--page-section-bg);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

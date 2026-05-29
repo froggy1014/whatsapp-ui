@@ -175,9 +175,9 @@ const VoiceMessageBubble = React.forwardRef<HTMLDivElement, VoiceMessageBubblePr
             </div>
 
             {/* Waveform + duration */}
-            <div className="flex flex-col gap-[4px]">
+            <div className="flex flex-col gap-[4px] overflow-hidden min-w-0 flex-1">
               {/* Waveform bars */}
-              <div className="flex items-center gap-[2px]" style={{ height: 20 }}>
+              <div className="flex items-center gap-[2px] overflow-hidden" style={{ height: 20 }}>
                 {WAVEFORM_BARS.map((h, i) => (
                   <div
                     key={i}
