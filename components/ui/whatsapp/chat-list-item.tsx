@@ -21,7 +21,7 @@ function getInitials(name: string): string {
   return name.split(" ").map(w => w[0]).slice(0, 2).join("").toUpperCase();
 }
 
-type MessageStatus = "sent" | "delivered" | "read";
+import { type MessageStatus, MessageStatusIcon } from "./message-status";
 
 interface ChatListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
@@ -37,29 +37,6 @@ interface ChatListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   isSelected?: boolean;
 }
 
-function StatusIcon({ status }: { status: MessageStatus }) {
-  if (status === "read") {
-    return (
-      <svg viewBox="0 0 16 11" height="11" width="16" className="shrink-0 text-wa-read">
-        <path d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z" fill="currentColor" />
-        <path d="M15.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-1.2-1.298-.728.897 1.58 1.704a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.193-.484z" fill="currentColor" />
-      </svg>
-    );
-  }
-  if (status === "delivered") {
-    return (
-      <svg viewBox="0 0 16 11" height="11" width="16" className="shrink-0 text-wa-delivered">
-        <path d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z" fill="currentColor" />
-        <path d="M15.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-1.2-1.298-.728.897 1.58 1.704a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.193-.484z" fill="currentColor" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 16 11" height="11" width="16" className="shrink-0 text-wa-delivered">
-      <path d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z" fill="currentColor" />
-    </svg>
-  );
-}
 
 const ChatListItem = React.forwardRef<HTMLDivElement, ChatListItemProps>(
   (
@@ -133,7 +110,7 @@ const ChatListItem = React.forwardRef<HTMLDivElement, ChatListItemProps>(
           <div className="mt-[3px] flex items-center justify-between gap-1">
             <div className="flex min-w-0 items-center gap-[3px]">
               {lastMessageStatus && !hasUnread && (
-                <StatusIcon status={lastMessageStatus} />
+                <MessageStatusIcon status={lastMessageStatus} />
               )}
               <span className="truncate text-[13px] leading-[20px] text-wa-text-secondary">
                 {isTyping ? (

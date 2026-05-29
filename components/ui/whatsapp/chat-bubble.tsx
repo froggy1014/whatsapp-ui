@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { type MessageStatus, MessageStatusIcon } from "./message-status";
 import { type Reaction, ReactionsDisplay } from "./reaction";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
 
-export type MessageStatus = "sending" | "sent" | "delivered" | "read";
-export type { Reaction };
+export type { MessageStatus, Reaction };
 
 interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "incoming" | "outgoing";
@@ -21,60 +21,6 @@ interface ChatBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 11" height="11" width="16" className={className}>
-      <path
-        d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function DoubleCheckIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 11" height="11" width="16" className={className}>
-      <path
-        d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z"
-        fill="currentColor"
-      />
-      <path
-        d="M15.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-1.2-1.298-.728.897 1.58 1.704a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.193-.484z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function StatusIndicator({ status }: { status: MessageStatus }) {
-  switch (status) {
-    case "sending":
-      return (
-        <span className="text-wa-delivered opacity-50">
-          <CheckIcon />
-        </span>
-      );
-    case "sent":
-      return (
-        <span className="text-wa-delivered">
-          <CheckIcon />
-        </span>
-      );
-    case "delivered":
-      return (
-        <span className="text-wa-delivered">
-          <DoubleCheckIcon />
-        </span>
-      );
-    case "read":
-      return (
-        <span className="text-wa-read">
-          <DoubleCheckIcon />
-        </span>
-      );
-  }
-}
 
 const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
   (
@@ -178,7 +124,7 @@ const ChatBubble = React.forwardRef<HTMLDivElement, ChatBubbleProps>(
                 {timestamp}
               </span>
             )}
-            {isOutgoing && status && <StatusIndicator status={status} />}
+            {isOutgoing && status && <MessageStatusIcon status={status} />}
           </div>
         </div>
 

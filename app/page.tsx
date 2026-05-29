@@ -129,7 +129,7 @@ export default function Home() {
                 return (
                   <div key={item.name} className="group flex flex-col rounded-xl border border-page-border bg-page-card hover:border-page-muted/30 hover:bg-page-card-hover transition-all overflow-hidden">
                     {/* Live preview — not wrapped in <Link> to avoid nested <a> from interactive previews */}
-                    <div className="border-b border-page-border pointer-events-none flex-1">
+                    <div className="border-b border-page-border flex-1">
                       <ComponentPreview name={item.name} />
                     </div>
                     {/* Info + install pinned to bottom */}

@@ -69,7 +69,7 @@ const CallPermissionBubble = React.forwardRef<
 
             <Drawer.Portal>
               <Drawer.Backdrop className="fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0" />
-              <Drawer.Popup className="fixed bottom-0 left-0 right-0 z-50 rounded-t-2xl bg-white outline-none transition-transform duration-300 ease-out data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full">
+              <Drawer.Popup className="fixed bottom-0 left-0 right-0 z-50 rounded-t-2xl bg-wa-panel-bg outline-none transition-transform duration-300 ease-out data-[starting-style]:translate-y-full data-[ending-style]:translate-y-full">
                 <CallPermissionSheet bizName={bizName} onClose={() => setOpen(false)} />
               </Drawer.Popup>
             </Drawer.Portal>

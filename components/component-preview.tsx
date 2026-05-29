@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { Code, X, Copy, Check } from "lucide-react";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
 import { ChatListItem } from "@/components/ui/whatsapp/chat-list-item";
@@ -87,7 +89,7 @@ const PREVIEWS: Record<string, () => React.ReactNode> = {
   "voice-message-bubble": () => (
     <div className="overflow-hidden space-y-1">
       <VoiceMessageBubble variant="incoming" duration="0:42" timestamp="10:24" audioSrc="/file_example_MP3_700KB.mp3" showTail />
-      <VoiceMessageBubble variant="outgoing" duration="0:18" timestamp="10:25" status="read" showTail />
+      <VoiceMessageBubble variant="outgoing" duration="0:18" timestamp="10:25" status="read" audioSrc="/file_example_MP3_700KB.mp3" showTail />
     </div>
   ),
   "file-attachment-bubble": () => (
@@ -258,13 +260,227 @@ const PREVIEWS: Record<string, () => React.ReactNode> = {
   ),
 };
 
+const CODE_SNIPPETS: Record<string, string> = {
+  "chat-bubble": `<ChatBubble variant="incoming" timestamp="10:24" showTail>
+  Hey, check this out!
+</ChatBubble>
+<ChatBubble variant="outgoing" timestamp="10:25" status="read" showTail>
+  Looks amazing
+</ChatBubble>`,
+  "chat-header": `<ChatHeader name="Alice" isOnline status="online" />`,
+  "chat-list-item": `<ChatListItem
+  name="Alice"
+  lastMessage="Hey, are you free today?"
+  timestamp="10:24"
+  unreadCount={2}
+/>`,
+  "chat-menu": `<ChatMenu
+  items={[
+    { label: "Contact info" },
+    { label: "Select messages" },
+    { label: "Mute" },
+  ]}
+/>`,
+  "message-input": `<MessageInput placeholder="Type a message" />`,
+  "message-status": `<MessageStatusIcon status="sent" />
+<MessageStatusIcon status="delivered" />
+<MessageStatusIcon status="read" />`,
+  "date-separator": `<DateSeparator label="Today" />`,
+  "typing-indicator": `<TypingIndicator />`,
+  "image-bubble": `<ImageBubble
+  variant="incoming"
+  src="/photo.jpg"
+  caption="Beautiful sunset"
+  timestamp="10:24"
+  showTail
+/>`,
+  "video-bubble": `<VideoBubble
+  variant="incoming"
+  src="/video.mp4"
+  duration="1:24"
+  timestamp="10:24"
+  showTail
+/>`,
+  "voice-message-bubble": `<VoiceMessageBubble
+  variant="incoming"
+  duration="0:42"
+  timestamp="10:24"
+  audioSrc="/audio.mp3"
+  showTail
+/>`,
+  "file-attachment-bubble": `<FileAttachmentBubble
+  variant="incoming"
+  fileName="report.pdf"
+  fileSize="2.4 MB"
+  fileType="pdf"
+  timestamp="10:24"
+  downloadStatus="idle"
+  showTail
+/>`,
+  "sticker-bubble": `<StickerBubble
+  variant="outgoing"
+  src="/sticker.png"
+  alt="wave"
+  timestamp="10:24"
+  status="read"
+  showTail
+/>`,
+  "template-bubble": `<TemplateBubble
+  variant="incoming"
+  header={{ type: "text", text: "Order Update" }}
+  body="Your order #1234 has been shipped!"
+  buttons={[{ type: "url", label: "Track Order", url: "#" }]}
+  timestamp="10:24"
+/>`,
+  "carousel-template": `<CarouselTemplate
+  body="Check out our latest products"
+  timestamp="10:24"
+  cards={[
+    { body: "Premium Plan", buttons: [{ type: "url", label: "Learn more", url: "#" }] },
+    { body: "Pro Plan", buttons: [{ type: "url", label: "Learn more", url: "#" }] },
+  ]}
+/>`,
+  "interactive-button-bubble": `<InteractiveButtonBubble
+  variant="incoming"
+  body="Would you like to proceed?"
+  buttons={[
+    { id: "1", title: "Yes" },
+    { id: "2", title: "No" },
+  ]}
+  timestamp="10:24"
+  showTail
+/>`,
+  "interactive-reply-bubble": `<InteractiveReplyBubble
+  variant="outgoing"
+  title="Yes"
+  replyType="button_reply"
+  timestamp="10:25"
+  status="read"
+  showTail
+/>`,
+  "list-message-bubble": `<ListMessageBubble
+  variant="incoming"
+  body="Choose a category"
+  buttonLabel="View options"
+  sections={[{
+    title: "Menu",
+    rows: [
+      { id: "1", title: "Pizza" },
+      { id: "2", title: "Burger" },
+    ],
+  }]}
+  timestamp="10:24"
+  showTail
+/>`,
+  "cta-url-bubble": `<CtaUrlBubble
+  variant="incoming"
+  body="Visit our website for more details"
+  displayText="Open Website"
+  url="#"
+  timestamp="10:24"
+  showTail
+/>`,
+  "call-permission": `<CallPermissionBubble bizName="Acme Corp" />`,
+  "reaction": `<ReactionsDisplay
+  reactions={[
+    { emoji: "❤️", count: 3, reacted: true },
+    { emoji: "👍", count: 1, reacted: false },
+  ]}
+/>`,
+  "reaction-pill": `<ReactionPill emoji="👍" count={5} reacted />
+<ReactionPill emoji="❤️" count={2} />`,
+  "action-button": `<ActionButton>Reply</ActionButton>
+<ActionButton>Forward</ActionButton>`,
+  "contact-bubble": `<ContactBubble
+  variant="incoming"
+  contacts={[{ name: "John Doe", phones: ["+1 234 567 890"] }]}
+  timestamp="10:24"
+  showTail
+/>`,
+  "location-bubble": `<LocationBubble
+  variant="incoming"
+  latitude={37.7749}
+  longitude={-122.4194}
+  name="San Francisco"
+  address="California, USA"
+  timestamp="10:24"
+  showTail
+/>`,
+  "reply-preview": `<ChatBubble variant="outgoing" timestamp="10:25" status="read" showTail>
+  <ReplyPreview author="Alice" body="Hey, check this out!" />
+  Looks great!
+</ChatBubble>`,
+  "forwarded-label": `<ChatBubble variant="incoming" timestamp="10:24" showTail>
+  <ForwardedLabel />
+  Check out this cool project!
+</ChatBubble>`,
+  "system-message-bubble": `<SystemMessageBubble>
+  Messages are end-to-end encrypted
+</SystemMessageBubble>`,
+  "unsupported-message-bubble": `<UnsupportedMessageBubble
+  variant="incoming"
+  timestamp="10:24"
+  showTail
+/>`,
+};
+
+function CodeCopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button onClick={copy} aria-label="Copy code" className="p-1 rounded hover:bg-white/10 transition-colors">
+      {copied ? <Check size={12} className="text-[#00a884]" /> : <Copy size={12} />}
+    </button>
+  );
+}
+
+const NO_WALLPAPER = new Set([
+  "chat-list-item",
+]);
+
 export function ComponentPreview({ name }: { name: string }) {
+  const [showCode, setShowCode] = useState(false);
   const render = PREVIEWS[name];
+  const code = CODE_SNIPPETS[name];
   if (!render) return null;
 
+  const bgClass = NO_WALLPAPER.has(name)
+    ? "rounded-lg overflow-hidden p-3"
+    : "wa-wallpaper rounded-lg overflow-hidden p-3";
+
   return (
-    <div className="wa-wallpaper rounded-lg overflow-hidden p-3">
-      {render()}
+    <div className="relative">
+      {showCode && code ? (
+        <div className="bg-[#0d1117] rounded-lg overflow-hidden">
+          <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/10">
+            <span className="text-[10px] font-mono text-white/50">tsx</span>
+            <div className="flex items-center gap-1">
+              <CodeCopyButton text={code} />
+              <button onClick={() => setShowCode(false)} className="p-1 rounded hover:bg-white/10 transition-colors text-white/50">
+                <X size={12} />
+              </button>
+            </div>
+          </div>
+          <pre className="p-3 overflow-x-auto text-[11px] leading-relaxed font-mono text-[#e6edf3]"><code>{code}</code></pre>
+        </div>
+      ) : (
+        <div className={bgClass}>
+          {render()}
+        </div>
+      )}
+      {!showCode && code && (
+        <button
+          onClick={() => setShowCode(true)}
+          className="absolute top-2 right-2 p-1.5 rounded-md bg-black/30 hover:bg-black/50 text-white/70 hover:text-white transition-colors"
+          aria-label="Show code"
+        >
+          <Code size={14} />
+        </button>
+      )}
     </div>
   );
 }

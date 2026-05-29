@@ -5,7 +5,7 @@ import { Button } from "@base-ui/react/button";
 import { Progress } from "@base-ui/react/progress";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
-import { type MessageStatus } from "@/components/ui/whatsapp/chat-bubble";
+import { type MessageStatus, MessageStatusIcon } from "./message-status";
 
 type DownloadStatus = "idle" | "downloading" | "done";
 
@@ -101,31 +101,6 @@ function DownloadButton({
   );
 }
 
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 11" height="11" width="16" className={className}>
-      <path
-        d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function DoubleCheckIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 16 11" height="11" width="16" className={className}>
-      <path
-        d="M11.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-2.011-2.175a.463.463 0 0 0-.349-.158.467.467 0 0 0-.338.131.537.537 0 0 0-.14.353.54.54 0 0 0 .13.363l2.39 2.576a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.223-.271z"
-        fill="currentColor"
-      />
-      <path
-        d="M15.071.653a.457.457 0 0 0-.304-.102.493.493 0 0 0-.381.178l-6.19 7.636-1.2-1.298-.728.897 1.58 1.704a.465.465 0 0 0 .349.158.457.457 0 0 0 .368-.189l6.596-8.14a.504.504 0 0 0 .103-.36.516.516 0 0 0-.193-.484z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 const FileAttachmentBubble = React.forwardRef<
   HTMLDivElement,
@@ -154,12 +129,7 @@ const FileAttachmentBubble = React.forwardRef<
 
     const statusIcon = () => {
       if (!isOutgoing || !status) return null;
-      if (status === "sending" || status === "sent")
-        return <span className="text-wa-delivered opacity-75"><CheckIcon /></span>;
-      if (status === "delivered")
-        return <span className="text-wa-delivered"><DoubleCheckIcon /></span>;
-      if (status === "read")
-        return <span className="text-wa-read"><DoubleCheckIcon /></span>;
+      return <MessageStatusIcon status={status} />;
     };
 
     return (

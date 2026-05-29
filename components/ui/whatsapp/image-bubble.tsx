@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import "@/components/ui/whatsapp/styles/whatsapp.css";
-import { type MessageStatus } from "@/components/ui/whatsapp/chat-bubble";
+import { type MessageStatus } from "./message-status";
 
 interface ImageBubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "incoming" | "outgoing";
