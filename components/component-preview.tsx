@@ -113,7 +113,6 @@ const PREVIEWS: Record<string, () => React.ReactNode> = {
         body="Thanks for signing up! Here's your welcome guide."
         buttons={[{ type: "url", label: "Open Guide", url: "#" }]}
         timestamp="10:25"
-        status="read"
       />
     </div>
   ),

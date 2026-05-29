@@ -22,6 +22,6 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@whatsapp": "https://whatsapp-ui.vercel.app/r/{name}.json"
+    "@whatsapp": "https://whatsapp-ui-omega.vercel.app/r/{name}.json"
   }
 }

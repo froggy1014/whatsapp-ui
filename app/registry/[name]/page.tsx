@@ -6,7 +6,7 @@ import { CopyButton } from "@/components/copy-button";
 const BASE_URL =
   process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "https://whatsapp-ui.vercel.app";
+    : "https://whatsapp-ui-omega.vercel.app";
 
 export async function generateStaticParams() {
   return getRegistryItems().map(({ name }) => ({ name }));

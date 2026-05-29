@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 const BASE_URL =
   process.env.VERCEL_PROJECT_PRODUCTION_URL
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : "https://whatsapp-ui.vercel.app";
+    : "https://whatsapp-ui-omega.vercel.app";
 
 const CATEGORY_ORDER = [
   { label: "Chat", names: ["chat-bubble", "chat-header", "chat-list-item", "chat-menu", "message-input", "message-status", "date-separator", "typing-indicator"] },
