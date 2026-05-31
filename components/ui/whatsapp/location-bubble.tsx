@@ -18,6 +18,10 @@ export interface LocationBubbleProps extends React.HTMLAttributes<HTMLDivElement
   status?: MessageStatus;
   showTail?: boolean;
   onOpenMap?: () => void;
+  /** Override the default Google Maps URL */
+  mapsUrl?: string;
+  /** Override the default `<a>` element for the CTA button (e.g. Next.js Link) */
+  renderAction?: (props: { href: string; children: React.ReactNode; className: string; target?: string; rel?: string }) => React.ReactElement;
 }
 
 const LocationBubble = React.forwardRef<HTMLDivElement, LocationBubbleProps>(
@@ -34,12 +38,14 @@ const LocationBubble = React.forwardRef<HTMLDivElement, LocationBubbleProps>(
       status,
       showTail = false,
       onOpenMap,
+      mapsUrl: mapsUrlProp,
+      renderAction,
       ...props
     },
     ref
   ) => {
     const isOutgoing = variant === "outgoing";
-    const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    const mapsUrl = mapsUrlProp ?? `https://www.google.com/maps?q=${latitude},${longitude}`;
 
     return (
       <div
@@ -118,16 +124,33 @@ const LocationBubble = React.forwardRef<HTMLDivElement, LocationBubbleProps>(
 
           {/* Open in Maps CTA */}
           <div className="border-t border-wa-border">
-            <Button
-              render={<a href={mapsUrl} target="_blank" rel="noopener noreferrer" />}
-              nativeButton={false}
-              className="flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500 transition-colors hover:bg-wa-hover"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-              </svg>
-              Open in Maps
-            </Button>
+            {renderAction ? (
+              renderAction({
+                href: mapsUrl,
+                className: "flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500 transition-colors hover:bg-wa-hover",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                children: (
+                  <>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    Open in Maps
+                  </>
+                ),
+              })
+            ) : (
+              <Button
+                render={<a href={mapsUrl} target="_blank" rel="noopener noreferrer" />}
+                nativeButton={false}
+                className="flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500 transition-colors hover:bg-wa-hover"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+                Open in Maps
+              </Button>
+            )}
           </div>
         </div>
       </div>

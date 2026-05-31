@@ -50,6 +50,8 @@ export interface TemplateBubbleProps
   footer?: string;
   buttons?: TemplateButton[];
   timestamp?: string;
+  /** Override the default `<a>` element for URL/phone buttons (e.g. Next.js Link) */
+  renderAction?: (props: { href: string; children: React.ReactNode; className: string; target?: string; rel?: string }) => React.ReactElement;
 }
 
 // ─── Variable highlighting ─────────────────────────────────────────────────
@@ -159,17 +161,9 @@ const ICONS: Partial<Record<TemplateButton["type"], React.ReactNode>> = {
 
 // ─── Buttons ──────────────────────────────────────────────────────────────────
 
-function TemplateButtonRow({ button }: { button: TemplateButton }) {
+function TemplateButtonRow({ button, renderAction }: { button: TemplateButton; renderAction?: TemplateBubbleProps["renderAction"] }) {
   const [copied, setCopied] = React.useState(false);
   const base = "flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500";
-
-  const renderEl = (() => {
-    if (button.type === "url" && button.url)
-      return <a href={button.url} target="_blank" rel="noopener noreferrer" />;
-    if (button.type === "phone_number" && button.phone_number)
-      return <a href={`tel:${button.phone_number}`} />;
-    return undefined;
-  })();
 
   if (button.type === "call_permission") {
     return (
@@ -205,13 +199,8 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
       }
     : undefined;
 
-  return (
-    <Button
-      render={renderEl}
-      nativeButton={renderEl == null}
-      className={base}
-      onClick={handleClick}
-    >
+  const buttonContent = (
+    <>
       {copied ? (
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style={{ filter: "var(--wa-btn-icon-filter)" }}>
           <path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
@@ -220,6 +209,39 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
         ICONS[button.type] ?? null
       )}
       {copied ? "Copied!" : label}
+    </>
+  );
+
+  // Use renderAction if provided for link-type buttons
+  const href = button.type === "url" && button.url ? button.url
+    : button.type === "phone_number" && button.phone_number ? `tel:${button.phone_number}`
+    : undefined;
+
+  if (renderAction && href) {
+    return renderAction({
+      href,
+      children: buttonContent,
+      className: base,
+      ...(button.type === "url" ? { target: "_blank", rel: "noopener noreferrer" } : {}),
+    });
+  }
+
+  const renderEl = (() => {
+    if (button.type === "url" && button.url)
+      return <a href={button.url} target="_blank" rel="noopener noreferrer" />;
+    if (button.type === "phone_number" && button.phone_number)
+      return <a href={`tel:${button.phone_number}`} />;
+    return undefined;
+  })();
+
+  return (
+    <Button
+      render={renderEl}
+      nativeButton={renderEl == null}
+      className={base}
+      onClick={handleClick}
+    >
+      {buttonContent}
     </Button>
   );
 }
@@ -227,7 +249,7 @@ function TemplateButtonRow({ button }: { button: TemplateButton }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
-  ({ className, variant = "incoming", header, body, footer, buttons = [], timestamp, ...props }, ref) => {
+  ({ className, variant = "incoming", header, body, footer, buttons = [], timestamp, renderAction, ...props }, ref) => {
     const hasButtons = buttons.length > 0;
     const isOutgoing = variant === "outgoing";
 
@@ -272,7 +294,7 @@ const TemplateBubble = React.forwardRef<HTMLDivElement, TemplateBubbleProps>(
             <div className="border-t border-wa-border">
               {buttons.map((btn, i) => (
                 <div key={i} className={cn(i > 0 && "border-t border-wa-border")}>
-                  <TemplateButtonRow button={btn} />
+                  <TemplateButtonRow button={btn} renderAction={renderAction} />
                 </div>
               ))}
             </div>

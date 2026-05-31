@@ -17,11 +17,38 @@ export interface CarouselTemplateProps extends React.HTMLAttributes<HTMLDivEleme
   body?: string;
   cards: CarouselCard[];
   timestamp?: string;
+  /** Override the default `<a>` element for URL/phone buttons (e.g. Next.js Link) */
+  renderAction?: (props: { href: string; children: React.ReactNode; className: string; target?: string; rel?: string }) => React.ReactElement;
 }
 
-function CardButton({ button }: { button: TemplateButton }) {
+function CardButton({ button, renderAction }: { button: TemplateButton; renderAction?: CarouselTemplateProps["renderAction"] }) {
   const base = "flex w-full items-center justify-center gap-1.5 py-[9px] text-[13px] font-medium text-wa-emerald-500";
   const label = button.type === "call_permission" ? `Call ${button.bizName}` : button.type === "copy_code" ? (button.label ?? "Copy offer code") : "label" in button ? button.label : "";
+
+  const buttonContent = (
+    <>
+      {button.type === "url" && (
+        <img src="/wa-icon-url.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
+      )}
+      {button.type === "flow" && (
+        <img src="/wa-icon-flow.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
+      )}
+      {label}
+    </>
+  );
+
+  const href = button.type === "url" && button.url ? button.url
+    : button.type === "phone_number" && button.phone_number ? `tel:${button.phone_number}`
+    : undefined;
+
+  if (renderAction && href) {
+    return renderAction({
+      href,
+      children: buttonContent,
+      className: base,
+      ...(button.type === "url" ? { target: "_blank", rel: "noopener noreferrer" } : {}),
+    });
+  }
 
   const renderEl = button.type === "url" && button.url
     ? <a href={button.url} target="_blank" rel="noopener noreferrer" />
@@ -31,19 +58,13 @@ function CardButton({ button }: { button: TemplateButton }) {
 
   return (
     <Button render={renderEl} nativeButton={renderEl == null} className={base}>
-      {button.type === "url" && (
-        <img src="/wa-icon-url.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-      )}
-      {button.type === "flow" && (
-        <img src="/wa-icon-flow.png" width={14} height={14} alt="" style={{ filter: "var(--wa-btn-icon-filter)" }} />
-      )}
-      {label}
+      {buttonContent}
     </Button>
   );
 }
 
 const CarouselTemplate = React.forwardRef<HTMLDivElement, CarouselTemplateProps>(
-  ({ className, body, cards, timestamp, ...props }, ref) => {
+  ({ className, body, cards, timestamp, renderAction, ...props }, ref) => {
     return (
       <div ref={ref} className={cn("font-wa w-full", className)} {...props}>
         {/* Optional intro bubble */}
@@ -91,7 +112,7 @@ const CarouselTemplate = React.forwardRef<HTMLDivElement, CarouselTemplateProps>
                 <div className="border-t border-wa-border">
                   {card.buttons.map((btn, j) => (
                     <div key={j} className={cn(j > 0 && "border-t border-wa-border")}>
-                      <CardButton button={btn} />
+                      <CardButton button={btn} renderAction={renderAction} />
                     </div>
                   ))}
                 </div>

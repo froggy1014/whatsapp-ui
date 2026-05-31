@@ -35,6 +35,8 @@ interface ChatListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   isTyping?: boolean;
   isPinned?: boolean;
   isSelected?: boolean;
+  /** Override the root element (e.g. Next.js Link, <a>, <button>) */
+  render?: React.ReactElement;
 }
 
 
@@ -53,6 +55,7 @@ const ChatListItem = React.forwardRef<HTMLDivElement, ChatListItemProps>(
       isTyping = false,
       isPinned = false,
       isSelected = false,
+      render,
       ...props
     },
     ref
@@ -60,18 +63,16 @@ const ChatListItem = React.forwardRef<HTMLDivElement, ChatListItemProps>(
     const hasUnread = !!unreadCount && unreadCount > 0;
     const avatarColor = getAvatarColor(name);
 
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          "font-wa flex cursor-pointer items-center gap-[15px] py-[10px] transition-colors duration-150",
-          isSelected
-            ? "mx-2 rounded-xl bg-wa-active px-[9px]"
-            : "mx-2 rounded-xl px-[9px] hover:bg-wa-hover",
-          className
-        )}
-        {...props}
-      >
+    const rootClassName = cn(
+      "font-wa flex cursor-pointer items-center gap-[15px] py-[10px] transition-colors duration-150",
+      isSelected
+        ? "mx-2 rounded-xl bg-wa-active px-[9px]"
+        : "mx-2 rounded-xl px-[9px] hover:bg-wa-hover",
+      className
+    );
+
+    const content = (
+      <>
         {/* Avatar */}
         <div className="relative shrink-0">
           <div
@@ -143,6 +144,23 @@ const ChatListItem = React.forwardRef<HTMLDivElement, ChatListItemProps>(
             </div>
           </div>
         </div>
+      </>
+    );
+
+    if (render) {
+      return React.cloneElement(render, {
+        ref,
+        className: cn(
+          (render.props as Record<string, string | undefined>).className,
+          rootClassName
+        ),
+        ...props,
+      } as React.HTMLAttributes<HTMLElement>, content);
+    }
+
+    return (
+      <div ref={ref} className={rootClassName} {...props}>
+        {content}
       </div>
     );
   }

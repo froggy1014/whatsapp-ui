@@ -17,6 +17,8 @@ export interface CtaUrlBubbleProps extends React.HTMLAttributes<HTMLDivElement> 
   timestamp?: string;
   status?: MessageStatus;
   showTail?: boolean;
+  /** Override the default `<a>` element for the CTA button (e.g. Next.js Link) */
+  renderAction?: (props: { href: string; children: React.ReactNode; className: string; target?: string; rel?: string }) => React.ReactElement;
 }
 
 const CtaUrlBubble = React.forwardRef<HTMLDivElement, CtaUrlBubbleProps>(
@@ -31,6 +33,7 @@ const CtaUrlBubble = React.forwardRef<HTMLDivElement, CtaUrlBubbleProps>(
       timestamp,
       status,
       showTail = false,
+      renderAction,
       ...props
     },
     ref
@@ -67,16 +70,33 @@ const CtaUrlBubble = React.forwardRef<HTMLDivElement, CtaUrlBubbleProps>(
           </div>
 
           <div className="border-t border-wa-border">
-            <Button
-              render={url ? <a href={url} target="_blank" rel="noopener noreferrer" /> : undefined}
-              nativeButton={!url}
-              className="flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500 transition-colors hover:bg-wa-hover"
-            >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-              </svg>
-              {displayText}
-            </Button>
+            {renderAction && url ? (
+              renderAction({
+                href: url,
+                className: "flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500 transition-colors hover:bg-wa-hover",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                children: (
+                  <>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                      <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                    </svg>
+                    {displayText}
+                  </>
+                ),
+              })
+            ) : (
+              <Button
+                render={url ? <a href={url} target="_blank" rel="noopener noreferrer" /> : undefined}
+                nativeButton={!url}
+                className="flex w-full items-center justify-center gap-1.5 py-[10px] text-[14px] font-medium text-wa-emerald-500 transition-colors hover:bg-wa-hover"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+                </svg>
+                {displayText}
+              </Button>
+            )}
           </div>
         </div>
       </div>
