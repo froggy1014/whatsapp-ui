@@ -95,7 +95,6 @@ function ChatPanel({ isTyping = false }: { isTyping?: boolean }) {
       {/* Messages */}
       <div
         className="wa-wallpaper flex-1 overflow-y-auto px-16 py-4"
-        style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
       >
         <DateSeparator label="Today" />
 
@@ -173,7 +172,6 @@ export const Mobile: Story = {
       />
       <div
         className="wa-wallpaper flex-1 overflow-y-auto px-4 py-4"
-        style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
       >
         <DateSeparator label="Today" />
         <ChatBubble variant="incoming" timestamp="10:20" showTail>

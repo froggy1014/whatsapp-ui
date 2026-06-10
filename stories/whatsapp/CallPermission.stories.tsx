@@ -15,7 +15,6 @@ export const Default: Story = {
   render: () => (
     <div
       className="wa-wallpaper min-h-screen px-4 py-6 flex flex-col gap-2"
-      style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}
     >
       <ChatBubble variant="incoming" timestamp="3:00 PM" showTail>
         Would you like to receive a call from one of our representatives?

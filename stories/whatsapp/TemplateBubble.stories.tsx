@@ -10,12 +10,12 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-const bg = { background: "var(--wa-conversation-bg, #f5f0e8)" };
+
 
 export const Gallery: Story = {
   name: "Gallery — All Types",
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6" style={bg}>
+    <div className="wa-wallpaper min-h-screen p-6">
       <div className="flex flex-wrap gap-6">
         {[
           { label: "Text", node: <TemplateBubble body="Hi {{name}}, your appointment is confirmed for {{date}} at {{time}}." footer="Reply STOP to unsubscribe" buttons={[{ type: "url" as const, label: "Reschedule" }]} timestamp="2:36 PM" /> },
@@ -40,7 +40,7 @@ export const Gallery: Story = {
 
 export const Carousel: Story = {
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6" style={bg}>
+    <div className="wa-wallpaper min-h-screen p-6">
       <CarouselTemplate
         body="Hey there! Summer is here, we've got the freshest lemons in store to keep you hydrated."
         timestamp="11:59"

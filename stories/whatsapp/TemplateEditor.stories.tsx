@@ -26,7 +26,7 @@ const initialFormData: TemplateFormData = {
 function EditorDemo() {
   const [formData, setFormData] = useState<TemplateFormData>(initialFormData);
   return (
-    <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)", minWidth: 480 }}>
+    <div className="wa-wallpaper p-6" style={{ minWidth: 480 }}>
       <TemplateEditor
         formData={formData}
         onChange={setFormData}
@@ -55,7 +55,7 @@ function PrefilledDemo() {
     ],
   });
   return (
-    <div className="wa-wallpaper p-6" style={{ background: "var(--wa-conversation-bg, #f5f0e8)", minWidth: 480 }}>
+    <div className="wa-wallpaper p-6" style={{ minWidth: 480 }}>
       <TemplateEditor
         formData={formData}
         onChange={setFormData}

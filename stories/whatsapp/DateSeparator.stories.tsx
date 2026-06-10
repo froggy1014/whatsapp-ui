@@ -17,7 +17,7 @@ export const Default: Story = {};
 export const InContext: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper flex flex-col px-4 py-4" style={{ background: "var(--wa-conversation-bg, #f5f0e8)" }}>
+    <div className="wa-wallpaper flex flex-col px-4 py-4">
       <DateSeparator label="Yesterday" />
       <ChatBubble variant="incoming" timestamp="23:55" showTail>Good night!</ChatBubble>
       <DateSeparator label="Today" />
