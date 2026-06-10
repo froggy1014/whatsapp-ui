@@ -67,58 +67,18 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
 
         {/* Wallpaper + bubble */}
         <div
-          className="wa-wallpaper overflow-hidden rounded-xl border p-6"
+          className="wa-wallpaper overflow-hidden rounded-xl p-4"
           style={{
             background: "var(--wa-conversation-bg)",
-            borderColor: "var(--wa-border)",
           }}
         >
-          <div className="flex justify-start">
-            <TemplateBubble
-              header={header}
-              body={body}
-              footer={formData.footerText || undefined}
-              buttons={buttons.length > 0 ? buttons : undefined}
-              timestamp={timestamp}
-            />
-          </div>
-        </div>
-
-        {/* Meta info */}
-        <div
-          className="mt-4 space-y-1 rounded-lg p-3 text-xs"
-          style={{
-            background: "var(--wa-bg)",
-            color: "var(--wa-text-secondary)",
-          }}
-        >
-          <div className="flex justify-between">
-            <span>Name</span>
-            <span className="font-mono" style={{ color: "var(--wa-text-primary)" }}>
-              {formData.name || "-"}
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span>Language</span>
-            <span style={{ color: "var(--wa-text-primary)" }}>{formData.language}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Category</span>
-            <span style={{ color: "var(--wa-text-primary)" }}>{formData.category}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Components</span>
-            <span style={{ color: "var(--wa-text-primary)" }}>
-              {[
-                formData.headerType !== "none" && "Header",
-                "Body",
-                formData.footerText && "Footer",
-                formData.buttons.length > 0 && "Buttons",
-              ]
-                .filter(Boolean)
-                .join(", ")}
-            </span>
-          </div>
+          <TemplateBubble
+            header={header}
+            body={body}
+            footer={formData.footerText || undefined}
+            buttons={buttons.length > 0 ? buttons : undefined}
+            timestamp={timestamp}
+          />
         </div>
       </div>
     );
