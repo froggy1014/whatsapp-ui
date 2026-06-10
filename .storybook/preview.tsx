@@ -1,6 +1,17 @@
 import React from "react";
 import type { Preview } from "@storybook/nextjs-vite";
+import { Geist, Geist_Mono } from "next/font/google";
 import "../app/globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 const BACKGROUNDS = {
   light: "#f5f0e8",
@@ -45,7 +56,7 @@ const preview: Preview = {
 
       return (
         <div
-          className="wa-wallpaper"
+          className={`${geistSans.variable} ${geistMono.variable} wa-wallpaper`}
           style={{
             minHeight: "100vh",
             padding: isFullscreen ? "0" : "24px",
