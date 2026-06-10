@@ -493,7 +493,8 @@
         "@tiptap/core",
         "@tiptap/pm",
         "@tiptap/extension-placeholder",
-        "@tiptap/extension-character-count"
+        "@tiptap/extension-character-count",
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [
