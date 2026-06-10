@@ -1,0 +1,35 @@
+/* Tiptap body editor */
+.tiptap-body-editor {
+  min-height: 120px;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--wa-text-primary);
+  outline: none;
+}
+
+.tiptap-body-editor p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--wa-text-secondary);
+  opacity: 0.6;
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Variable chip */
+.tiptap-variable-chip {
+  display: inline-flex;
+  align-items: center;
+  background: var(--wa-emerald-500);
+  color: #fff;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  font-weight: 600;
+  margin: 0 1px;
+  user-select: none;
+  vertical-align: baseline;
+  line-height: 1.4;
+}

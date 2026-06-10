@@ -481,6 +481,49 @@
         { "path": "components/ui/whatsapp/chat-menu.tsx", "type": "registry:component", "target": "components/ui/whatsapp/chat-menu.tsx" },
         { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
       ]
+    },
+    {
+      "name": "template-editor",
+      "type": "registry:component",
+      "title": "Template Editor",
+      "description": "WhatsApp Business template creation form with Tiptap rich text editor, variable chips ({{1}}, {{2}}), header/footer/buttons config, and character count.",
+      "dependencies": [
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/core",
+        "@tiptap/pm",
+        "@tiptap/extension-placeholder",
+        "@tiptap/extension-character-count"
+      ],
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/template-editor.tsx", "type": "registry:component", "target": "components/ui/whatsapp/template-editor.tsx" },
+        { "path": "components/ui/whatsapp/_template-editor-internal/tiptap-variable.ts", "type": "registry:file", "target": "components/ui/whatsapp/_template-editor-internal/tiptap-variable.ts" },
+        { "path": "components/ui/whatsapp/_template-editor-internal/template-editor.css", "type": "registry:file", "target": "components/ui/whatsapp/_template-editor-internal/template-editor.css" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "template-preview",
+      "type": "registry:component",
+      "title": "Template Preview",
+      "description": "WhatsApp-style live preview of a template being edited — message bubble with header, body, footer, buttons, and meta info panel.",
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/template-preview.tsx", "type": "registry:component", "target": "components/ui/whatsapp/template-preview.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
+    },
+    {
+      "name": "template-list",
+      "type": "registry:component",
+      "title": "Template List",
+      "description": "WhatsApp Business template list with status badges (APPROVED/PENDING/REJECTED), mini body preview, delete action, and empty/loading states.",
+      "registryDependencies": [],
+      "files": [
+        { "path": "components/ui/whatsapp/template-list.tsx", "type": "registry:component", "target": "components/ui/whatsapp/template-list.tsx" },
+        { "path": "components/ui/whatsapp/styles/whatsapp.css", "type": "registry:file", "target": "components/ui/whatsapp/styles/whatsapp.css" }
+      ]
     }
   ]
 }
