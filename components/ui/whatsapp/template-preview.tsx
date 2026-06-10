@@ -54,13 +54,7 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
         className={cn("overflow-hidden rounded-xl", className)}
         {...props}
       >
-        <div
-          className="px-4 py-3"
-          style={{
-            background: "var(--wa-panel-bg)",
-            borderBottom: "1px solid var(--wa-border)",
-          }}
-        >
+        <div className="px-4 py-3">
           <h2
             className="text-lg font-semibold"
             style={{ color: "var(--wa-text-primary)" }}
