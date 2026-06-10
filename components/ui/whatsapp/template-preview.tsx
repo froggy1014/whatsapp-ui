@@ -54,15 +54,6 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
         className={cn("wa-wallpaper overflow-hidden rounded-xl", className)}
         {...props}
       >
-        <div className="px-4 pt-4 pb-2">
-          <h2
-            className="text-lg font-semibold"
-            style={{ color: "var(--wa-text-primary)" }}
-          >
-            Template Preview
-          </h2>
-        </div>
-
         <div className="p-4">
           <TemplateBubble
             header={header}
