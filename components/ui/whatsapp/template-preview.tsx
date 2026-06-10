@@ -51,23 +51,26 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
     return (
       <div
         ref={ref}
-        className={cn("rounded-xl border p-6", className)}
-        style={{
-          background: "var(--wa-panel-bg)",
-          borderColor: "var(--wa-border)",
-        }}
+        className={cn("overflow-hidden rounded-xl", className)}
         {...props}
       >
-        <h2
-          className="mb-4 text-lg font-semibold"
-          style={{ color: "var(--wa-text-primary)" }}
-        >
-          Preview
-        </h2>
-
-        {/* Wallpaper + bubble */}
         <div
-          className="wa-wallpaper overflow-hidden rounded-xl pt-4"
+          className="px-4 py-3"
+          style={{
+            background: "var(--wa-panel-bg)",
+            borderBottom: "1px solid var(--wa-border)",
+          }}
+        >
+          <h2
+            className="text-lg font-semibold"
+            style={{ color: "var(--wa-text-primary)" }}
+          >
+            Template Preview
+          </h2>
+        </div>
+
+        <div
+          className="wa-wallpaper p-4"
           style={{
             background: "var(--wa-conversation-bg)",
           }}
