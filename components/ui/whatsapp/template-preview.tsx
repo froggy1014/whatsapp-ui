@@ -63,12 +63,7 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
           </h2>
         </div>
 
-        <div
-          className="wa-wallpaper p-4"
-          style={{
-            background: "var(--wa-conversation-bg)",
-          }}
-        >
+        <div className="wa-wallpaper p-4">
           <TemplateBubble
             header={header}
             body={body}
