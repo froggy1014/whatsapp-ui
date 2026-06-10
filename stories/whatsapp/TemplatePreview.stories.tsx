@@ -4,17 +4,16 @@ import { TemplatePreview } from "@/components/ui/whatsapp/template-preview";
 
 const meta: Meta = {
   title: "WhatsApp/TemplatePreview",
-  parameters: { layout: "centered", backgrounds: { disable: true } },
+  parameters: { layout: "fullscreen", backgrounds: { disable: true } },
 };
 export default meta;
 type Story = StoryObj;
 
-const bg = { background: "var(--wa-conversation-bg, #f5f0e8)" };
-
 export const Empty: Story = {
   render: () => (
-    <div className="wa-wallpaper p-6" style={{ ...bg, minWidth: 400 }}>
+    <div className="wa-wallpaper min-h-screen p-6">
       <TemplatePreview
+        style={{ maxWidth: 400 }}
         formData={{
           name: "",
           language: "en_US",
@@ -33,8 +32,9 @@ export const Empty: Story = {
 export const WithContent: Story = {
   name: "With Content",
   render: () => (
-    <div className="wa-wallpaper p-6" style={{ ...bg, minWidth: 400 }}>
+    <div className="wa-wallpaper min-h-screen p-6">
       <TemplatePreview
+        style={{ maxWidth: 400 }}
         formData={{
           name: "order_confirmation",
           language: "en_US",
