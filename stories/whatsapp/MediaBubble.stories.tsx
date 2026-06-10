@@ -9,7 +9,7 @@ const meta: Meta = {
   parameters: { layout: "padded" },
   decorators: [
     (Story) => (
-      <div className="wa-wallpaper px-4 py-4" style={{ minWidth: 360 }}>
+      <div className="px-4 py-4" style={{ minWidth: 360 }}>
         <Story />
       </div>
     ),

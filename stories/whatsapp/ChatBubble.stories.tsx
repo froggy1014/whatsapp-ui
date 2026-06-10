@@ -21,7 +21,7 @@ export const Outgoing: Story = {
 export const MessageStatus: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper flex flex-col px-4 py-4" style={{ minWidth: 320 }}>
+    <div className="flex flex-col px-4 py-4" style={{ minWidth: 320 }}>
       <ChatBubble variant="outgoing" timestamp="10:25" status="sending" showTail={false}>Sending…</ChatBubble>
       <ChatBubble variant="outgoing" timestamp="10:25" status="sent" showTail={false}>Sent</ChatBubble>
       <ChatBubble variant="outgoing" timestamp="10:25" status="delivered" showTail={false}>Delivered</ChatBubble>
@@ -45,7 +45,7 @@ export const GroupChat: Story = {
 export const Conversation: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper flex flex-col px-4 py-4">
+    <div className="flex flex-col px-4 py-4">
       <ChatBubble variant="incoming" timestamp="10:20" showTail>Hey! Are you coming to the meeting later? 😊</ChatBubble>
       <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail={false}>Yes, just finishing up some stuff</ChatBubble>
       <ChatBubble variant="outgoing" timestamp="10:21" status="read" showTail>Should be there in 10 mins 👍</ChatBubble>

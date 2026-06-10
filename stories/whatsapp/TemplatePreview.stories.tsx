@@ -11,7 +11,7 @@ type Story = StoryObj;
 
 export const Empty: Story = {
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6">
+    <div className="min-h-screen p-6">
       <TemplatePreview
         style={{ maxWidth: 400 }}
         formData={{
@@ -32,7 +32,7 @@ export const Empty: Story = {
 export const WithContent: Story = {
   name: "With Content",
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6">
+    <div className="min-h-screen p-6">
       <TemplatePreview
         style={{ maxWidth: 400 }}
         formData={{

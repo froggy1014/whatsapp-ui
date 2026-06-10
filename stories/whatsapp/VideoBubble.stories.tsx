@@ -7,7 +7,7 @@ const meta: Meta<typeof VideoBubble> = {
   parameters: { layout: "centered", backgrounds: { disable: true } },
   decorators: [
     (Story) => (
-      <div className="wa-wallpaper w-[400px] p-4">
+      <div className="w-[400px] p-4">
         <Story />
       </div>
     ),

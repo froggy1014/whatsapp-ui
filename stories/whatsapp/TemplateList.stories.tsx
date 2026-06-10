@@ -68,7 +68,7 @@ const sampleTemplates = [
 
 export const Default: Story = {
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6">
+    <div className="min-h-screen p-6">
       <TemplateList
         templates={sampleTemplates}
         onDelete={(name) => alert(`Delete: ${name}`)}
@@ -80,7 +80,7 @@ export const Default: Story = {
 
 export const Loading: Story = {
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6">
+    <div className="min-h-screen p-6">
       <TemplateList templates={[]} loading />
     </div>
   ),
@@ -88,7 +88,7 @@ export const Loading: Story = {
 
 export const Empty: Story = {
   render: () => (
-    <div className="wa-wallpaper min-h-screen p-6">
+    <div className="min-h-screen p-6">
       <TemplateList
         templates={[]}
         onCreateNew={() => alert("Create new")}

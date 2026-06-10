@@ -18,7 +18,7 @@ export const Reacted: Story = { args: { reacted: true } };
 export const DirectChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper p-6">
+    <div className="p-6">
       <ChatBubble
         variant="incoming"
         timestamp="10:29"
@@ -35,7 +35,7 @@ export const DirectChat: Story = {
 export const GroupChat: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper p-6">
+    <div className="p-6">
       <ChatBubble
         variant="incoming"
         timestamp="09:32"
@@ -56,7 +56,7 @@ export const GroupChat: Story = {
 export const OutgoingBubble: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="wa-wallpaper p-6">
+    <div className="p-6">
       <ChatBubble
         variant="outgoing"
         timestamp="10:29"

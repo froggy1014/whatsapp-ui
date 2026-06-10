@@ -47,7 +47,6 @@ const preview: Preview = {
         <div
           className="wa-wallpaper"
           style={{
-            background: bg,
             minHeight: "100vh",
             padding: isFullscreen ? "0" : "24px",
           }}

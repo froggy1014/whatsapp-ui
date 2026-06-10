@@ -7,7 +7,7 @@ const meta: Meta<typeof MessageInput> = {
   parameters: { layout: "fullscreen", backgrounds: { disable: true } },
   decorators: [
     (Story) => (
-      <div className="wa-wallpaper min-h-[120px] flex items-end">
+      <div className="min-h-[120px] flex items-end">
         <div className="w-full">
           <Story />
         </div>
