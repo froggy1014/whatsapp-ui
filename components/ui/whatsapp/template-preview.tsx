@@ -67,7 +67,7 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
 
         {/* Wallpaper + bubble */}
         <div
-          className="wa-wallpaper overflow-hidden rounded-xl p-4"
+          className="wa-wallpaper overflow-hidden rounded-xl pt-4"
           style={{
             background: "var(--wa-conversation-bg)",
           }}
