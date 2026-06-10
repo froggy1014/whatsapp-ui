@@ -21,6 +21,7 @@ const sampleTemplates = [
       {
         type: "BODY" as const,
         text: "Hi {{text}},\n\nYour new account has been created successfully.\n\nPlease verify {{text}} to complete your profile.",
+        example: { body_text: [["John", "your email address"]] },
       },
       {
         type: "BUTTONS" as const,
@@ -39,6 +40,7 @@ const sampleTemplates = [
       {
         type: "BODY" as const,
         text: "Hi {{text}}, your delivery address has been successfully updated to {{text}}. Contact {{text}} for any inquiries.",
+        example: { body_text: [["Sarah", "123 Main St, Suite 200", "support@example.com"]] },
       },
     ],
   },
@@ -53,6 +55,7 @@ const sampleTemplates = [
       {
         type: "BODY" as const,
         text: "Hello {{text}},\n\nYour upcoming appointment with {{business name}} on {{date}} at {{text}} has been canceled.\n\nLet us know if you have any questions or need to reschedule.",
+        example: { body_text: [["Alex", "Jasper's Market", "June 15, 2025", "3:00 PM"]] },
       },
       {
         type: "BUTTONS" as const,
@@ -71,6 +74,7 @@ const sampleTemplates = [
       {
         type: "BODY" as const,
         text: "Hi {{text}},\nYour appointment on {{text}} has been cancelled. We hope to see you another time.",
+        example: { body_text: [["Emily", "March 20, 2025 at 10:00 AM"]] },
       },
     ],
   },
@@ -85,6 +89,7 @@ const sampleTemplates = [
       {
         type: "BODY" as const,
         text: "Hello {{text}},\n\nThank you for booking with {{business name}}.\n\nYour appointment for {{text}} on {{date}} at {{text}} is confirmed.",
+        example: { body_text: [["Michael", "Jasper's Market", "a haircut", "July 1, 2025", "2:30 PM"]] },
       },
       {
         type: "BUTTONS" as const,
@@ -103,6 +108,7 @@ const sampleTemplates = [
       {
         type: "BODY" as const,
         text: "Hi {{text}},\nYour appointment is scheduled for {{text}}.\n\nService: {{text}}\nConfirmation number: {{text}}\n\nWe're looking forward to your visit.",
+        example: { body_text: [["David", "April 5, 2025 at 11:00 AM", "Deep cleaning", "CONF-78234"]] },
       },
     ],
   },

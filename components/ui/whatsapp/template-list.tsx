@@ -12,7 +12,10 @@ export interface TemplateComponent {
   format?: string;
   text?: string;
   buttons?: Array<{ type: string; text: string; url?: string; phone_number?: string }>;
-  example?: Record<string, unknown>;
+  example?: {
+    header_text?: string[];
+    body_text?: string[][];
+  };
 }
 
 export interface WhatsAppTemplate {
@@ -35,6 +38,16 @@ export interface TemplateListProps
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
+function substituteExamples(text: string, examples?: string[]): string {
+  if (!examples || examples.length === 0) return text;
+  let idx = 0;
+  return text.replace(/\{\{[^}]+\}\}/g, () => {
+    const val = examples[idx];
+    idx++;
+    return val ?? "";
+  });
+}
+
 function mapComponentButtons(
   buttons?: TemplateComponent["buttons"],
 ): TemplateButton[] | undefined {
@@ -50,6 +63,77 @@ function mapComponentButtons(
       };
     return { type: "quick_reply" as const, label: btn.text };
   });
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+
+function TemplateCard({
+  template,
+  onSelect,
+}: {
+  template: WhatsAppTemplate;
+  onSelect?: (template: WhatsAppTemplate) => void;
+}) {
+  const [hovered, setHovered] = React.useState(false);
+
+  const headerComp = template.components?.find((c) => c.type === "HEADER");
+  const bodyComp = template.components?.find((c) => c.type === "BODY");
+  const footerComp = template.components?.find((c) => c.type === "FOOTER");
+  const buttonsComp = template.components?.find((c) => c.type === "BUTTONS");
+
+  const rawHeaderText = headerComp?.text;
+  const rawBodyText = bodyComp?.text || "No body text";
+
+  const headerExamples = headerComp?.example?.header_text;
+  const bodyExamples = bodyComp?.example?.body_text?.[0];
+
+  const displayHeaderText = hovered
+    ? rawHeaderText
+    : rawHeaderText
+      ? substituteExamples(rawHeaderText, headerExamples)
+      : undefined;
+
+  const displayBodyText = hovered
+    ? rawBodyText
+    : substituteExamples(rawBodyText, bodyExamples);
+
+  const header = displayHeaderText
+    ? { type: "text" as const, text: displayHeaderText }
+    : undefined;
+
+  return (
+    <div
+      className="group cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-lg"
+      onClick={() => onSelect?.(template)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="wa-wallpaper p-4">
+        <TemplateBubble
+          header={header}
+          body={displayBodyText}
+          footer={footerComp?.text}
+          buttons={mapComponentButtons(buttonsComp?.buttons)}
+          timestamp="6:24 AM"
+        />
+      </div>
+
+      <div
+        className="px-4 py-3"
+        style={{
+          background: "var(--wa-panel-bg)",
+          borderTop: "1px solid var(--wa-border)",
+        }}
+      >
+        <p
+          className="truncate text-sm"
+          style={{ color: "var(--wa-text-primary)" }}
+        >
+          {template.name}
+        </p>
+      </div>
+    </div>
+  );
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────
@@ -117,52 +201,13 @@ const TemplateList = React.forwardRef<HTMLDivElement, TemplateListProps>(
     return (
       <div ref={ref} className={cn(className)} {...props}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {templates.map((tmpl) => {
-            const headerComp = tmpl.components?.find((c) => c.type === "HEADER");
-            const bodyComp = tmpl.components?.find((c) => c.type === "BODY");
-            const footerComp = tmpl.components?.find((c) => c.type === "FOOTER");
-            const buttonsComp = tmpl.components?.find((c) => c.type === "BUTTONS");
-
-            const header =
-              headerComp?.text
-                ? { type: "text" as const, text: headerComp.text }
-                : undefined;
-
-            return (
-              <div
-                key={tmpl.id}
-                className="group cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-lg"
-                onClick={() => onSelectTemplate?.(tmpl)}
-              >
-                {/* Wallpaper + bubble */}
-                <div className="wa-wallpaper p-4">
-                  <TemplateBubble
-                    header={header}
-                    body={bodyComp?.text || "No body text"}
-                    footer={footerComp?.text}
-                    buttons={mapComponentButtons(buttonsComp?.buttons)}
-                    timestamp="6:24 AM"
-                  />
-                </div>
-
-                {/* Template name footer */}
-                <div
-                  className="px-4 py-3"
-                  style={{
-                    background: "var(--wa-panel-bg)",
-                    borderTop: "1px solid var(--wa-border)",
-                  }}
-                >
-                  <p
-                    className="truncate text-sm"
-                    style={{ color: "var(--wa-text-primary)" }}
-                  >
-                    {tmpl.name}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
+          {templates.map((tmpl) => (
+            <TemplateCard
+              key={tmpl.id}
+              template={tmpl}
+              onSelect={onSelectTemplate}
+            />
+          ))}
         </div>
       </div>
     );
