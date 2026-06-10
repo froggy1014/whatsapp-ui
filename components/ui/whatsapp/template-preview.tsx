@@ -41,7 +41,7 @@ const TemplatePreview = React.forwardRef<HTMLDivElement, TemplatePreviewProps>(
     const timestamp = `${now.getHours()}:${String(now.getMinutes()).padStart(2, "0")}`;
 
     const header =
-      formData.headerType === "text" && formData.headerText
+      formData.headerFormat === "TEXT" && formData.headerText
         ? { type: "text" as const, text: formData.headerText }
         : undefined;
 

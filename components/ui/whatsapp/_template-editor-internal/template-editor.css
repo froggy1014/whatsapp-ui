@@ -17,6 +17,50 @@
   pointer-events: none;
 }
 
+/* WaSelect popup animations */
+@keyframes wa-select-open {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes wa-select-close {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+  }
+}
+
+.wa-select-popup {
+  transform-origin: var(--transform-origin);
+}
+
+.wa-select-popup[data-open] {
+  animation: wa-select-open 150ms ease-out;
+}
+
+.wa-select-popup[data-closed] {
+  animation: wa-select-close 100ms ease-in;
+}
+
+/* Select trigger icon rotation */
+.wa-select-trigger[data-popup-open] svg:last-child {
+  transform: rotate(180deg);
+}
+
+.wa-select-trigger svg:last-child {
+  transition: transform 150ms ease;
+}
+
 /* Variable chip */
 .tiptap-variable-chip {
   display: inline-flex;

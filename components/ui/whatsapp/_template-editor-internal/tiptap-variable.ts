@@ -4,11 +4,12 @@ import { ReactNodeViewRenderer, NodeViewWrapper } from "@tiptap/react";
 import { createElement } from "react";
 
 function VariableChipView(props: NodeViewRendererProps) {
-  const index = props.node.attrs.index;
+  const { index, name } = props.node.attrs;
+  const label = name ? `{{${name}}}` : `{{${index}}}`;
   return createElement(
     NodeViewWrapper,
     { as: "span", className: "tiptap-variable-chip" },
-    `{{${index}}}`,
+    label,
   );
 }
 
@@ -20,7 +21,8 @@ export const VariableNode = Node.create({
 
   addAttributes() {
     return {
-      index: { default: 1 },
+      index: { default: null },
+      name: { default: null },
     };
   },
 
@@ -29,10 +31,13 @@ export const VariableNode = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
+    const label = HTMLAttributes.name
+      ? `{{${HTMLAttributes.name}}}`
+      : `{{${HTMLAttributes.index}}}`;
     return [
       "span",
       mergeAttributes(HTMLAttributes, { "data-variable": "" }),
-      `{{${HTMLAttributes.index}}}`,
+      label,
     ];
   },
 
@@ -52,8 +57,8 @@ export function getPlainTextWithVariables(doc: Record<string, unknown>): string 
         if (child.type === "text") {
           text += child.text;
         } else if (child.type === "variable") {
-          const attrs = child.attrs as { index: number };
-          text += `{{${attrs.index}}}`;
+          const attrs = child.attrs as { index: number | null; name: string | null };
+          text += attrs.name ? `{{${attrs.name}}}` : `{{${attrs.index}}}`;
         }
       });
     }
