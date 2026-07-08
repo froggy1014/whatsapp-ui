@@ -45,7 +45,7 @@ export default function Home() {
       {/* Hero */}
       <header className="relative overflow-hidden border-b border-page-border">
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-12">
-          <div className="flex flex-col lg:flex-row gap-12 items-end">
+          <div className="flex flex-col lg:flex-row gap-12 lg:items-end">
             {/* Left: Text */}
             <div className="flex-1 min-w-0">
               <h1 className="text-3xl font-bold tracking-tight mb-6">WhatsApp UI</h1>
