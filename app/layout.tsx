@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "WhatsApp UI",
     description: "WhatsApp Web UI components for shadcn/ui",
-    url: "https://whatsapp-ui.jeongmin.dev",
+    url: "https://ui.meta-cloud-api.site",
   },
 };
 
