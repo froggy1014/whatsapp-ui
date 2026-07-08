@@ -6,14 +6,14 @@ If you're building on top of WhatsApp — whether it's a SaaS platform, a custom
 
 <!-- demo gif -->
 
-**[Demo](https://whatsapp-ui-omega.vercel.app)** · **[Registry](https://whatsapp-ui-omega.vercel.app/r/registry.json)**
+**[Demo](https://whatsapp-ui.jeongmin.dev)** · **[Registry](https://whatsapp-ui.jeongmin.dev/r/registry.json)**
 
 ---
 
 ## Install
 
 ```bash
-npx shadcn@latest add https://whatsapp-ui-omega.vercel.app/r/chat-bubble.json
+npx shadcn@latest add https://whatsapp-ui.jeongmin.dev/r/chat-bubble.json
 ```
 
 Each component is independent — install only what you need.

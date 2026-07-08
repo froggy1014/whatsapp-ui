@@ -9,3 +9,5 @@ export const GET = async (_: NextRequest) => {
 
   return NextResponse.json(registry);
 };
+
+export const dynamic = "force-static";
