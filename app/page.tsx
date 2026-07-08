@@ -44,13 +44,24 @@ export default function Home() {
 
       {/* Hero */}
       <header className="relative overflow-hidden border-b border-page-border">
-        <div className="mx-auto max-w-6xl px-6 pt-16 pb-12">
-          <div className="flex flex-col lg:flex-row gap-12 lg:items-end">
+        {/* Accent glow */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -top-32 left-1/2 h-[340px] w-[680px] max-w-[150vw] -translate-x-1/2 rounded-full bg-page-accent/10 blur-3xl" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-6 pt-12 pb-10 sm:pt-16 sm:pb-12">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 lg:items-end">
             {/* Left: Text */}
             <div className="flex-1 min-w-0">
-              <h1 className="text-3xl font-bold tracking-tight mb-6">WhatsApp UI</h1>
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-page-accent/25 bg-page-accent-soft px-3 py-1 text-xs font-medium text-page-accent">
+                <span className="h-1.5 w-1.5 rounded-full bg-page-accent" />
+                shadcn/ui registry · {items.length} components
+              </div>
 
-              <p className="text-lg text-page-subtle mb-2 max-w-lg">
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-5 bg-gradient-to-br from-page-fg to-page-muted bg-clip-text text-transparent">
+                WhatsApp UI
+              </h1>
+
+              <p className="text-base sm:text-lg text-page-subtle mb-2 max-w-lg">
                 A <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="text-page-accent hover:underline">shadcn/ui</a> registry of WhatsApp Web components, built on the official WDS design tokens.
               </p>
               <p className="text-sm text-page-muted mb-8 max-w-lg">
@@ -60,7 +71,7 @@ export default function Home() {
               {/* Install command */}
               <div className="mb-6">
                 <p className="text-xs text-page-muted uppercase tracking-wider mb-2 font-medium">Quick install</p>
-                <div className="flex items-center gap-2 rounded-lg bg-page-code-bg border border-page-border px-4 py-3 max-w-lg">
+                <div className="flex items-center gap-2 rounded-xl bg-page-code-bg border border-page-accent/20 px-4 py-3 max-w-lg shadow-sm">
                   <code className="text-sm font-mono text-page-accent flex-1 truncate">
                     npx shadcn@latest add {BASE_URL}/r/chat-bubble.json
                   </code>
@@ -72,16 +83,16 @@ export default function Home() {
               {/* Badges */}
               <div className="flex flex-wrap gap-3">
                 <a href="https://github.com/froggy1014/whatsapp-ui" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted transition-colors">
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted active:scale-[0.98] transition-[color,border-color,transform] duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
                   GitHub
                 </a>
                 <a href="https://www.npmjs.com/package/meta-cloud-api" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted transition-colors">
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted active:scale-[0.98] transition-[color,border-color,transform] duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
                   SDK: meta-cloud-api
                 </a>
                 <a href="https://playground.meta-cloud-api.site" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted transition-colors">
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted active:scale-[0.98] transition-[color,border-color,transform] duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
                   Live Playground
                 </a>
               </div>
@@ -127,7 +138,7 @@ export default function Home() {
                 if (!item) return null;
                 const installCmd = `npx shadcn@latest add ${BASE_URL}/r/${item.name}.json`;
                 return (
-                  <div key={item.name} className="group flex flex-col rounded-xl border border-page-border bg-page-card hover:border-page-muted/30 hover:bg-page-card-hover transition-all overflow-hidden">
+                  <div key={item.name} className="group flex flex-col rounded-xl border border-page-border bg-page-card hover:border-page-muted/30 hover:bg-page-card-hover hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/25 transition-[border-color,background-color,transform,box-shadow] duration-200 overflow-hidden">
                     {/* Live preview — not wrapped in <Link> to avoid nested <a> from interactive previews */}
                     <div className="border-b border-page-border flex-1">
                       <ComponentPreview name={item.name} />
@@ -173,17 +184,17 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <a href="https://github.com/froggy1014/meta-cloud-api" target="_blank" rel="noopener noreferrer"
-              className="rounded-xl border border-page-border p-5 hover:border-page-muted/30 transition-colors">
+              className="rounded-xl border border-page-border p-5 hover:border-page-muted/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/25 transition-[border-color,transform,box-shadow] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
               <h3 className="font-semibold mb-1">meta-cloud-api</h3>
               <p className="text-xs text-page-subtle">WhatsApp TypeScript SDK. 18 API modules, strict types, zero dependencies.</p>
             </a>
             <a href="https://github.com/froggy1014/whatsapp-ui" target="_blank" rel="noopener noreferrer"
-              className="rounded-xl border border-page-accent/30 bg-page-accent-soft p-5 hover:border-page-accent/50 transition-colors">
+              className="rounded-xl border border-page-accent/30 bg-page-accent-soft p-5 hover:border-page-accent/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/25 transition-[border-color,transform,box-shadow] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
               <h3 className="font-semibold text-page-accent mb-1">whatsapp-ui</h3>
               <p className="text-xs text-page-subtle">You are here. {items.length} shadcn components with WDS design tokens.</p>
             </a>
             <a href="https://playground.meta-cloud-api.site" target="_blank" rel="noopener noreferrer"
-              className="rounded-xl border border-page-border p-5 hover:border-page-muted/30 transition-colors">
+              className="rounded-xl border border-page-border p-5 hover:border-page-muted/30 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/25 transition-[border-color,transform,box-shadow] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
               <h3 className="font-semibold mb-1">Playground</h3>
               <p className="text-xs text-page-subtle">Interactive SDK demo. Send real WhatsApp messages and see the SDK code.</p>
             </a>
