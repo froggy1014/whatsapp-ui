@@ -15,7 +15,7 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "WA UI — shadcn/ui Registry",
   description:
-    "Production-ready WhatsApp Web UI components built with Tailwind CSS v4 and the official WDS design token system.",
+    "Production-ready WhatsApp Web UI components built with Tailwind CSS v4 and the WDS design token system.",
   openGraph: {
     title: "WA UI",
     description: "WhatsApp Web UI components for shadcn/ui",

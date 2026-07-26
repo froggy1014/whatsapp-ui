@@ -1,6 +1,6 @@
 # WA UI
 
-> A shadcn/ui registry of WhatsApp Web components, built directly on WhatsApp's official WDS design tokens.
+> A shadcn/ui registry of WhatsApp Web components, built directly on WhatsApp's WDS design tokens.
 
 If you're building on top of WhatsApp — whether it's a SaaS platform, a customer support tool, or a Meta Cloud API integration — you shouldn't have to rebuild the UI from scratch. This registry gives you the exact same components, colors, and spacing that WhatsApp uses, ready to drop into your React app with a single command.
 
@@ -45,7 +45,7 @@ Each component is independent — install only what you need.
 
 ## Design system
 
-Every component uses the official **WDS (WhatsApp Design System)** tokens — the same CSS variables that WhatsApp Web ships. Colors, spacing, border radii, and typography are all sourced directly from WDS, with both light and dark mode variants.
+Every component uses the **WDS (WhatsApp Design System)** tokens — the same CSS variables that WhatsApp Web ships. Colors, spacing, border radii, and typography are all sourced directly from WDS, with both light and dark mode variants.
 
 See [`DESIGN.md`](./DESIGN.md) for the full token reference.
 

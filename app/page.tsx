@@ -62,7 +62,7 @@ export default function Home() {
               </h1>
 
               <p className="text-base sm:text-lg text-page-subtle mb-2 max-w-lg">
-                A <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="text-page-accent hover:underline">shadcn/ui</a> registry of WhatsApp Web components, built on the official WDS design tokens.
+                A <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="text-page-accent hover:underline">shadcn/ui</a> registry of WhatsApp Web components, built on the WDS design tokens.
               </p>
               <p className="text-sm text-page-muted mb-8 max-w-lg">
                 Every component uses the same CSS variables that WhatsApp Web ships. Colors, spacing, border radii, and typography are all sourced directly from WDS. Light and dark mode included.
