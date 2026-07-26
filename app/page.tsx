@@ -34,7 +34,7 @@ export default function Home() {
             <span className="text-sm font-semibold">WhatsApp UI</span>
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://github.com/froggy1014/whatsapp-ui" target="_blank" rel="noopener noreferrer" className="text-page-muted hover:text-page-fg transition-colors">
+            <a href="https://github.com/froggy1014/wa-ui" target="_blank" rel="noopener noreferrer" className="text-page-muted hover:text-page-fg transition-colors">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
             </a>
             <ThemeToggle />
@@ -82,7 +82,7 @@ export default function Home() {
 
               {/* Badges */}
               <div className="flex flex-wrap gap-3">
-                <a href="https://github.com/froggy1014/whatsapp-ui" target="_blank" rel="noopener noreferrer"
+                <a href="https://github.com/froggy1014/wa-ui" target="_blank" rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center gap-2 rounded-full bg-page-code-bg border border-page-border px-4 py-2 text-sm text-page-subtle hover:text-page-fg hover:border-page-muted active:scale-[0.98] transition-[color,border-color,transform] duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
                   GitHub
@@ -188,9 +188,9 @@ export default function Home() {
               <h3 className="font-semibold mb-1">meta-cloud-api</h3>
               <p className="text-xs text-page-subtle">WhatsApp TypeScript SDK. 18 API modules, strict types, zero dependencies.</p>
             </a>
-            <a href="https://github.com/froggy1014/whatsapp-ui" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/froggy1014/wa-ui" target="_blank" rel="noopener noreferrer"
               className="rounded-xl border border-page-accent/30 bg-page-accent-soft p-5 hover:border-page-accent/50 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 dark:hover:shadow-black/25 transition-[border-color,transform,box-shadow] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-page-accent">
-              <h3 className="font-semibold text-page-accent mb-1">whatsapp-ui</h3>
+              <h3 className="font-semibold text-page-accent mb-1">wa-ui</h3>
               <p className="text-xs text-page-subtle">You are here. {items.length} shadcn components with WDS design tokens.</p>
             </a>
             <a href="https://playground.meta-cloud-api.site" target="_blank" rel="noopener noreferrer"
@@ -207,9 +207,9 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-page-muted">
           <p>MIT License. Built by <a href="https://github.com/froggy1014" target="_blank" rel="noopener noreferrer" className="text-page-subtle hover:text-page-fg">@froggy1014</a></p>
           <div className="flex items-center gap-4">
-            <a href="https://github.com/froggy1014/whatsapp-ui" target="_blank" rel="noopener noreferrer" className="hover:text-page-fg">GitHub</a>
+            <a href="https://github.com/froggy1014/wa-ui" target="_blank" rel="noopener noreferrer" className="hover:text-page-fg">GitHub</a>
             <a href="https://meta-cloud-api.site" target="_blank" rel="noopener noreferrer" className="hover:text-page-fg">Docs</a>
-            <a href="https://github.com/froggy1014/whatsapp-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-page-fg">Contributing</a>
+            <a href="https://github.com/froggy1014/wa-ui/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-page-fg">Contributing</a>
           </div>
         </div>
       </footer>

@@ -1,4 +1,4 @@
-# WhatsApp UI
+# WA UI
 
 > A shadcn/ui registry of WhatsApp Web components, built directly on WhatsApp's official WDS design tokens.
 

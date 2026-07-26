@@ -1,8 +1,8 @@
-# WhatsApp UI — Design System
+# WA UI — Design System
 
 ## Overview
 
-WhatsApp UI is a production-ready React component library that faithfully replicates WhatsApp Web's visual language using the official WDS (WhatsApp Design System) design tokens. The design prioritizes familiarity, clarity, and cross-platform consistency.
+WA UI is a production-ready React component library that faithfully replicates WhatsApp Web's visual language using the official WDS (WhatsApp Design System) design tokens. The design prioritizes familiarity, clarity, and cross-platform consistency.
 
 ---
 

@@ -3,8 +3,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/froggy1014/whatsapp-ui
-cd whatsapp-ui
+git clone https://github.com/froggy1014/wa-ui
+cd wa-ui
 pnpm install
 pnpm storybook   # component development
 pnpm dev         # demo site

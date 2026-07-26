@@ -19,7 +19,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/froggy1014/whatsapp-ui:${{ github.sha }}
+          tags: ghcr.io/froggy1014/wa-ui:${{ github.sha }}
       - uses: actions/checkout@v4
         with:
           repository: froggy1014/froggy1014-k3s-infra
@@ -28,10 +28,10 @@ jobs:
       - name: Update image tag in infra repo
         run: |
           cd infra
-          sed -i "s|image: ghcr.io/froggy1014/whatsapp-ui:.*|image: ghcr.io/froggy1014/whatsapp-ui:${{ github.sha }}|" \
+          sed -i "s|image: ghcr.io/froggy1014/wa-ui:.*|image: ghcr.io/froggy1014/wa-ui:${{ github.sha }}|" \
             k3s/manifests/whatsapp-ui/deployment.yaml
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git diff --quiet && echo "no change" && exit 0
-          git commit -am "chore: update whatsapp-ui image to ${{ github.sha }}"
+          git commit -am "chore: update wa-ui image to ${{ github.sha }}"
           git push

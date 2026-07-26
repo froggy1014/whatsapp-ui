@@ -32,7 +32,7 @@ import { ForwardedLabel } from "@/components/ui/whatsapp/forwarded-label";
 import { SystemMessageBubble } from "@/components/ui/whatsapp/system-message-bubble";
 import { UnsupportedMessageBubble } from "@/components/ui/whatsapp/unsupported-message-bubble";
 
-const IMG = "https://picsum.photos/seed/whatsapp-ui-preview/400/280";
+const IMG = "https://picsum.photos/seed/wa-ui-preview/400/280";
 
 const PREVIEWS: Record<string, () => React.ReactNode> = {
   "chat-bubble": () => (

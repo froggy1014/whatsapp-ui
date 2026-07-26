@@ -13,11 +13,11 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WhatsApp UI — shadcn/ui Registry",
+  title: "WA UI — shadcn/ui Registry",
   description:
     "Production-ready WhatsApp Web UI components built with Tailwind CSS v4 and the official WDS design token system.",
   openGraph: {
-    title: "WhatsApp UI",
+    title: "WA UI",
     description: "WhatsApp Web UI components for shadcn/ui",
     url: "https://ui.meta-cloud-api.site",
   },

@@ -39,26 +39,26 @@ interface Step {
 
 // ─── Conversation script ──────────────────────────────────────────────────────
 
-const IMG = "https://picsum.photos/seed/whatsapp-ui/400/280";
+const IMG = "https://picsum.photos/seed/wa-ui/400/280";
 
 const SCRIPT: Step[] = [
   { delay: 500,  typingFor: 1600, msg: { id: 1,  type: "text",     variant: "incoming", text: "hey, I heard you're building something on top of WhatsApp 👀" } },
   { delay: 600,  typingFor: 0,    msg: { id: 2,  type: "text",     variant: "outgoing", text: "yeah lol, matching the exact UX is the hardest part",           status: "read"      } },
   { delay: 300,  typingFor: 0,    msg: { id: 3,  type: "text",     variant: "outgoing", text: "building every component from scratch is killing me 😵",         status: "read"      } },
   { delay: 600,  typingFor: 1200, msg: { id: 5,  type: "text",     variant: "incoming", text: "ok wait — I think I found exactly what you need" } },
-  { delay: 400,  typingFor: 1100, msg: { id: 8,  type: "text",     variant: "incoming", text: "it's whatsapp-ui — a shadcn registry with the official WDS design tokens" } },
+  { delay: 400,  typingFor: 1100, msg: { id: 8,  type: "text",     variant: "incoming", text: "it's wa-ui — a shadcn registry with the official WDS design tokens" } },
   { delay: 400,  typingFor: 800,  msg: { id: 9,  type: "template", variant: "incoming",
       title: "WhatsApp UI",
       body: "Production-ready WhatsApp Web components. Tailwind v4, @base-ui/react, dark mode, WDS tokens included.",
       btnLabel: "View Registry",
-      btnUrl: "https://github.com/froggy1014/whatsapp-ui",
+      btnUrl: "https://github.com/froggy1014/wa-ui",
   } },
   { delay: 500,  typingFor: 0,    msg: { id: 10, type: "reaction", targetId: 9, emoji: "🔥" } },
   { delay: 400,  typingFor: 0,    msg: { id: 11, type: "text",     variant: "outgoing", text: "wait... ChatBubble, MessageInput, Templates — it's all there?!", status: "read"    } },
   { delay: 300,  typingFor: 900,  msg: { id: 12, type: "text",     variant: "incoming", text: "yep 😄 one command and you're done" } },
   { delay: 400,  typingFor: 800,  msg: { id: 13, type: "image",    variant: "incoming", src: IMG, caption: "dark mode works too 🌙" } },
   { delay: 500,  typingFor: 0,    msg: { id: 14, type: "text",     variant: "outgoing", text: "bro this is insane",                                                     status: "read"      } },
-  { delay: 300,  typingFor: 900,  msg: { id: 19, type: "file",     variant: "incoming", fileName: "whatsapp-ui-quickstart.pdf", fileSize: "512 KB", fileType: "pdf", downloadUrl: "/file-sample_150kB.pdf" } },
+  { delay: 300,  typingFor: 900,  msg: { id: 19, type: "file",     variant: "incoming", fileName: "wa-ui-quickstart.pdf", fileSize: "512 KB", fileType: "pdf", downloadUrl: "/file-sample_150kB.pdf" } },
   { delay: 500,  typingFor: 0,    msg: { id: 15, type: "text",     variant: "outgoing", text: "already started 👀",                                                 status: "read" } },
   { delay: 400,  typingFor: 0,    msg: { id: 20, type: "multi-image", variant: "outgoing",
       srcs: [IMG, IMG, IMG, IMG],
@@ -68,9 +68,9 @@ const SCRIPT: Step[] = [
   { delay: 500,  typingFor: 900,  msg: { id: 21, type: "carousel", variant: "incoming",
       body: "here's a taste of what's in the registry 👇",
       cards: [
-        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View", btnUrl: "https://github.com/froggy1014/whatsapp-ui" },
-        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View", btnUrl: "https://github.com/froggy1014/whatsapp-ui" },
-        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View", btnUrl: "https://github.com/froggy1014/whatsapp-ui" },
+        { body: "ChatBubble — incoming, outgoing, group, reactions", btnLabel: "View", btnUrl: "https://github.com/froggy1014/wa-ui" },
+        { body: "TemplateBubble — all Meta Cloud API button types", btnLabel: "View", btnUrl: "https://github.com/froggy1014/wa-ui" },
+        { body: "VoiceMessageBubble — real audio playback support", btnLabel: "View", btnUrl: "https://github.com/froggy1014/wa-ui" },
       ],
   } },
   { delay: 500,  typingFor: 800,  msg: { id: 16, type: "text",     variant: "incoming", text: "lol go build something 🚀" } },
