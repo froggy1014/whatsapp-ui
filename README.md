@@ -4,7 +4,9 @@
 
 If you're building on top of WhatsApp — whether it's a SaaS platform, a customer support tool, or a Meta Cloud API integration — you shouldn't have to rebuild the UI from scratch. This registry gives you the exact same components, colors, and spacing that WhatsApp uses, ready to drop into your React app with a single command.
 
-<!-- demo gif -->
+<p align="center">
+  <img src=".github/demo.gif" alt="Chat bubbles, typing indicator, and a Meta Business template rendered with WA UI" width="380">
+</p>
 
 **[Demo](https://ui.meta-cloud-api.site)** · **[Registry](https://ui.meta-cloud-api.site/r/registry.json)**
 

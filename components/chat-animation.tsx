@@ -137,7 +137,7 @@ function useTypingText(text: string, active: boolean, onDone: () => void) {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function ChatAnimation() {
+export function ChatAnimation({ componentCount }: { componentCount?: number }) {
   const [messages, setMessages]   = useState<ChatMessage[]>([]);
   const [reactions, setReactions] = useState<Record<number, string>>({});
   const [incoming, setIncoming]   = useState(false);
@@ -227,7 +227,11 @@ export function ChatAnimation() {
       <ChatHeader
         name="WhatsApp UI"
         isOnline={incoming}
-        status={incoming ? undefined : "shadcn registry · 14 components"}
+        status={
+          incoming
+            ? undefined
+            : `shadcn registry${componentCount ? ` · ${componentCount} components` : ""}`
+        }
         customActions={
           <ChatMenu
             items={[
