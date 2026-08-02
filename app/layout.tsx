@@ -14,11 +14,21 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ui.meta-cloud-api.site"),
-  title: "WA UI — shadcn/ui Registry",
+  title: "WA UI — WhatsApp Web UI components for shadcn/ui",
   description:
-    "Production-ready WhatsApp Web UI components built with Tailwind CSS v4 and the WDS design token system.",
+    "Production-ready WhatsApp Web UI components for React — chat bubbles, message input, and Meta Business templates. Built with Tailwind CSS v4 and the WDS design token system.",
+  keywords: [
+    "whatsapp ui",
+    "whatsapp web components",
+    "whatsapp chat ui",
+    "whatsapp cloud api",
+    "shadcn registry",
+    "shadcn ui",
+    "react chat ui",
+    "wds design tokens",
+  ],
   openGraph: {
-    title: "WA UI — shadcn/ui Registry",
+    title: "WA UI — WhatsApp Web UI components for shadcn/ui",
     description:
       "A shadcn/ui registry of WhatsApp Web components, built on WhatsApp's WDS design tokens.",
     url: "https://ui.meta-cloud-api.site",
@@ -27,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "WA UI — shadcn/ui Registry",
+    title: "WA UI — WhatsApp Web UI components for shadcn/ui",
     description:
       "A shadcn/ui registry of WhatsApp Web components, built on WhatsApp's WDS design tokens.",
   },
