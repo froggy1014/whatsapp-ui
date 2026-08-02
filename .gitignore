@@ -47,3 +47,6 @@ storybook-static
 
 # internal planning doc (not published)
 META_CLOUD_API_COMPONENT_PLAN.md
+
+# local MCP server scratch db (proxmox-mcp)
+proxmox-jobs.sqlite3*

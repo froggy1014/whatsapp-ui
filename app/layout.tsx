@@ -13,13 +13,23 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ui.meta-cloud-api.site"),
   title: "WA UI — shadcn/ui Registry",
   description:
     "Production-ready WhatsApp Web UI components built with Tailwind CSS v4 and the WDS design token system.",
   openGraph: {
-    title: "WA UI",
-    description: "WhatsApp Web UI components for shadcn/ui",
+    title: "WA UI — shadcn/ui Registry",
+    description:
+      "A shadcn/ui registry of WhatsApp Web components, built on WhatsApp's WDS design tokens.",
     url: "https://ui.meta-cloud-api.site",
+    siteName: "WA UI",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WA UI — shadcn/ui Registry",
+    description:
+      "A shadcn/ui registry of WhatsApp Web components, built on WhatsApp's WDS design tokens.",
   },
 };
 
