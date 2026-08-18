@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChatBubble } from "@/components/ui/whatsapp/chat-bubble";
 import { CarouselTemplate } from "@/components/ui/whatsapp/carousel-template";
 import { ChatHeader } from "@/components/ui/whatsapp/chat-header";
@@ -10,7 +10,7 @@ import { ImageBubble } from "@/components/ui/whatsapp/image-bubble";
 import { TemplateBubble } from "@/components/ui/whatsapp/template-bubble";
 import { TypingIndicator } from "@/components/ui/whatsapp/typing-indicator";
 import { VoiceMessageBubble } from "@/components/ui/whatsapp/voice-message-bubble";
-import { Sun, Moon, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { ChatMenu } from "@/components/ui/whatsapp/chat-menu";
 import { AnimatedInput } from "@/components/animated-input";
 import { MessageInput } from "@/components/ui/whatsapp/message-input";
@@ -143,24 +143,8 @@ export function ChatAnimation({ componentCount }: { componentCount?: number }) {
   const [incoming, setIncoming]   = useState(false);
   const [outgoingText, setOutgoing] = useState<string | null>(null);
   const [step, setStep]           = useState(0);
-  const [dark, setDark]           = useState(() =>
-    typeof document !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : true
-  );
   const scrollRef                 = useRef<HTMLDivElement>(null);
 
-  const applyTheme = useCallback((isDark: boolean) => {
-    const root = document.documentElement;
-    root.classList.toggle("dark", isDark);
-    root.setAttribute("data-theme", isDark ? "dark" : "light");
-  }, []);
-
-  // Apply on mount immediately (no delay)
-  useEffect(() => { applyTheme(dark); }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Apply on toggle
-  useEffect(() => { applyTheme(dark); }, [dark, applyTheme]);
   // Holds the message to commit once typing animation finishes
   const pendingMsg                = useRef<ChatMessage | null>(null);
 
