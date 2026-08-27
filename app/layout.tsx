@@ -43,6 +43,10 @@ export const metadata: Metadata = {
   },
 };
 
+// Runs before first paint so a saved light theme never flashes dark. Kept in
+// sync with the class/attribute pair ThemeToggle writes. Defaults to dark.
+const themeBootScript = `try{var t=localStorage.getItem("theme");var d=t!=="light";var r=document.documentElement;r.classList.toggle("dark",d);r.setAttribute("data-theme",d?"dark":"light")}catch(e){}`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -53,8 +57,12 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${mono.variable} dark h-full antialiased`}
       data-theme="dark"
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>{children}</body>
+      <body className="min-h-full flex flex-col font-sans" suppressHydrationWarning>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+        {children}
+      </body>
     </html>
   );
 }
